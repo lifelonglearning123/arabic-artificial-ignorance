@@ -74,8 +74,7 @@
       transition:background .3s,backdrop-filter .3s,border-color .3s;
       border-bottom:1px solid transparent;
     }
-    nav.scrolled { background:rgba(255,255,255,.95); backdrop-filter:blur(18px); border-color:var(--border); box-shadow:0 1px 16px rgba(0,0,0,.08); }
-    .nav-logo img { height:34px; width:auto; display:block; }
+    nav.scrolled { background:rgba(255,255,255,.95); backdrop-filter:blur(18px); border-color:var(--border); box-shadow:0 1px 16px rgba(0,0,0,.08); }    .nav-logo img { height:51px; width:auto; display:block; }
     .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
     .nav-links a { color:var(--text-muted); text-decoration:none; font-family:var(--font-ui); font-size:.7rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; transition:color .2s; }
     .nav-links a:hover { color:var(--green); }
@@ -195,13 +194,6 @@
     .card-task  { display:flex; align-items:center; gap:.6rem; font-size:.75rem; color:var(--text-muted); }
     .card-task::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--card-color,var(--green)); flex-shrink:0; }
 
-    /* EVA spans full width */
-    .agent-card.card-eva { grid-column:span 3; }
-    .card-eva-inner { display:grid; grid-template-columns:320px 1fr; }
-    .card-eva-inner .card-img-wrap { height:380px; border-radius:0; }
-    .card-eva-right { display:grid; grid-template-columns:1fr 1fr; gap:2rem; padding:2rem 2rem 2rem 0; }
-    .card-eva-right .card-body { padding:0; }
-    .card-eva-tasks { padding:0; display:flex; flex-direction:column; gap:.6rem; justify-content:center; }
 
     /* ════════════════ AGENT PLAYBOOK ════════════════ */
     #playbook { background:var(--bg); }
@@ -403,8 +395,6 @@
     @media(max-width:1100px) {
       .modules-grid { grid-template-columns:repeat(3,1fr); }
       .agents-grid  { grid-template-columns:repeat(2,1fr); }
-      .agent-card.card-eva { grid-column:span 2; }
-      .card-eva-right { grid-template-columns:1fr; }
       .savings-grid { grid-template-columns:repeat(2,1fr); }
     }
     @media(max-width:900px) {
@@ -426,9 +416,6 @@
       .panel-img-col .panel-img-wrap { border-radius:50%; overflow:hidden; height:120px; }
       .panel-bottom   { grid-template-columns:1fr; }
       .comparison     { grid-template-columns:1fr; }
-      .card-eva-inner { grid-template-columns:1fr; }
-      .card-eva-inner .card-img-wrap { height:280px; }
-      .card-eva-right { padding:1.5rem; grid-template-columns:1fr; gap:1.25rem; }
     }
     @media(max-width:700px) {
       .agents-grid  { grid-template-columns:1fr; }
@@ -446,34 +433,64 @@
       .modules-grid { grid-template-columns:1fr; }
       .hero-stats   { grid-template-columns:1fr 1fr; }
     }
+
+    /* ════════════════ LANG SWITCH ════════════════ */
+    .lang-switch {
+      display:flex; align-items:center; gap:2px;
+      background:var(--bg-2); border:1px solid var(--border);
+      border-radius:100px; padding:3px;
+    }
+    .lang-btn {
+      padding:.28rem .6rem; border-radius:100px; border:none;
+      cursor:pointer; background:transparent; color:var(--text-muted);
+      font-family:var(--font-ui); font-size:.62rem; font-weight:700;
+      letter-spacing:.1em; transition:all .2s;
+    }
+    .lang-btn.active { background:var(--green); color:#fff; }
+    .lang-btn:hover:not(.active) { color:var(--green); }
+    .mobile-lang { display:flex; gap:.75rem; margin-top:.5rem; }
+    .mobile-lang button {
+      font-family:var(--font-display); font-size:1.1rem; font-weight:900;
+      background:none; border:1px solid var(--border); border-radius:8px;
+      padding:.4rem 1.1rem; cursor:pointer; color:var(--text-muted); transition:all .2s;
+    }
+    .mobile-lang button.active { background:var(--green); color:#fff; border-color:var(--green); }
   </style>
 </head>
 <body>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobileMenu()">✕ close</button>
-  <a href="#problem"  onclick="closeMobileMenu()">Problem</a>
-  <a href="#agents"   onclick="closeMobileMenu()">The Monkeys</a>
-  <a href="#playbook" onclick="closeMobileMenu()">How They Work</a>
+  <button class="mobile-close" onclick="closeMobileMenu()" data-i18n="mob-close">✕ close</button>
+  <a href="#problem"  onclick="closeMobileMenu()" data-i18n="nav-problem">Problem</a>
+  <a href="#agents"   onclick="closeMobileMenu()" data-i18n="nav-monkeys">The Monkeys</a>
+  <a href="#playbook" onclick="closeMobileMenu()" data-i18n="nav-how">How They Work</a>
   <a href="#roi"      onclick="closeMobileMenu()">ROI</a>
-  <a href="#modules"  onclick="closeMobileMenu()">Modules</a>
-  <a href="#contact"  onclick="closeMobileMenu()" style="color:var(--green)">Book a Demo</a>
+  <a href="#modules"  onclick="closeMobileMenu()" data-i18n="nav-modules">Modules</a>
+  <a href="#contact"  onclick="closeMobileMenu()" style="color:var(--green)" data-i18n="nav-cta">Book a Demo</a>
+  <div class="mobile-lang">
+    <button class="active" onclick="setLang('en')">EN</button>
+    <button onclick="setLang('it')">IT</button>
+  </div>
 </div>
 
 <!-- NAV -->
 <nav id="navbar">
   <a href="#hero" class="nav-logo"><img src="brand/Vector.png" alt="Artificial Ignorance"></a>
   <ul class="nav-links">
-    <li><a href="#problem">Problem</a></li>
-    <li><a href="#agents">The Monkeys</a></li>
-    <li><a href="#playbook">How They Work</a></li>
+    <li><a href="#problem" data-i18n="nav-problem">Problem</a></li>
+    <li><a href="#agents" data-i18n="nav-monkeys">The Monkeys</a></li>
+    <li><a href="#playbook" data-i18n="nav-how">How They Work</a></li>
     <li><a href="#roi">ROI</a></li>
-    <li><a href="#modules">Modules</a></li>
-    <li><a href="#proof">Proof</a></li>
+    <li><a href="#modules" data-i18n="nav-modules">Modules</a></li>
+    <li><a href="#proof" data-i18n="nav-proof">Proof</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
-    <a href="#contact" class="btn btn-primary">Book a Demo</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+    </div>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav-cta">Book a Demo</a>
     <div class="hamburger" onclick="openMobileMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -482,22 +499,22 @@
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="container hero-inner">
-    <div class="hero-badge">🧠 AI Infrastructure · Built Different</div>
+    <div class="hero-badge" data-i18n="hero-badge">🧠 AI Infrastructure · Built Different</div>
     <h1 class="hero-h1">
-      <span class="line-solid">THE BRAIN</span>
-      <span class="line-green">BEHIND YOUR</span>
-      <span class="line-outline">BUSINESS.</span>
+      <span class="line-solid" data-i18n="hero-h1-1">THE BRAIN</span>
+      <span class="line-green" data-i18n="hero-h1-2">BEHIND YOUR</span>
+      <span class="line-outline" data-i18n="hero-h1-3">BUSINESS.</span>
     </h1>
-    <p class="hero-sub">We build AI infrastructure that truly knows your company — voice, CRM, memory, and six intelligent agents. All learning. All connected. All working 24/7.</p>
+    <p class="hero-sub" data-i18n="hero-sub">We build AI infrastructure that truly knows your company — voice, CRM, memory, and six intelligent agents. All learning. All connected. All working 24/7.</p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary">Book a Demo →</a>
-      <a href="#agents"  class="btn btn-outline">Meet the Monkeys 🐒</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="hero-cta1">Book a Demo →</a>
+      <a href="#agents"  class="btn btn-outline" data-i18n="hero-cta2">Meet the Monkeys 🐒</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="stat-num" data-count="80">0</div><div class="stat-label">Companies Served</div></div>
-      <div class="hero-stat"><div class="stat-num">6</div><div class="stat-label">AI Agents</div></div>
-      <div class="hero-stat"><div class="stat-num">24/7</div><div class="stat-label">Always On</div></div>
-      <div class="hero-stat"><div class="stat-num">∞</div><div class="stat-label">Compounding Knowledge</div></div>
+      <div class="hero-stat"><div class="stat-num" data-count="80">0</div><div class="stat-label" data-i18n="stat-companies">Companies Served</div></div>
+      <div class="hero-stat"><div class="stat-num">6</div><div class="stat-label" data-i18n="stat-agents">AI Agents</div></div>
+      <div class="hero-stat"><div class="stat-num">24/7</div><div class="stat-label" data-i18n="stat-alwayson">Always On</div></div>
+      <div class="hero-stat"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stat-knowledge">Compounding Knowledge</div></div>
     </div>
   </div>
   <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="" class="hero-deco">
@@ -505,7 +522,7 @@
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
-  <div class="marquee-label">CONNECTS WITH</div>
+  <div class="marquee-label" data-i18n="marquee-label">CONNECTS WITH</div>
   <div class="marquee-track">
     <!-- set 1 -->
     <span class="marquee-item"><img src="partner%20logo/gohighlevel.png" alt="GoHighLevel"><span class="marquee-dot"></span><img src="partner%20logo/facebook.png" alt="Facebook"><span class="marquee-dot"></span><img src="partner%20logo/instagram.jpg" alt="Instagram"><span class="marquee-dot"></span><img src="partner%20logo/whatsapp.png" alt="WhatsApp"><span class="marquee-dot"></span><img src="partner%20logo/google%20business%20profile.jpg" alt="Google Business Profile"><span class="marquee-dot"></span><img src="partner%20logo/google%20calendar.png" alt="Google Calendar"><span class="marquee-dot"></span><img src="partner%20logo/hubspot.jpg" alt="HubSpot"><span class="marquee-dot"></span><img src="partner%20logo/linkedin.png" alt="LinkedIn"><span class="marquee-dot"></span><img src="partner%20logo/pinterest.png" alt="Pinterest"><span class="marquee-dot"></span><img src="partner%20logo/youtube.png" alt="YouTube"></span>
@@ -519,30 +536,30 @@
   <div class="container">
     <div class="problem-grid">
       <div class="reveal">
-        <span class="label">The Problem</span>
-        <h2 class="problem-h2">Generic AI<br>doesn't know<br><em>your</em> business.</h2>
-        <p class="problem-body">Most AI tools are one-size-fits-all. They forget your business the moment you close the tab. You spend more time correcting and re-explaining than actually getting work done.</p>
+        <span class="label" data-i18n="prob-label">The Problem</span>
+        <h2 class="problem-h2" data-i18n="prob-h2">Generic AI<br>doesn't know<br><em>your</em> business.</h2>
+        <p class="problem-body" data-i18n="prob-body">Most AI tools are one-size-fits-all. They forget your business the moment you close the tab. You spend more time correcting and re-explaining than actually getting work done.</p>
       </div>
       <div class="problem-cards reveal">
         <div class="problem-card">
           <img src="brand/1.png" alt="" class="pc-icon">
           <div>
-            <div class="pc-title">Drowning in Repetition</div>
-            <div class="pc-desc">Your team burns 60% of their day on tasks that should be automated — emails, follow-ups, social posts, support tickets. That's not a people problem. It's an infrastructure problem.</div>
+            <div class="pc-title" data-i18n="pc1-title">Drowning in Repetition</div>
+            <div class="pc-desc" data-i18n="pc1-desc">Your team burns 60% of their day on tasks that should be automated — emails, follow-ups, social posts, support tickets. That's not a people problem. It's an infrastructure problem.</div>
           </div>
         </div>
         <div class="problem-card">
           <img src="brand/4.png" alt="" class="pc-icon">
           <div>
-            <div class="pc-title">AI That Forgets Everything</div>
-            <div class="pc-desc">Generic AI has no memory of your business. Every conversation starts from zero. Endless re-explaining. Zero compounding value. It's a tool, not a team member.</div>
+            <div class="pc-title" data-i18n="pc2-title">AI That Forgets Everything</div>
+            <div class="pc-desc" data-i18n="pc2-desc">Generic AI has no memory of your business. Every conversation starts from zero. Endless re-explaining. Zero compounding value. It's a tool, not a team member.</div>
           </div>
         </div>
         <div class="problem-card">
           <img src="brand/2.png" alt="" class="pc-icon">
           <div>
-            <div class="pc-title">Tool Sprawl Is Killing ROI</div>
-            <div class="pc-desc">Ten subscriptions that don't talk to each other. No unified brain. No coordinated output. Your AI stack costs more than it saves and nobody knows what's working.</div>
+            <div class="pc-title" data-i18n="pc3-title">Tool Sprawl Is Killing ROI</div>
+            <div class="pc-desc" data-i18n="pc3-desc">Ten subscriptions that don't talk to each other. No unified brain. No coordinated output. Your AI stack costs more than it saves and nobody knows what's working.</div>
           </div>
         </div>
       </div>
@@ -554,43 +571,43 @@
 <section id="solution" class="section">
   <div class="container">
     <div class="sol-header reveal">
-      <span class="label">Our Solution</span>
-      <h2 class="sol-h2">One brain.<br><span>Infinite memory.</span><br>Six specialists.</h2>
-      <p class="sol-sub">We build a living AI knowledge base from your real business data — every call, every email, every social interaction — then power six specialist agents that know your company inside out.</p>
+      <span class="label" data-i18n="sol-label">Our Solution</span>
+      <h2 class="sol-h2" data-i18n="sol-h2">One brain.<br><span>Infinite memory.</span><br>Six specialists.</h2>
+      <p class="sol-sub" data-i18n="sol-sub">We build a living AI knowledge base from your real business data — every call, every email, every social interaction — then power six specialist agents that know your company inside out.</p>
     </div>
     <div class="flow reveal">
       <div class="flow-node">
         <span class="node-emoji">🎙️</span>
-        <span class="node-title">AI Voice</span>
-        <span class="node-desc">Captures knowledge from every call</span>
+        <span class="node-title" data-i18n="flow-voice-title">AI Voice</span>
+        <span class="node-desc" data-i18n="flow-voice-desc">Captures knowledge from every call</span>
         <div class="node-tags"><span class="node-tag">ElevenLabs</span><span class="node-tag">Knotie.AI</span><span class="node-tag">RetellAI</span></div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node">
         <span class="node-emoji">📧</span>
-        <span class="node-title">CRM + Email</span>
-        <span class="node-desc">Contacts, history &amp; campaigns</span>
+        <span class="node-title" data-i18n="flow-crm-title">CRM + Email</span>
+        <span class="node-desc" data-i18n="flow-crm-desc">Contacts, history &amp; campaigns</span>
         <div class="node-tags"><span class="node-tag">GoHighLevel</span></div>
       </div>
       <div class="flow-arrow">+</div>
       <div class="flow-node">
         <span class="node-emoji">📱</span>
-        <span class="node-title">Social Media</span>
-        <span class="node-desc">Posts, engagement &amp; trends</span>
+        <span class="node-title" data-i18n="flow-social-title">Social Media</span>
+        <span class="node-desc" data-i18n="flow-social-desc">Posts, engagement &amp; trends</span>
         <div class="node-tags"><span class="node-tag">All platforms</span></div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node is-brain">
         <span class="node-emoji">🧠</span>
-        <span class="node-title">The AI Brain</span>
-        <span class="node-desc">RAG knowledge base — your company's living memory. Gets smarter every day.</span>
+        <span class="node-title" data-i18n="flow-brain-title">The AI Brain</span>
+        <span class="node-desc" data-i18n="flow-brain-desc">RAG knowledge base — your company's living memory. Gets smarter every day.</span>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node">
         <span class="node-emoji">🐒</span>
-        <span class="node-title">Your Agents</span>
-        <span class="node-desc">Carl · Mike · Penny · Sherlock · Rosa · Eva</span>
-        <div class="node-tags"><span class="node-tag">24/7</span><span class="node-tag">Always learning</span></div>
+        <span class="node-title" data-i18n="flow-agents-title">Your Agents</span>
+        <span class="node-desc" data-i18n="flow-agents-desc">Carl · Mike · Penny · Sherlock · Rosa · Eva</span>
+        <div class="node-tags"><span class="node-tag">24/7</span><span class="node-tag" data-i18n="flow-agents-tag2">Always learning</span></div>
       </div>
     </div>
   </div>
@@ -601,10 +618,10 @@
   <div class="container">
     <div class="agents-header">
       <div class="reveal">
-        <span class="label">Meet the Team</span>
-        <h2 class="agents-h2">The Monkeys 🐒</h2>
+        <span class="label" data-i18n="agents-label">Meet the Team</span>
+        <h2 class="agents-h2" data-i18n="agents-h2">The Monkeys 🐒</h2>
       </div>
-      <p class="agents-note reveal">Six specialists. All powered by your AI brain. Buy one or buy them all.</p>
+      <p class="agents-note reveal" data-i18n="agents-note">Six specialists. All powered by your AI brain. Buy one or buy them all.</p>
     </div>
 
     <div class="agents-grid">
@@ -616,14 +633,14 @@
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
-          <span class="card-badge">Customer Support</span>
+          <span class="card-badge" data-i18n="carl-badge">Customer Support</span>
           <div class="card-name">Carl</div>
-          <div class="card-role">The Support Monkey</div>
-          <p class="card-desc">Carl handles every customer query with the full knowledge of your business behind him. No scripts. Real answers. No hold music.</p>
+          <div class="card-role" data-i18n="carl-role">The Support Monkey</div>
+          <p class="card-desc" data-i18n="carl-desc">Carl handles every customer query with the full knowledge of your business behind him. No scripts. Real answers. No hold music.</p>
           <div class="card-tasks">
-            <div class="card-task">24/7 instant query resolution</div>
-            <div class="card-task">Intelligent human escalation</div>
-            <div class="card-task">Learns from every interaction</div>
+            <div class="card-task" data-i18n="carl-task1">24/7 instant query resolution</div>
+            <div class="card-task" data-i18n="carl-task2">Intelligent human escalation</div>
+            <div class="card-task" data-i18n="carl-task3">Learns from every interaction</div>
           </div>
         </div>
       </div>
@@ -635,14 +652,14 @@
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
-          <span class="card-badge">Social Media</span>
+          <span class="card-badge" data-i18n="mike-badge">Social Media</span>
           <div class="card-name">Mike</div>
-          <div class="card-role">The Social Monkey</div>
-          <p class="card-desc">Mike creates platform-native content across every channel — adapted for each audience, scheduled and posted automatically.</p>
+          <div class="card-role" data-i18n="mike-role">The Social Monkey</div>
+          <p class="card-desc" data-i18n="mike-desc">Mike creates platform-native content across every channel — adapted for each audience, scheduled and posted automatically.</p>
           <div class="card-tasks">
-            <div class="card-task">Platform-specific content creation</div>
-            <div class="card-task">Automated scheduling &amp; posting</div>
-            <div class="card-task">Engagement tracking &amp; replies</div>
+            <div class="card-task" data-i18n="mike-task1">Platform-specific content creation</div>
+            <div class="card-task" data-i18n="mike-task2">Automated scheduling &amp; posting</div>
+            <div class="card-task" data-i18n="mike-task3">Engagement tracking &amp; replies</div>
           </div>
         </div>
       </div>
@@ -655,14 +672,14 @@
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
-          <span class="card-badge" style="color:var(--penny-color);">Lead Generation</span>
+          <span class="card-badge" style="color:var(--penny-color);" data-i18n="penny-badge">Lead Generation</span>
           <div class="card-name">Penny</div>
-          <div class="card-role">The Lead Monkey</div>
-          <p class="card-desc">Penny hunts, qualifies, and nurtures leads using your full business context — not generic templates, actual intelligence about what your prospects care about.</p>
+          <div class="card-role" data-i18n="penny-role">The Lead Monkey</div>
+          <p class="card-desc" data-i18n="penny-desc">Penny hunts, qualifies, and nurtures leads using your full business context — not generic templates, actual intelligence about what your prospects care about.</p>
           <div class="card-tasks">
-            <div class="card-task">Prospect identification &amp; outreach</div>
-            <div class="card-task">Automated follow-up sequences</div>
-            <div class="card-task">Lead scoring &amp; qualification</div>
+            <div class="card-task" data-i18n="penny-task1">Prospect identification &amp; outreach</div>
+            <div class="card-task" data-i18n="penny-task2">Automated follow-up sequences</div>
+            <div class="card-task" data-i18n="penny-task3">Lead scoring &amp; qualification</div>
           </div>
         </div>
       </div>
@@ -674,14 +691,14 @@
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
-          <span class="card-badge" style="color:var(--sherlock-color);">SEO · GEO</span>
+          <span class="card-badge" style="color:var(--sherlock-color);" data-i18n="sherlock-badge">SEO · GEO</span>
           <div class="card-name">Sherlock</div>
-          <div class="card-role">The Search Monkey</div>
-          <p class="card-desc">Sherlock investigates every angle of your search presence — traditional SEO and the new frontier of AI search (GEO). He makes your brand impossible to miss.</p>
+          <div class="card-role" data-i18n="sherlock-role">The Search Monkey</div>
+          <p class="card-desc" data-i18n="sherlock-desc">Sherlock investigates every angle of your search presence — traditional SEO and the new frontier of AI search (GEO). He makes your brand impossible to miss.</p>
           <div class="card-tasks">
-            <div class="card-task">SEO-optimised content &amp; audits</div>
-            <div class="card-task">Generative Engine Optimisation</div>
-            <div class="card-task">Rank tracking &amp; competitor intel</div>
+            <div class="card-task" data-i18n="sherlock-task1">SEO-optimised content &amp; audits</div>
+            <div class="card-task" data-i18n="sherlock-task2">Generative Engine Optimisation</div>
+            <div class="card-task" data-i18n="sherlock-task3">Rank tracking &amp; competitor intel</div>
           </div>
         </div>
       </div>
@@ -693,40 +710,33 @@
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
-          <span class="card-badge" style="color:var(--rosa-color);">Sales</span>
+          <span class="card-badge" style="color:var(--rosa-color);" data-i18n="rosa-badge">Sales</span>
           <div class="card-name">Rosa</div>
-          <div class="card-role">The Sales Monkey</div>
-          <p class="card-desc">Rosa closes. Armed with your full business context, product knowledge, and customer history, she runs your sales process from first touch to signed deal.</p>
+          <div class="card-role" data-i18n="rosa-role">The Sales Monkey</div>
+          <p class="card-desc" data-i18n="rosa-desc">Rosa closes. Armed with your full business context, product knowledge, and customer history, she runs your sales process from first touch to signed deal.</p>
           <div class="card-tasks">
-            <div class="card-task">Automated sales conversations</div>
-            <div class="card-task">Proposal &amp; quote generation</div>
-            <div class="card-task">Pipeline management &amp; forecasting</div>
+            <div class="card-task" data-i18n="rosa-task1">Automated sales conversations</div>
+            <div class="card-task" data-i18n="rosa-task2">Proposal &amp; quote generation</div>
+            <div class="card-task" data-i18n="rosa-task3">Pipeline management &amp; forecasting</div>
           </div>
         </div>
       </div>
 
       <!-- EVA -->
-      <div class="agent-card card-eva reveal" style="--card-color:var(--eva-color);--card-bg:rgba(0,191,165,.08);--card-badge-bg:rgba(0,191,165,.1);--card-badge-border:rgba(0,191,165,.3);">
-        <div class="card-eva-inner">
-          <div class="card-img-wrap">
-            <img src="brand/EVA.png" alt="Eva — Personal Assistant &amp; AI Brain">
-            <div class="card-color-bar"></div>
-          </div>
-          <div class="card-eva-right">
-            <div class="card-body">
-              <span class="card-badge" style="background:rgba(0,191,165,.15);border-color:rgba(0,191,165,.4);color:var(--eva-color);">⭐ Flagship · The AI Brain</span>
-              <div class="card-name">Eva</div>
-              <div class="card-role">Personal Assistant</div>
-              <p class="card-desc">Eva IS the AI brain. She learns everything about your business and coordinates the entire team. The longer you run the infrastructure, the smarter Eva gets — she's not just an assistant, she's your company's collective intelligence.</p>
-            </div>
-            <div class="card-eva-tasks card-tasks" style="justify-content:flex-start;">
-              <div class="card-task" style="--card-color:var(--eva-color);">Manages inbox &amp; calendar 24/7</div>
-              <div class="card-task" style="--card-color:var(--eva-color);">Coordinates all other agents</div>
-              <div class="card-task" style="--card-color:var(--eva-color);">Holds your full business memory</div>
-              <div class="card-task" style="--card-color:var(--eva-color);">Gets smarter every single day</div>
-              <div class="card-task" style="--card-color:var(--eva-color);">The core of the AI infrastructure</div>
-              <div class="card-task" style="--card-color:var(--eva-color);">Provides daily intelligence briefings</div>
-            </div>
+      <div class="agent-card reveal" style="--card-color:var(--eva-color);--card-bg:rgba(0,191,165,.08);--card-badge-bg:rgba(0,191,165,.1);--card-badge-border:rgba(0,191,165,.3);">
+        <div class="card-img-wrap" style="height:300px;">
+          <img src="brand/EVA.png" alt="Eva — Personal Assistant &amp; AI Brain">
+          <div class="card-color-bar"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-badge" style="background:rgba(0,191,165,.15);border-color:rgba(0,191,165,.4);color:var(--eva-color);" data-i18n="eva-badge">⭐ Flagship · The AI Brain</span>
+          <div class="card-name">Eva</div>
+          <div class="card-role" data-i18n="eva-role">Personal Assistant</div>
+          <p class="card-desc" data-i18n="eva-desc">Eva IS the AI brain. She learns everything about your business and coordinates the entire team. The longer you run the infrastructure, the smarter Eva gets — she's not just an assistant, she's your company's collective intelligence.</p>
+          <div class="card-tasks">
+            <div class="card-task" data-i18n="eva-task1">Manages inbox &amp; calendar 24/7</div>
+            <div class="card-task" data-i18n="eva-task2">Coordinates all other agents</div>
+            <div class="card-task" data-i18n="eva-task3">Holds your full business memory</div>
           </div>
         </div>
       </div>
@@ -739,9 +749,9 @@
 <section id="playbook" class="section">
   <div class="container">
     <div class="playbook-header reveal">
-      <span class="label">Agent Playbook</span>
-      <h2 class="playbook-h2">How your monkeys <span>actually work</span></h2>
-      <p class="playbook-sub">Each agent runs a defined workflow powered by your AI brain — solving specific problems and generating measurable financial returns.</p>
+      <span class="label" data-i18n="playbook-label">Agent Playbook</span>
+      <h2 class="playbook-h2" data-i18n="playbook-h2">How your monkeys <span>actually work</span></h2>
+      <p class="playbook-sub" data-i18n="playbook-sub">Each agent runs a defined workflow powered by your AI brain — solving specific problems and generating measurable financial returns.</p>
     </div>
 
     <!-- Tab nav -->
@@ -759,31 +769,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/EVA.png" alt="Eva"></div>
         <div class="panel-agent-name">Eva</div>
-        <div class="panel-agent-role">Personal Assistant · AI Brain</div>
+        <div class="panel-agent-role" data-i18n="eva-panel-role">Personal Assistant · AI Brain</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Eva Works</div>
+          <div class="pflow-title" data-i18n="eva-how-title">How Eva Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Connects to everything.</strong> Eva links to your voice system, CRM, email, and social channels — ingesting all business data into the RAG knowledge base continuously.</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Builds your AI brain.</strong> Every interaction, every call, every email enriches Eva's understanding of your business, products, clients, and tone.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Manages your time.</strong> Eva handles your calendar, drafts your emails, takes meeting notes, and filters your inbox — so you only deal with what matters.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>Coordinates the team.</strong> Eva briefs Carl, Mike, Penny, Sherlock, and Rosa — passing context, syncing tasks, and ensuring every agent knows what the others are doing.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Delivers daily briefings.</strong> Every morning, Eva sends a business intelligence summary — what happened, what needs attention, what the agents are working on.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="eva-step1"><strong>Connects to everything.</strong> Eva links to your voice system, CRM, email, and social channels — ingesting all business data into the RAG knowledge base continuously.</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="eva-step2"><strong>Builds your AI brain.</strong> Every interaction, every call, every email enriches Eva's understanding of your business, products, clients, and tone.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="eva-step3"><strong>Manages your time.</strong> Eva handles your calendar, drafts your emails, takes meeting notes, and filters your inbox — so you only deal with what matters.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="eva-step4"><strong>Coordinates the team.</strong> Eva briefs Carl, Mike, Penny, Sherlock, and Rosa — passing context, syncing tasks, and ensuring every agent knows what the others are doing.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="eva-step5"><strong>Delivers daily briefings.</strong> Every morning, Eva sends a business intelligence summary — what happened, what needs attention, what the agents are working on.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Eva Solves</div>
-            <div class="prob-item"><span class="prob-icon">⚡</span><div class="prob-text"><strong>Fragmented business knowledge</strong>Information lives in email, CRM, calls, and WhatsApp — nowhere and everywhere at once. Eva unifies it all.</div></div>
-            <div class="prob-item"><span class="prob-icon">⏱️</span><div class="prob-text"><strong>Executive time consumed by admin</strong>20+ hours per week lost to scheduling, inbox management, and coordination tasks that require no human judgment.</div></div>
-            <div class="prob-item"><span class="prob-icon">🔀</span><div class="prob-text"><strong>Agents working in silos</strong>Without Eva, each agent operates independently. She's the connective tissue that turns six tools into one coordinated team.</div></div>
+            <div class="panel-card-title" data-i18n="eva-prob-title">Problems Eva Solves</div>
+            <div class="prob-item" data-i18n="eva-prob1"><span class="prob-icon">⚡</span><div class="prob-text"><strong>Fragmented business knowledge</strong>Information lives in email, CRM, calls, and WhatsApp — nowhere and everywhere at once. Eva unifies it all.</div></div>
+            <div class="prob-item" data-i18n="eva-prob2"><span class="prob-icon">⏱️</span><div class="prob-text"><strong>Executive time consumed by admin</strong>20+ hours per week lost to scheduling, inbox management, and coordination tasks that require no human judgment.</div></div>
+            <div class="prob-item" data-i18n="eva-prob3"><span class="prob-icon">🔀</span><div class="prob-text"><strong>Agents working in silos</strong>Without Eva, each agent operates independently. She's the connective tissue that turns six tools into one coordinated team.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">20+ hrs</div><div class="roi-label">Executive time saved per week</div><div class="roi-note">At £75/hr, that's £1,500/week returned to strategic work</div></div>
-            <div class="roi-item"><div class="roi-num">£50k+</div><div class="roi-label">Equivalent annual coordination value</div><div class="roi-note">Replaces an EA or operations manager role</div></div>
-            <div class="roi-item"><div class="roi-num">10×</div><div class="roi-label">Agent efficiency multiplier</div><div class="roi-note">Coordinated agents dramatically outperform siloed ones</div></div>
+            <div class="panel-card-title" data-i18n="eva-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="eva-roi1"><div class="roi-num">20+ hrs</div><div class="roi-label">Executive time saved per week</div><div class="roi-note">At £75/hr, that's £1,500/week returned to strategic work</div></div>
+            <div class="roi-item" data-i18n="eva-roi2"><div class="roi-num">£50k+</div><div class="roi-label">Equivalent annual coordination value</div><div class="roi-note">Replaces an EA or operations manager role</div></div>
+            <div class="roi-item" data-i18n="eva-roi3"><div class="roi-num">10×</div><div class="roi-label">Agent efficiency multiplier</div><div class="roi-note">Coordinated agents dramatically outperform siloed ones</div></div>
           </div>
         </div>
       </div>
@@ -794,31 +804,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="Carl"></div>
         <div class="panel-agent-name">Carl</div>
-        <div class="panel-agent-role">Customer Support Monkey</div>
+        <div class="panel-agent-role" data-i18n="carl-panel-role">Customer Support Monkey</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Carl Works</div>
+          <div class="pflow-title" data-i18n="carl-how-title">How Carl Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Customer contacts your business</strong> via phone, chat, email, or SMS. Carl receives the query instantly — zero hold time, zero queue.</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Carl searches Eva's brain</strong> for the relevant context — product info, client history, past issues, company policies — in milliseconds.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Responds with precision.</strong> Not a template — a real, contextual answer that sounds like it came from someone who actually knows your business.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>Escalates intelligently.</strong> When a query genuinely needs a human, Carl flags it with full context so your team doesn't start from zero.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Logs every interaction back to the brain.</strong> Every query and resolution makes the knowledge base smarter for next time.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="carl-step1"><strong>Customer contacts your business</strong> via phone, chat, email, or SMS. Carl receives the query instantly — zero hold time, zero queue.</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="carl-step2"><strong>Carl searches Eva's brain</strong> for the relevant context — product info, client history, past issues, company policies — in milliseconds.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="carl-step3"><strong>Responds with precision.</strong> Not a template — a real, contextual answer that sounds like it came from someone who actually knows your business.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="carl-step4"><strong>Escalates intelligently.</strong> When a query genuinely needs a human, Carl flags it with full context so your team doesn't start from zero.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="carl-step5"><strong>Logs every interaction back to the brain.</strong> Every query and resolution makes the knowledge base smarter for next time.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Carl Solves</div>
-            <div class="prob-item"><span class="prob-icon">🕐</span><div class="prob-text"><strong>Slow response times</strong>Average email support response is 4+ hours. Carl responds in 3 seconds — 24/7, including weekends and bank holidays.</div></div>
-            <div class="prob-item"><span class="prob-icon">🌙</span><div class="prob-text"><strong>After-hours gaps</strong>40% of customer queries arrive outside business hours. Without Carl, those customers go to your competitor.</div></div>
-            <div class="prob-item"><span class="prob-icon">📋</span><div class="prob-text"><strong>Inconsistent answers</strong>Different staff give different answers. Carl gives the same accurate, on-brand answer every single time.</div></div>
+            <div class="panel-card-title" data-i18n="carl-prob-title">Problems Carl Solves</div>
+            <div class="prob-item" data-i18n="carl-prob1"><span class="prob-icon">🕐</span><div class="prob-text"><strong>Slow response times</strong>Average email support response is 4+ hours. Carl responds in 3 seconds — 24/7, including weekends and bank holidays.</div></div>
+            <div class="prob-item" data-i18n="carl-prob2"><span class="prob-icon">🌙</span><div class="prob-text"><strong>After-hours gaps</strong>40% of customer queries arrive outside business hours. Without Carl, those customers go to your competitor.</div></div>
+            <div class="prob-item" data-i18n="carl-prob3"><span class="prob-icon">📋</span><div class="prob-text"><strong>Inconsistent answers</strong>Different staff give different answers. Carl gives the same accurate, on-brand answer every single time.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">£30k+</div><div class="roi-label">Saved vs hiring a support agent</div><div class="roi-note">Salary, NI, pension, training — all eliminated</div></div>
-            <div class="roi-item"><div class="roi-num">£0.08</div><div class="roi-label">Cost per ticket (was £8+)</div><div class="roi-note">99% reduction in per-ticket support cost</div></div>
-            <div class="roi-item"><div class="roi-num">8,760 hrs</div><div class="roi-label">Available per year</div><div class="roi-note">vs 2,080 hrs for one full-time employee</div></div>
+            <div class="panel-card-title" data-i18n="carl-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="carl-roi1"><div class="roi-num">£30k+</div><div class="roi-label">Saved vs hiring a support agent</div><div class="roi-note">Salary, NI, pension, training — all eliminated</div></div>
+            <div class="roi-item" data-i18n="carl-roi2"><div class="roi-num">£0.08</div><div class="roi-label">Cost per ticket (was £8+)</div><div class="roi-note">99% reduction in per-ticket support cost</div></div>
+            <div class="roi-item" data-i18n="carl-roi3"><div class="roi-num">8,760 hrs</div><div class="roi-label">Available per year</div><div class="roi-note">vs 2,080 hrs for one full-time employee</div></div>
           </div>
         </div>
       </div>
@@ -829,31 +839,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_21_09.png" alt="Mike"></div>
         <div class="panel-agent-name">Mike</div>
-        <div class="panel-agent-role">Social Media Manager</div>
+        <div class="panel-agent-role" data-i18n="mike-panel-role">Social Media Manager</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Mike Works</div>
+          <div class="pflow-title" data-i18n="mike-how-title">How Mike Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Brain analysis.</strong> Mike reads your existing top-performing content and brand voice from Eva's knowledge base to understand what works for your audience.</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Trend research.</strong> Mike scans your industry for trending topics, competitor content, and audience conversations to identify timely opportunities.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Platform-native content creation.</strong> Not the same post copy-pasted. LinkedIn gets thought leadership. Instagram gets visuals &amp; hooks. X gets punchy. TikTok gets raw.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>Optimal scheduling.</strong> Mike posts at the times your specific audience is most active — maximising organic reach without paid promotion.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Monitors &amp; reports.</strong> Tracks engagement, replies to comments, and feeds performance data back to the brain to refine future content.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="mike-step1"><strong>Brain analysis.</strong> Mike reads your existing top-performing content and brand voice from Eva's knowledge base to understand what works for your audience.</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="mike-step2"><strong>Trend research.</strong> Mike scans your industry for trending topics, competitor content, and audience conversations to identify timely opportunities.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="mike-step3"><strong>Platform-native content creation.</strong> Not the same post copy-pasted. LinkedIn gets thought leadership. Instagram gets visuals &amp; hooks. X gets punchy. TikTok gets raw.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="mike-step4"><strong>Optimal scheduling.</strong> Mike posts at the times your specific audience is most active — maximising organic reach without paid promotion.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="mike-step5"><strong>Monitors &amp; reports.</strong> Tracks engagement, replies to comments, and feeds performance data back to the brain to refine future content.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Mike Solves</div>
-            <div class="prob-item"><span class="prob-icon">📉</span><div class="prob-text"><strong>Inconsistent posting</strong>Most SMBs post less than 3× per week. Inconsistency kills organic reach. Mike posts daily without you lifting a finger.</div></div>
-            <div class="prob-item"><span class="prob-icon">🔁</span><div class="prob-text"><strong>Same content, every platform</strong>Copy-pasting kills engagement. Mike creates genuinely different content for each platform's format and audience.</div></div>
-            <div class="prob-item"><span class="prob-icon">💸</span><div class="prob-text"><strong>Agency fees with no transparency</strong>Social media agencies charge £1,500–£3,000/month for services Mike delivers in real time, 24/7.</div></div>
+            <div class="panel-card-title" data-i18n="mike-prob-title">Problems Mike Solves</div>
+            <div class="prob-item" data-i18n="mike-prob1"><span class="prob-icon">📉</span><div class="prob-text"><strong>Inconsistent posting</strong>Most SMBs post less than 3× per week. Inconsistency kills organic reach. Mike posts daily without you lifting a finger.</div></div>
+            <div class="prob-item" data-i18n="mike-prob2"><span class="prob-icon">🔁</span><div class="prob-text"><strong>Same content, every platform</strong>Copy-pasting kills engagement. Mike creates genuinely different content for each platform's format and audience.</div></div>
+            <div class="prob-item" data-i18n="mike-prob3"><span class="prob-icon">💸</span><div class="prob-text"><strong>Agency fees with no transparency</strong>Social media agencies charge £1,500–£3,000/month for services Mike delivers in real time, 24/7.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">£32k+</div><div class="roi-label">Saved vs a social media manager</div><div class="roi-note">Salary, benefits, and agency fees combined</div></div>
-            <div class="roi-item"><div class="roi-num">15 hrs</div><div class="roi-label">Saved per week on content creation</div><div class="roi-note">Returned to billable or strategic work</div></div>
-            <div class="roi-item"><div class="roi-num">+40%</div><div class="roi-label">Average engagement uplift</div><div class="roi-note">Consistent, platform-native content outperforms sporadic posts</div></div>
+            <div class="panel-card-title" data-i18n="mike-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="mike-roi1"><div class="roi-num">£32k+</div><div class="roi-label">Saved vs a social media manager</div><div class="roi-note">Salary, benefits, and agency fees combined</div></div>
+            <div class="roi-item" data-i18n="mike-roi2"><div class="roi-num">15 hrs</div><div class="roi-label">Saved per week on content creation</div><div class="roi-note">Returned to billable or strategic work</div></div>
+            <div class="roi-item" data-i18n="mike-roi3"><div class="roi-num">+40%</div><div class="roi-label">Average engagement uplift</div><div class="roi-note">Consistent, platform-native content outperforms sporadic posts</div></div>
           </div>
         </div>
       </div>
@@ -864,31 +874,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_13_36.png" alt="Penny"></div>
         <div class="panel-agent-name">Penny</div>
-        <div class="panel-agent-role">Lead Generation</div>
+        <div class="panel-agent-role" data-i18n="penny-panel-role">Lead Generation</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Penny Works</div>
+          <div class="pflow-title" data-i18n="penny-how-title">How Penny Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Defines your ideal customer.</strong> Penny analyses your existing client data in the brain to build a precise ICP — industry, size, pain points, buying triggers.</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Builds a targeted prospect list.</strong> Penny searches LinkedIn, directories, and databases to find prospects that match your ICP — not random lists.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Crafts personalised outreach.</strong> Using context from the brain, every message references something specific and relevant — not a generic "hope this finds you well" template.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>Manages the follow-up sequence.</strong> 80% of deals require 5+ touchpoints. Penny handles every follow-up automatically, adjusting tone and angle each time.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Qualifies and passes to Rosa.</strong> Hot leads are handed off with full context so Rosa can pick up exactly where Penny left off.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="penny-step1"><strong>Defines your ideal customer.</strong> Penny analyses your existing client data in the brain to build a precise ICP — industry, size, pain points, buying triggers.</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="penny-step2"><strong>Builds a targeted prospect list.</strong> Penny searches LinkedIn, directories, and databases to find prospects that match your ICP — not random lists.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="penny-step3"><strong>Crafts personalised outreach.</strong> Using context from the brain, every message references something specific and relevant — not a generic "hope this finds you well" template.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="penny-step4"><strong>Manages the follow-up sequence.</strong> 80% of deals require 5+ touchpoints. Penny handles every follow-up automatically, adjusting tone and angle each time.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="penny-step5"><strong>Qualifies and passes to Rosa.</strong> Hot leads are handed off with full context so Rosa can pick up exactly where Penny left off.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Penny Solves</div>
-            <div class="prob-item"><span class="prob-icon">⏰</span><div class="prob-text"><strong>Manual prospecting eats your week</strong>Sales people spend 20% of their week on prospecting that could be automated. Penny does it 24/7 without losing focus.</div></div>
-            <div class="prob-item"><span class="prob-icon">📧</span><div class="prob-text"><strong>Generic outreach gets ignored</strong>Average cold email open rate is 21%. Penny's personalised, context-driven messages achieve 3–5× higher reply rates.</div></div>
-            <div class="prob-item"><span class="prob-icon">📭</span><div class="prob-text"><strong>Missed follow-ups lose deals</strong>80% of sales need 5+ follow-ups. 44% of reps give up after one. Penny never gives up.</div></div>
+            <div class="panel-card-title" data-i18n="penny-prob-title">Problems Penny Solves</div>
+            <div class="prob-item" data-i18n="penny-prob1"><span class="prob-icon">⏰</span><div class="prob-text"><strong>Manual prospecting eats your week</strong>Sales people spend 20% of their week on prospecting that could be automated. Penny does it 24/7 without losing focus.</div></div>
+            <div class="prob-item" data-i18n="penny-prob2"><span class="prob-icon">📧</span><div class="prob-text"><strong>Generic outreach gets ignored</strong>Average cold email open rate is 21%. Penny's personalised, context-driven messages achieve 3–5× higher reply rates.</div></div>
+            <div class="prob-item" data-i18n="penny-prob3"><span class="prob-icon">📭</span><div class="prob-text"><strong>Missed follow-ups lose deals</strong>80% of sales need 5+ follow-ups. 44% of reps give up after one. Penny never gives up.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">£35k+</div><div class="roi-label">Saved vs an SDR hire</div><div class="roi-note">Salary, commission, tools, and onboarding costs</div></div>
-            <div class="roi-item"><div class="roi-num">3×</div><div class="roi-label">More outreach volume than a human</div><div class="roi-note">Penny never sleeps, never loses motivation</div></div>
-            <div class="roi-item"><div class="roi-num">5×</div><div class="roi-label">Higher reply rates on outreach</div><div class="roi-note">Personalised, context-rich messages vs generic templates</div></div>
+            <div class="panel-card-title" data-i18n="penny-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="penny-roi1"><div class="roi-num">£35k+</div><div class="roi-label">Saved vs an SDR hire</div><div class="roi-note">Salary, commission, tools, and onboarding costs</div></div>
+            <div class="roi-item" data-i18n="penny-roi2"><div class="roi-num">3×</div><div class="roi-label">More outreach volume than a human</div><div class="roi-note">Penny never sleeps, never loses motivation</div></div>
+            <div class="roi-item" data-i18n="penny-roi3"><div class="roi-num">5×</div><div class="roi-label">Higher reply rates on outreach</div><div class="roi-note">Personalised, context-rich messages vs generic templates</div></div>
           </div>
         </div>
       </div>
@@ -899,31 +909,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_23_15.png" alt="Sherlock"></div>
         <div class="panel-agent-name">Sherlock</div>
-        <div class="panel-agent-role">SEO &amp; GEO Specialist</div>
+        <div class="panel-agent-role" data-i18n="sherlock-panel-role">SEO &amp; GEO Specialist</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Sherlock Works</div>
+          <div class="pflow-title" data-i18n="sherlock-how-title">How Sherlock Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Search presence audit.</strong> Sherlock analyses your current rankings, site health, and visibility in both traditional search (Google) and AI search engines (ChatGPT, Perplexity, Gemini).</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Competitor gap analysis.</strong> Identifies which keywords and topics your competitors rank for that you don't — and builds a priority attack list.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Content strategy creation.</strong> Using your brain data, Sherlock creates SEO articles and landing pages that address real customer questions with your authentic expertise.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>GEO optimisation.</strong> Structures your content so it's cited by AI answers in ChatGPT, Perplexity, and Google's AI Overview — the new frontier of search.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Weekly rank tracking &amp; reporting.</strong> Monitors rankings, traffic, and AI citation frequency — adjusting strategy based on what's working.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="sherlock-step1"><strong>Search presence audit.</strong> Sherlock analyses your current rankings, site health, and visibility in both traditional search (Google) and AI search engines (ChatGPT, Perplexity, Gemini).</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="sherlock-step2"><strong>Competitor gap analysis.</strong> Identifies which keywords and topics your competitors rank for that you don't — and builds a priority attack list.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="sherlock-step3"><strong>Content strategy creation.</strong> Using your brain data, Sherlock creates SEO articles and landing pages that address real customer questions with your authentic expertise.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="sherlock-step4"><strong>GEO optimisation.</strong> Structures your content so it's cited by AI answers in ChatGPT, Perplexity, and Google's AI Overview — the new frontier of search.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="sherlock-step5"><strong>Weekly rank tracking &amp; reporting.</strong> Monitors rankings, traffic, and AI citation frequency — adjusting strategy based on what's working.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Sherlock Solves</div>
-            <div class="prob-item"><span class="prob-icon">👻</span><div class="prob-text"><strong>Invisible in search</strong>If you don't appear on page 1 — traditional or AI — you functionally don't exist to 90% of potential customers.</div></div>
-            <div class="prob-item"><span class="prob-icon">🤖</span><div class="prob-text"><strong>No GEO strategy</strong>AI search is replacing Google for millions of users. Most businesses have zero strategy for being cited in AI answers.</div></div>
-            <div class="prob-item"><span class="prob-icon">💰</span><div class="prob-text"><strong>Expensive agencies with opaque results</strong>SEO agencies charge £2,000–£5,000/month with 6-month contracts and vague reporting. Sherlock delivers transparent, continuous results.</div></div>
+            <div class="panel-card-title" data-i18n="sherlock-prob-title">Problems Sherlock Solves</div>
+            <div class="prob-item" data-i18n="sherlock-prob1"><span class="prob-icon">👻</span><div class="prob-text"><strong>Invisible in search</strong>If you don't appear on page 1 — traditional or AI — you functionally don't exist to 90% of potential customers.</div></div>
+            <div class="prob-item" data-i18n="sherlock-prob2"><span class="prob-icon">🤖</span><div class="prob-text"><strong>No GEO strategy</strong>AI search is replacing Google for millions of users. Most businesses have zero strategy for being cited in AI answers.</div></div>
+            <div class="prob-item" data-i18n="sherlock-prob3"><span class="prob-icon">💰</span><div class="prob-text"><strong>Expensive agencies with opaque results</strong>SEO agencies charge £2,000–£5,000/month with 6-month contracts and vague reporting. Sherlock delivers transparent, continuous results.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">£36k+</div><div class="roi-label">Saved vs an SEO agency annually</div><div class="roi-note">At £1,500–£3,000/month, agency fees add up fast</div></div>
-            <div class="roi-item"><div class="roi-num">Compounds</div><div class="roi-label">Organic growth = falling CAC over time</div><div class="roi-note">Every article is a 24/7 sales asset that never expires</div></div>
-            <div class="roi-item"><div class="roi-num">First-mover</div><div class="roi-label">GEO advantage while competitors sleep</div><div class="roi-note">AI search share is growing 40% year-on-year</div></div>
+            <div class="panel-card-title" data-i18n="sherlock-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="sherlock-roi1"><div class="roi-num">£36k+</div><div class="roi-label">Saved vs an SEO agency annually</div><div class="roi-note">At £1,500–£3,000/month, agency fees add up fast</div></div>
+            <div class="roi-item" data-i18n="sherlock-roi2"><div class="roi-num">Compounds</div><div class="roi-label">Organic growth = falling CAC over time</div><div class="roi-note">Every article is a 24/7 sales asset that never expires</div></div>
+            <div class="roi-item" data-i18n="sherlock-roi3"><div class="roi-num">First-mover</div><div class="roi-label">GEO advantage while competitors sleep</div><div class="roi-note">AI search share is growing 40% year-on-year</div></div>
           </div>
         </div>
       </div>
@@ -934,31 +944,31 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%202%20apr%202026%2C%2009_05_59.png" alt="Rosa"></div>
         <div class="panel-agent-name">Rosa</div>
-        <div class="panel-agent-role">Sales Agent</div>
+        <div class="panel-agent-role" data-i18n="rosa-panel-role">Sales Agent</div>
       </div>
       <div class="panel-content reveal">
         <div>
-          <div class="pflow-title">How Rosa Works</div>
+          <div class="pflow-title" data-i18n="rosa-how-title">How Rosa Works</div>
           <div class="pflow-steps">
-            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text"><strong>Receives qualified leads from Penny.</strong> Rosa picks up where Penny left off — with full context on the prospect's background, interests, and engagement history.</div></div>
-            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text"><strong>Reviews the brain.</strong> Rosa checks your full product knowledge, pricing, past deals, and client success stories — armed to handle any question or objection.</div></div>
-            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text"><strong>Opens the conversation.</strong> Rosa initiates a personalised sales dialogue — not a pitch, a genuine conversation that leads with the prospect's specific pain points.</div></div>
-            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text"><strong>Handles objections.</strong> Using deep product and competitor knowledge from the brain, Rosa addresses every objection with accurate, confident responses.</div></div>
-            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text"><strong>Generates proposals &amp; closes.</strong> Rosa creates tailored proposals, sends contracts, and follows up until the deal is won — or intelligently nurtures prospects not yet ready to buy.</div></div>
+            <div class="pflow-step"><div class="pflow-num">1</div><div class="pflow-text" data-i18n="rosa-step1"><strong>Receives qualified leads from Penny.</strong> Rosa picks up where Penny left off — with full context on the prospect's background, interests, and engagement history.</div></div>
+            <div class="pflow-step"><div class="pflow-num">2</div><div class="pflow-text" data-i18n="rosa-step2"><strong>Reviews the brain.</strong> Rosa checks your full product knowledge, pricing, past deals, and client success stories — armed to handle any question or objection.</div></div>
+            <div class="pflow-step"><div class="pflow-num">3</div><div class="pflow-text" data-i18n="rosa-step3"><strong>Opens the conversation.</strong> Rosa initiates a personalised sales dialogue — not a pitch, a genuine conversation that leads with the prospect's specific pain points.</div></div>
+            <div class="pflow-step"><div class="pflow-num">4</div><div class="pflow-text" data-i18n="rosa-step4"><strong>Handles objections.</strong> Using deep product and competitor knowledge from the brain, Rosa addresses every objection with accurate, confident responses.</div></div>
+            <div class="pflow-step"><div class="pflow-num">5</div><div class="pflow-text" data-i18n="rosa-step5"><strong>Generates proposals &amp; closes.</strong> Rosa creates tailored proposals, sends contracts, and follows up until the deal is won — or intelligently nurtures prospects not yet ready to buy.</div></div>
           </div>
         </div>
         <div class="panel-bottom">
           <div class="panel-card">
-            <div class="panel-card-title">Problems Rosa Solves</div>
-            <div class="prob-item"><span class="prob-icon">⚡</span><div class="prob-text"><strong>Slow lead response kills conversions</strong>Respond to a lead within 5 minutes and you're 100× more likely to convert. Rosa responds in seconds, every time.</div></div>
-            <div class="prob-item"><span class="prob-icon">😴</span><div class="prob-text"><strong>Sales only happen during office hours</strong>Deals are lost every night and weekend. Rosa sells 24/7/365 — your best sales rep never sleeps.</div></div>
-            <div class="prob-item"><span class="prob-icon">📑</span><div class="prob-text"><strong>Inconsistent proposals and follow-up</strong>Sales quality varies by person and energy level. Rosa delivers the same excellent experience every single time.</div></div>
+            <div class="panel-card-title" data-i18n="rosa-prob-title">Problems Rosa Solves</div>
+            <div class="prob-item" data-i18n="rosa-prob1"><span class="prob-icon">⚡</span><div class="prob-text"><strong>Slow lead response kills conversions</strong>Respond to a lead within 5 minutes and you're 100× more likely to convert. Rosa responds in seconds, every time.</div></div>
+            <div class="prob-item" data-i18n="rosa-prob2"><span class="prob-icon">😴</span><div class="prob-text"><strong>Sales only happen during office hours</strong>Deals are lost every night and weekend. Rosa sells 24/7/365 — your best sales rep never sleeps.</div></div>
+            <div class="prob-item" data-i18n="rosa-prob3"><span class="prob-icon">📑</span><div class="prob-text"><strong>Inconsistent proposals and follow-up</strong>Sales quality varies by person and energy level. Rosa delivers the same excellent experience every single time.</div></div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-title">Financial Impact</div>
-            <div class="roi-item"><div class="roi-num">7×</div><div class="roi-label">Higher conversion from instant response</div><div class="roi-note">Speed-to-lead is the #1 factor in B2B conversion rates</div></div>
-            <div class="roi-item"><div class="roi-num">£40k+</div><div class="roi-label">Saved vs an additional sales hire</div><div class="roi-note">Salary, commission, CRM licences, and onboarding</div></div>
-            <div class="roi-item"><div class="roi-num">−30%</div><div class="roi-label">Shorter sales cycle</div><div class="roi-note">Faster follow-up and consistent nurturing compress timelines</div></div>
+            <div class="panel-card-title" data-i18n="rosa-roi-title">Financial Impact</div>
+            <div class="roi-item" data-i18n="rosa-roi1"><div class="roi-num">7×</div><div class="roi-label">Higher conversion from instant response</div><div class="roi-note">Speed-to-lead is the #1 factor in B2B conversion rates</div></div>
+            <div class="roi-item" data-i18n="rosa-roi2"><div class="roi-num">£40k+</div><div class="roi-label">Saved vs an additional sales hire</div><div class="roi-note">Salary, commission, CRM licences, and onboarding</div></div>
+            <div class="roi-item" data-i18n="rosa-roi3"><div class="roi-num">−30%</div><div class="roi-label">Shorter sales cycle</div><div class="roi-note">Faster follow-up and consistent nurturing compress timelines</div></div>
           </div>
         </div>
       </div>
@@ -971,27 +981,27 @@
 <section id="how" class="section">
   <div class="container">
     <div class="how-header reveal">
-      <span class="label">How It Works</span>
-      <h2 class="how-h2">Three steps.<br><span>One smart business.</span></h2>
+      <span class="label" data-i18n="how-label">How It Works</span>
+      <h2 class="how-h2" data-i18n="how-h2">Three steps.<br><span>One smart business.</span></h2>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-circle">01</div>
         <div class="step-icon">🎙️</div>
-        <div class="step-title">Feed the Brain</div>
-        <p class="step-desc">Your AI voice system captures every call. CRM pulls in your emails and social history. The knowledge base grows with real, live business data from day one.</p>
+        <div class="step-title" data-i18n="step1-title">Feed the Brain</div>
+        <p class="step-desc" data-i18n="step1-desc">Your AI voice system captures every call. CRM pulls in your emails and social history. The knowledge base grows with real, live business data from day one.</p>
       </div>
       <div class="step reveal">
         <div class="step-circle">02</div>
         <div class="step-icon">🧠</div>
-        <div class="step-title">Brain Learns Your Business</div>
-        <p class="step-desc">The RAG system processes all your data into a living company memory. It understands your products, your tone, your customers, and your history — deeply and continuously.</p>
+        <div class="step-title" data-i18n="step2-title">Brain Learns Your Business</div>
+        <p class="step-desc" data-i18n="step2-desc">The RAG system processes all your data into a living company memory. It understands your products, your tone, your customers, and your history — deeply and continuously.</p>
       </div>
       <div class="step reveal">
         <div class="step-circle">03</div>
         <div class="step-icon">🐒</div>
-        <div class="step-title">Agents Go to Work</div>
-        <p class="step-desc">Carl, Mike, Penny, Sherlock, Rosa, and Eva run your operations 24/7. They don't need briefing. They already know everything about your business.</p>
+        <div class="step-title" data-i18n="step3-title">Agents Go to Work</div>
+        <p class="step-desc" data-i18n="step3-desc">Carl, Mike, Penny, Sherlock, Rosa, and Eva run your operations 24/7. They don't need briefing. They already know everything about your business.</p>
       </div>
     </div>
   </div>
@@ -1001,15 +1011,15 @@
 <section id="roi" class="section">
   <div class="container">
     <div class="roi-header reveal">
-      <span class="label">Financial Impact</span>
-      <h2 class="roi-h2">The numbers<br><span>don't lie.</span></h2>
-      <p class="roi-sub">Hiring a team to do what your six AI agents do would cost over £200,000 a year. That's before tax, benefits, sick days, and turnover.</p>
+      <span class="label" data-i18n="roi-label">Financial Impact</span>
+      <h2 class="roi-h2" data-i18n="roi-h2">The numbers<br><span>don't lie.</span></h2>
+      <p class="roi-sub" data-i18n="roi-sub">Hiring a team to do what your six AI agents do would cost over £200,000 a year. That's before tax, benefits, sick days, and turnover.</p>
     </div>
 
     <div class="roi-hero-num reveal">
       <div class="roi-hero-value">£200,000+</div>
-      <div class="roi-hero-label">Annual equivalent value of your AI team</div>
-      <div class="roi-hero-sub">Across salaries, agency fees, tools, and lost hours — this is what the full agent stack replaces</div>
+      <div class="roi-hero-label" data-i18n="roi-hero-label">Annual equivalent value of your AI team</div>
+      <div class="roi-hero-sub" data-i18n="roi-hero-sub">Across salaries, agency fees, tools, and lost hours — this is what the full agent stack replaces</div>
     </div>
 
     <!-- Comparison: traditional vs AI -->
@@ -1018,33 +1028,33 @@
         <div class="comp-head">
           <span class="comp-head-icon">👥</span>
           <div>
-            <div class="comp-head-title">Traditional Human Team</div>
-            <div class="comp-head-sub">Doing what your 6 agents do</div>
+            <div class="comp-head-title" data-i18n="comp-human-title">Traditional Human Team</div>
+            <div class="comp-head-sub" data-i18n="comp-human-sub">Doing what your 6 agents do</div>
           </div>
         </div>
-        <div class="comp-row"><span class="comp-row-label">Customer Support Agent</span><span class="comp-row-val bad">£30,000/yr</span></div>
-        <div class="comp-row"><span class="comp-row-label">Social Media Manager</span><span class="comp-row-val bad">£32,000/yr</span></div>
-        <div class="comp-row"><span class="comp-row-label">Sales Development Rep</span><span class="comp-row-val bad">£35,000/yr</span></div>
-        <div class="comp-row"><span class="comp-row-label">SEO Agency Retainer</span><span class="comp-row-val bad">£24,000/yr</span></div>
-        <div class="comp-row"><span class="comp-row-label">Sales Agent (additional)</span><span class="comp-row-val bad">£42,000/yr</span></div>
-        <div class="comp-row"><span class="comp-row-label">Executive Assistant / Ops</span><span class="comp-row-val bad">£35,000/yr</span></div>
-        <div class="comp-row" style="background:rgba(255,82,82,.06);"><span class="comp-row-label" style="font-weight:700;color:var(--text);">Total Annual Cost</span><span class="comp-row-val bad" style="font-size:1.5rem;">£198,000</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-support">Customer Support Agent</span><span class="comp-row-val bad">£30,000/yr</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-social">Social Media Manager</span><span class="comp-row-val bad">£32,000/yr</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-sdr">Sales Development Rep</span><span class="comp-row-val bad">£35,000/yr</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-seo">SEO Agency Retainer</span><span class="comp-row-val bad">£24,000/yr</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-sales">Sales Agent (additional)</span><span class="comp-row-val bad">£42,000/yr</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-row-ea">Executive Assistant / Ops</span><span class="comp-row-val bad">£35,000/yr</span></div>
+        <div class="comp-row" style="background:rgba(255,82,82,.06);"><span class="comp-row-label" style="font-weight:700;color:var(--text);" data-i18n="comp-row-total-label">Total Annual Cost</span><span class="comp-row-val bad" style="font-size:1.5rem;">£198,000</span></div>
       </div>
       <div class="comp-col comp-ai">
         <div class="comp-head">
           <span class="comp-head-icon">🐒</span>
           <div>
-            <div class="comp-head-title">Artificial Ignorance</div>
-            <div class="comp-head-sub">The complete AI infrastructure</div>
+            <div class="comp-head-title" data-i18n="comp-ai-title">Artificial Ignorance</div>
+            <div class="comp-head-sub" data-i18n="comp-ai-sub">The complete AI infrastructure</div>
           </div>
         </div>
-        <div class="comp-row"><span class="comp-row-label">Carl — 24/7 Customer Support</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row"><span class="comp-row-label">Mike — Social Media Manager</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row"><span class="comp-row-label">Penny — Lead Generation</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row"><span class="comp-row-label">Sherlock — SEO &amp; GEO</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row"><span class="comp-row-label">Rosa — Sales Agent</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row"><span class="comp-row-label">Eva — Personal Assistant + Brain</span><span class="comp-row-val good">✓ Included</span></div>
-        <div class="comp-row" style="background:rgba(0,200,83,.08);"><span class="comp-row-label" style="font-weight:700;color:var(--text);">Talk to us about pricing</span><span class="comp-row-val good" style="font-size:1.5rem;">Book a Demo →</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-carl">Carl — 24/7 Customer Support</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-mike">Mike — Social Media Manager</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-penny">Penny — Lead Generation</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-sherlock">Sherlock — SEO &amp; GEO</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-rosa">Rosa — Sales Agent</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label" data-i18n="comp-eva">Eva — Personal Assistant + Brain</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row" style="background:rgba(0,200,83,.08);"><span class="comp-row-label" style="font-weight:700;color:var(--text);" data-i18n="comp-row-talk">Talk to us about pricing</span><span class="comp-row-val good" style="font-size:1.5rem;" data-i18n="comp-row-book">Book a Demo →</span></div>
       </div>
     </div>
 
@@ -1053,84 +1063,84 @@
       <div class="savings-card" style="--sc-color:var(--eva-color);">
         <div class="savings-agent">
           <img src="brand/EVA.png" alt="Eva" class="savings-thumb">
-          <div><div class="savings-name">Eva</div><div class="savings-role">Personal Assistant</div></div>
+          <div><div class="savings-name">Eva</div><div class="savings-role" data-i18n="savings-eva-role">Personal Assistant</div></div>
         </div>
         <div class="savings-amount">£50k+</div>
-        <div class="savings-period">Annual value delivered</div>
+        <div class="savings-period" data-i18n="savings-eva-period">Annual value delivered</div>
         <div class="savings-facts">
-          <div class="savings-fact">20+ executive hours saved per week</div>
-          <div class="savings-fact">Coordinates all 5 other agents</div>
-          <div class="savings-fact">Daily business intelligence briefings</div>
+          <div class="savings-fact" data-i18n="savings-eva-fact1">20+ executive hours saved per week</div>
+          <div class="savings-fact" data-i18n="savings-eva-fact2">Coordinates all 5 other agents</div>
+          <div class="savings-fact" data-i18n="savings-eva-fact3">Daily business intelligence briefings</div>
         </div>
       </div>
 
       <div class="savings-card" style="--sc-color:var(--carl-color);">
         <div class="savings-agent">
           <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="Carl" class="savings-thumb">
-          <div><div class="savings-name">Carl</div><div class="savings-role">Customer Support</div></div>
+          <div><div class="savings-name">Carl</div><div class="savings-role" data-i18n="savings-carl-role">Customer Support</div></div>
         </div>
         <div class="savings-amount">£30k+</div>
-        <div class="savings-period">Saved vs a support hire</div>
+        <div class="savings-period" data-i18n="savings-carl-period">Saved vs a support hire</div>
         <div class="savings-facts">
-          <div class="savings-fact">3-second response time, 24/7</div>
-          <div class="savings-fact">Cost per ticket drops from £8 to £0.08</div>
-          <div class="savings-fact">8,760 hours available per year</div>
+          <div class="savings-fact" data-i18n="savings-carl-fact1">3-second response time, 24/7</div>
+          <div class="savings-fact" data-i18n="savings-carl-fact2">Cost per ticket drops from £8 to £0.08</div>
+          <div class="savings-fact" data-i18n="savings-carl-fact3">8,760 hours available per year</div>
         </div>
       </div>
 
       <div class="savings-card" style="--sc-color:var(--mike-color);">
         <div class="savings-agent">
           <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_21_09.png" alt="Mike" class="savings-thumb">
-          <div><div class="savings-name">Mike</div><div class="savings-role">Social Media</div></div>
+          <div><div class="savings-name">Mike</div><div class="savings-role" data-i18n="savings-mike-role">Social Media</div></div>
         </div>
         <div class="savings-amount">£32k+</div>
-        <div class="savings-period">Saved vs a social manager</div>
+        <div class="savings-period" data-i18n="savings-mike-period">Saved vs a social manager</div>
         <div class="savings-facts">
-          <div class="savings-fact">15+ hours saved per week</div>
-          <div class="savings-fact">Average 40% engagement uplift</div>
-          <div class="savings-fact">Daily posting across all platforms</div>
+          <div class="savings-fact" data-i18n="savings-mike-fact1">15+ hours saved per week</div>
+          <div class="savings-fact" data-i18n="savings-mike-fact2">Average 40% engagement uplift</div>
+          <div class="savings-fact" data-i18n="savings-mike-fact3">Daily posting across all platforms</div>
         </div>
       </div>
 
       <div class="savings-card" style="--sc-color:var(--penny-color);">
         <div class="savings-agent">
           <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_13_36.png" alt="Penny" class="savings-thumb">
-          <div><div class="savings-name">Penny</div><div class="savings-role">Lead Generation</div></div>
+          <div><div class="savings-name">Penny</div><div class="savings-role" data-i18n="savings-penny-role">Lead Generation</div></div>
         </div>
         <div class="savings-amount">£35k+</div>
-        <div class="savings-period">Saved vs an SDR hire</div>
+        <div class="savings-period" data-i18n="savings-penny-period">Saved vs an SDR hire</div>
         <div class="savings-facts">
-          <div class="savings-fact">3× more outreach volume</div>
-          <div class="savings-fact">5× higher reply rates</div>
-          <div class="savings-fact">Never misses a follow-up</div>
+          <div class="savings-fact" data-i18n="savings-penny-fact1">3× more outreach volume</div>
+          <div class="savings-fact" data-i18n="savings-penny-fact2">5× higher reply rates</div>
+          <div class="savings-fact" data-i18n="savings-penny-fact3">Never misses a follow-up</div>
         </div>
       </div>
 
       <div class="savings-card" style="--sc-color:var(--sherlock-color);">
         <div class="savings-agent">
           <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_23_15.png" alt="Sherlock" class="savings-thumb">
-          <div><div class="savings-name">Sherlock</div><div class="savings-role">SEO &amp; GEO</div></div>
+          <div><div class="savings-name">Sherlock</div><div class="savings-role" data-i18n="savings-sherlock-role">SEO &amp; GEO</div></div>
         </div>
         <div class="savings-amount">£36k+</div>
-        <div class="savings-period">Saved vs an SEO agency</div>
+        <div class="savings-period" data-i18n="savings-sherlock-period">Saved vs an SEO agency</div>
         <div class="savings-facts">
-          <div class="savings-fact">Compounds organic traffic over time</div>
-          <div class="savings-fact">GEO for AI search engines</div>
-          <div class="savings-fact">Every article = permanent sales asset</div>
+          <div class="savings-fact" data-i18n="savings-sherlock-fact1">Compounds organic traffic over time</div>
+          <div class="savings-fact" data-i18n="savings-sherlock-fact2">GEO for AI search engines</div>
+          <div class="savings-fact" data-i18n="savings-sherlock-fact3">Every article = permanent sales asset</div>
         </div>
       </div>
 
       <div class="savings-card" style="--sc-color:var(--rosa-color);">
         <div class="savings-agent">
           <img src="brand/ChatGPT%20Image%202%20apr%202026%2C%2009_05_59.png" alt="Rosa" class="savings-thumb">
-          <div><div class="savings-name">Rosa</div><div class="savings-role">Sales Agent</div></div>
+          <div><div class="savings-name">Rosa</div><div class="savings-role" data-i18n="savings-rosa-role">Sales Agent</div></div>
         </div>
         <div class="savings-amount">£40k+</div>
-        <div class="savings-period">Saved vs an additional sales hire</div>
+        <div class="savings-period" data-i18n="savings-rosa-period">Saved vs an additional sales hire</div>
         <div class="savings-facts">
-          <div class="savings-fact">7× higher conversion from instant response</div>
-          <div class="savings-fact">Sales 24/7 — deals close while you sleep</div>
-          <div class="savings-fact">30% shorter sales cycle</div>
+          <div class="savings-fact" data-i18n="savings-rosa-fact1">7× higher conversion from instant response</div>
+          <div class="savings-fact" data-i18n="savings-rosa-fact2">Sales 24/7 — deals close while you sleep</div>
+          <div class="savings-fact" data-i18n="savings-rosa-fact3">30% shorter sales cycle</div>
         </div>
       </div>
     </div>
@@ -1142,50 +1152,50 @@
 <section id="modules" class="section">
   <div class="container">
     <div class="modules-header reveal">
-      <span class="label">Modular Infrastructure</span>
-      <h2 class="modules-h2">Buy what you need.<br>Scale when you're ready.</h2>
-      <p class="modules-sub">Start with one module. Add more as your business grows. Every piece plugs into the same AI brain.</p>
+      <span class="label" data-i18n="modules-label">Modular Infrastructure</span>
+      <h2 class="modules-h2" data-i18n="modules-h2">Buy what you need.<br>Scale when you're ready.</h2>
+      <p class="modules-sub" data-i18n="modules-sub">Start with one module. Add more as your business grows. Every piece plugs into the same AI brain.</p>
     </div>
     <div class="modules-grid reveal">
       <div class="mod-card" onclick="toggleMod(this)">
         <div class="mod-check">✓</div>
         <span class="mod-icon">🎙️</span>
-        <div class="mod-name">AI Voice</div>
-        <div class="mod-desc">Intelligent voice AI that captures knowledge from every call. Powered by ElevenLabs, Knotie.AI &amp; RetellAI.</div>
-        <span class="mod-tag">Foundation Layer</span>
+        <div class="mod-name" data-i18n="mod1-name">AI Voice</div>
+        <div class="mod-desc" data-i18n="mod1-desc">Intelligent voice AI that captures knowledge from every call. Powered by ElevenLabs, Knotie.AI &amp; RetellAI.</div>
+        <span class="mod-tag" data-i18n="mod1-tag">Foundation Layer</span>
       </div>
       <div class="mod-card" onclick="toggleMod(this)">
         <div class="mod-check">✓</div>
         <span class="mod-icon">📊</span>
-        <div class="mod-name">CRM Integration</div>
-        <div class="mod-desc">Connects your email, contacts, and social media into the central knowledge base. Everything in sync.</div>
-        <span class="mod-tag">Data Layer</span>
+        <div class="mod-name" data-i18n="mod2-name">CRM Integration</div>
+        <div class="mod-desc" data-i18n="mod2-desc">Connects your email, contacts, and social media into the central knowledge base. Everything in sync.</div>
+        <span class="mod-tag" data-i18n="mod2-tag">Data Layer</span>
       </div>
       <div class="mod-card" onclick="toggleMod(this)">
         <div class="mod-check">✓</div>
         <span class="mod-icon">🧠</span>
-        <div class="mod-name">RAG Brain</div>
-        <div class="mod-desc">The core AI memory system. Processes all your data into a searchable, compounding knowledge base.</div>
-        <span class="mod-tag">Intelligence Layer</span>
+        <div class="mod-name" data-i18n="mod3-name">RAG Brain</div>
+        <div class="mod-desc" data-i18n="mod3-desc">The core AI memory system. Processes all your data into a searchable, compounding knowledge base.</div>
+        <span class="mod-tag" data-i18n="mod3-tag">Intelligence Layer</span>
       </div>
       <div class="mod-card" onclick="toggleMod(this)">
         <div class="mod-check">✓</div>
         <span class="mod-icon">🐒</span>
-        <div class="mod-name">Individual Agents</div>
-        <div class="mod-desc">Pick your monkeys. Carl, Mike, Penny, Sherlock, Rosa, or Eva — add the agents you need, when you need them.</div>
-        <span class="mod-tag">Agent Layer</span>
+        <div class="mod-name" data-i18n="mod4-name">Individual Agents</div>
+        <div class="mod-desc" data-i18n="mod4-desc">Pick your monkeys. Carl, Mike, Penny, Sherlock, Rosa, or Eva — add the agents you need, when you need them.</div>
+        <span class="mod-tag" data-i18n="mod4-tag">Agent Layer</span>
       </div>
       <div class="mod-card active" onclick="toggleMod(this)">
         <div class="mod-check" style="opacity:1;transform:scale(1);">✓</div>
         <span class="mod-icon">🚀</span>
-        <div class="mod-name">Full Stack</div>
-        <div class="mod-desc">The complete AI infrastructure. Voice + CRM + Brain + all 6 Agents. Built, deployed, and managed for you.</div>
-        <span class="mod-tag">⭐ Most Popular</span>
+        <div class="mod-name" data-i18n="mod5-name">Full Stack</div>
+        <div class="mod-desc" data-i18n="mod5-desc">The complete AI infrastructure. Voice + CRM + Brain + all 6 Agents. Built, deployed, and managed for you.</div>
+        <span class="mod-tag" data-i18n="mod5-tag">⭐ Most Popular</span>
       </div>
     </div>
     <div class="modules-cta reveal">
-      <p>Not sure where to start? Let's build the right stack for your business.</p>
-      <a href="#contact" class="btn btn-primary">Get a Custom Build →</a>
+      <p data-i18n="modules-cta-p">Not sure where to start? Let's build the right stack for your business.</p>
+      <a href="#contact" class="btn btn-primary" data-i18n="modules-cta-btn">Get a Custom Build →</a>
     </div>
   </div>
 </section>
@@ -1194,30 +1204,30 @@
 <section id="proof" class="section">
   <div class="container">
     <div class="proof-head reveal">
-      <span class="label">Social Proof</span>
-      <h2 class="proof-h2">80+ companies running on<br><span>Artificial Ignorance</span></h2>
+      <span class="label" data-i18n="proof-label">Social Proof</span>
+      <h2 class="proof-h2" data-i18n="proof-h2">80+ companies running on<br><span>Artificial Ignorance</span></h2>
     </div>
     <div class="proof-stats reveal">
-      <div class="proof-stat"><div class="proof-stat-num" data-count="80">0</div><div class="proof-stat-label">Active Clients</div></div>
-      <div class="proof-stat"><div class="proof-stat-num">6</div><div class="proof-stat-label">AI Specialists</div></div>
-      <div class="proof-stat"><div class="proof-stat-num">24/7</div><div class="proof-stat-label">Always Running</div></div>
-      <div class="proof-stat"><div class="proof-stat-num">100%</div><div class="proof-stat-label">White-Label Ready</div></div>
+      <div class="proof-stat"><div class="proof-stat-num" data-count="80">0</div><div class="proof-stat-label" data-i18n="proof-stat1">Active Clients</div></div>
+      <div class="proof-stat"><div class="proof-stat-num">6</div><div class="proof-stat-label" data-i18n="proof-stat2">AI Specialists</div></div>
+      <div class="proof-stat"><div class="proof-stat-num">24/7</div><div class="proof-stat-label" data-i18n="proof-stat3">Always Running</div></div>
+      <div class="proof-stat"><div class="proof-stat-num">100%</div><div class="proof-stat-label" data-i18n="proof-stat4">White-Label Ready</div></div>
     </div>
     <div class="testimonials reveal">
       <div class="testimonial">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"We replaced our entire admin team's repetitive workload in 3 weeks. The AI brain knows our business better than some of our staff. Genuinely impressive infrastructure."</p>
-        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name">Sarah K.</div><div class="t-title">CEO, Real Estate Agency</div></div></div>
+        <p class="t-quote" data-i18n="t1-quote">"We replaced our entire admin team's repetitive workload in 3 weeks. The AI brain knows our business better than some of our staff. Genuinely impressive infrastructure."</p>
+        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name" data-i18n="t1-name">Sarah K.</div><div class="t-title" data-i18n="t1-title">CEO, Real Estate Agency</div></div></div>
       </div>
       <div class="testimonial">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"The RAG system is the game changer. Our agents answer questions with the full context of our 5-year client history. Nothing else comes close to what Artificial Ignorance has built."</p>
-        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name">Marcus T.</div><div class="t-title">Founder, Digital Marketing Agency</div></div></div>
+        <p class="t-quote" data-i18n="t2-quote">"The RAG system is the game changer. Our agents answer questions with the full context of our 5-year client history. Nothing else comes close to what Artificial Ignorance has built."</p>
+        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name" data-i18n="t2-name">Marcus T.</div><div class="t-title" data-i18n="t2-title">Founder, Digital Marketing Agency</div></div></div>
       </div>
       <div class="testimonial">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"We white-label the full stack for our clients. Artificial Ignorance is the infrastructure we'd been looking for. Our clients think we built it ourselves — that's how seamless it is."</p>
-        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name">James O.</div><div class="t-title">Director, SaaS Agency</div></div></div>
+        <p class="t-quote" data-i18n="t3-quote">"We white-label the full stack for our clients. Artificial Ignorance is the infrastructure we'd been looking for. Our clients think we built it ourselves — that's how seamless it is."</p>
+        <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name" data-i18n="t3-name">James O.</div><div class="t-title" data-i18n="t3-title">Director, SaaS Agency</div></div></div>
       </div>
     </div>
   </div>
@@ -1228,24 +1238,35 @@
   <div class="container">
     <div class="contact-grid">
       <div class="reveal">
-        <span class="label">Book a Demo</span>
-        <h2 class="contact-h2">Ready to give your<br>business a <span>real brain?</span></h2>
-        <p class="contact-desc">Tell us about your business and we'll show you exactly which modules you need. No fluff, no hard sell — just a straight conversation about what AI infrastructure can genuinely do for you.</p>
+        <span class="label" data-i18n="contact-label">Book a Demo</span>
+        <h2 class="contact-h2" data-i18n="contact-h2">Ready to give your<br>business a <span>real brain?</span></h2>
+        <p class="contact-desc" data-i18n="contact-desc">Tell us about your business and we'll show you exactly which modules you need. No fluff, no hard sell — just a straight conversation about what AI infrastructure can genuinely do for you.</p>
         <div class="contact-perks">
-          <div class="perk"><div class="perk-icon"><img src="brand/3.png" alt=""></div>30-minute discovery call — no commitment</div>
-          <div class="perk"><div class="perk-icon"><img src="brand/1.png" alt=""></div>Custom infrastructure recommendation</div>
-          <div class="perk"><div class="perk-icon"><img src="brand/2.png" alt=""></div>White-label options for agencies</div>
-          <div class="perk"><div class="perk-icon"><img src="brand/4.png" alt=""></div>Live demo of the AI brain in action</div>
+          <div class="perk"><div class="perk-icon"><img src="brand/3.png" alt=""></div><span data-i18n="perk1">30-minute discovery call — no commitment</span></div>
+          <div class="perk"><div class="perk-icon"><img src="brand/1.png" alt=""></div><span data-i18n="perk2">Custom infrastructure recommendation</span></div>
+          <div class="perk"><div class="perk-icon"><img src="brand/2.png" alt=""></div><span data-i18n="perk3">White-label options for agencies</span></div>
+          <div class="perk"><div class="perk-icon"><img src="brand/4.png" alt=""></div><span data-i18n="perk4">Live demo of the AI brain in action</span></div>
         </div>
       </div>
       <div class="reveal">
-        <div class="ghl-wrap">
-          <!-- GHL FORM EMBED CODE HERE -->
-          <div class="ghl-placeholder">
-            <span class="ph-icon">🐒</span>
-            <div class="ph-title">Book Your Demo</div>
-            <p class="ph-desc">Paste your GoHighLevel<br>form embed code here.</p>
-          </div>
+        <div class="ghl-wrap" style="padding:0;min-height:924px;">
+          <iframe
+            src="https://connect.artificialignorance.io/widget/form/8R3staFI5zUbueDFIiAj"
+            style="width:100%;height:924px;border:none;border-radius:20px"
+            id="inline-8R3staFI5zUbueDFIiAj"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="Drop us a message"
+            data-height="924"
+            data-layout-iframe-id="inline-8R3staFI5zUbueDFIiAj"
+            data-form-id="8R3staFI5zUbueDFIiAj"
+            title="Drop us a message">
+          </iframe>
         </div>
       </div>
     </div>
@@ -1255,13 +1276,13 @@
 <!-- FOOTER -->
 <footer>
   <a href="#hero" class="footer-logo"><img src="brand/Vector.png" alt="Artificial Ignorance"></a>
-  <p class="footer-copy">© 2025 Artificial Ignorance. AI infrastructure for businesses that mean it.</p>
+  <p class="footer-copy" data-i18n="footer-copy">© 2025 Artificial Ignorance. AI infrastructure for businesses that mean it.</p>
   <ul class="footer-links">
-    <li><a href="#agents">The Monkeys</a></li>
-    <li><a href="#playbook">How They Work</a></li>
+    <li><a href="#agents" data-i18n="footer-link1">The Monkeys</a></li>
+    <li><a href="#playbook" data-i18n="footer-link2">How They Work</a></li>
     <li><a href="#roi">ROI</a></li>
-    <li><a href="#modules">Modules</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#modules" data-i18n="footer-link4">Modules</a></li>
+    <li><a href="#contact" data-i18n="footer-link5">Contact</a></li>
   </ul>
 </footer>
 
@@ -1392,6 +1413,296 @@
       t.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
+
+  /* ════════════════ I18N ════════════════ */
+  const T = {
+    en: {
+      'mob-close':'✕ close','nav-problem':'Problem','nav-monkeys':'The Monkeys','nav-how':'How They Work','nav-modules':'Modules','nav-proof':'Proof','nav-cta':'Book a Demo',
+      'hero-badge':'🧠 AI Infrastructure · Built Different','hero-h1-1':'THE BRAIN','hero-h1-2':'BEHIND YOUR','hero-h1-3':'BUSINESS.','hero-sub':'We build AI infrastructure that truly knows your company — voice, CRM, memory, and six intelligent agents. All learning. All connected. All working 24/7.','hero-cta1':'Book a Demo →','hero-cta2':'Meet the Monkeys 🐒',
+      'stat-companies':'Companies Served','stat-agents':'AI Agents','stat-alwayson':'Always On','stat-knowledge':'Compounding Knowledge','marquee-label':'CONNECTS WITH',
+      'prob-label':'The Problem','prob-h2':'Generic AI<br>doesn\'t know<br><em>your</em> business.','prob-body':'Most AI tools are one-size-fits-all. They forget your business the moment you close the tab. You spend more time correcting and re-explaining than actually getting work done.',
+      'pc1-title':'Drowning in Repetition','pc1-desc':'Your team burns 60% of their day on tasks that should be automated — emails, follow-ups, social posts, support tickets. That\'s not a people problem. It\'s an infrastructure problem.',
+      'pc2-title':'AI That Forgets Everything','pc2-desc':'Generic AI has no memory of your business. Every conversation starts from zero. Endless re-explaining. Zero compounding value. It\'s a tool, not a team member.',
+      'pc3-title':'Tool Sprawl Is Killing ROI','pc3-desc':'Ten subscriptions that don\'t talk to each other. No unified brain. No coordinated output. Your AI stack costs more than it saves and nobody knows what\'s working.',
+      'sol-label':'Our Solution','sol-h2':'One brain.<br><span>Infinite memory.</span><br>Six specialists.','sol-sub':'We build a living AI knowledge base from your real business data — every call, every email, every social interaction — then power six specialist agents that know your company inside out.',
+      'flow-voice-title':'AI Voice','flow-voice-desc':'Captures knowledge from every call','flow-crm-title':'CRM + Email','flow-crm-desc':'Contacts, history &amp; campaigns','flow-social-title':'Social Media','flow-social-desc':'Posts, engagement &amp; trends','flow-brain-title':'The AI Brain','flow-brain-desc':'RAG knowledge base — your company\'s living memory. Gets smarter every day.','flow-agents-title':'Your Agents','flow-agents-desc':'Carl · Mike · Penny · Sherlock · Rosa · Eva','flow-agents-tag2':'Always learning',
+      'agents-label':'Meet the Team','agents-h2':'The Monkeys 🐒','agents-note':'Six specialists. All powered by your AI brain. Buy one or buy them all.',
+      'carl-badge':'Customer Support','carl-role':'The Support Monkey','carl-desc':'Carl handles every customer query with the full knowledge of your business behind him. No scripts. Real answers. No hold music.','carl-task1':'24/7 instant query resolution','carl-task2':'Intelligent human escalation','carl-task3':'Learns from every interaction',
+      'mike-badge':'Social Media','mike-role':'The Social Monkey','mike-desc':'Mike creates platform-native content across every channel — adapted for each audience, scheduled and posted automatically.','mike-task1':'Platform-specific content creation','mike-task2':'Automated scheduling &amp; posting','mike-task3':'Engagement tracking &amp; replies',
+      'penny-badge':'Lead Generation','penny-role':'The Lead Monkey','penny-desc':'Penny hunts, qualifies, and nurtures leads using your full business context — not generic templates, actual intelligence about what your prospects care about.','penny-task1':'Prospect identification &amp; outreach','penny-task2':'Automated follow-up sequences','penny-task3':'Lead scoring &amp; qualification',
+      'sherlock-badge':'SEO · GEO','sherlock-role':'The Search Monkey','sherlock-desc':'Sherlock investigates every angle of your search presence — traditional SEO and the new frontier of AI search (GEO). He makes your brand impossible to miss.','sherlock-task1':'SEO-optimised content &amp; audits','sherlock-task2':'Generative Engine Optimisation','sherlock-task3':'Rank tracking &amp; competitor intel',
+      'rosa-badge':'Sales','rosa-role':'The Sales Monkey','rosa-desc':'Rosa closes. Armed with your full business context, product knowledge, and customer history, she runs your sales process from first touch to signed deal.','rosa-task1':'Automated sales conversations','rosa-task2':'Proposal &amp; quote generation','rosa-task3':'Pipeline management &amp; forecasting',
+      'eva-badge':'⭐ Flagship · The AI Brain','eva-role':'Personal Assistant','eva-desc':'Eva IS the AI brain. She learns everything about your business and coordinates the entire team. The longer you run the infrastructure, the smarter Eva gets — she\'s not just an assistant, she\'s your company\'s collective intelligence.','eva-task1':'Manages inbox &amp; calendar 24/7','eva-task2':'Coordinates all other agents','eva-task3':'Holds your full business memory','eva-task4':'Gets smarter every single day','eva-task5':'The core of the AI infrastructure','eva-task6':'Provides daily intelligence briefings',
+      'playbook-label':'Agent Playbook','playbook-h2':'How your monkeys <span>actually work</span>','playbook-sub':'Each agent runs a defined workflow powered by your AI brain — solving specific problems and generating measurable financial returns.',
+      'eva-panel-role':'Personal Assistant · AI Brain','eva-how-title':'How Eva Works',
+      'eva-step1':'<strong>Connects to everything.</strong> Eva links to your voice system, CRM, email, and social channels — ingesting all business data into the RAG knowledge base continuously.',
+      'eva-step2':'<strong>Builds your AI brain.</strong> Every interaction, every call, every email enriches Eva\'s understanding of your business, products, clients, and tone.',
+      'eva-step3':'<strong>Manages your time.</strong> Eva handles your calendar, drafts your emails, takes meeting notes, and filters your inbox — so you only deal with what matters.',
+      'eva-step4':'<strong>Coordinates the team.</strong> Eva briefs Carl, Mike, Penny, Sherlock, and Rosa — passing context, syncing tasks, and ensuring every agent knows what the others are doing.',
+      'eva-step5':'<strong>Delivers daily briefings.</strong> Every morning, Eva sends a business intelligence summary — what happened, what needs attention, what the agents are working on.',
+      'eva-prob-title':'Problems Eva Solves',
+      'eva-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>Fragmented business knowledge</strong>Information lives in email, CRM, calls, and WhatsApp — nowhere and everywhere at once. Eva unifies it all.</div>',
+      'eva-prob2':'<span class="prob-icon">⏱️</span><div class="prob-text"><strong>Executive time consumed by admin</strong>20+ hours per week lost to scheduling, inbox management, and coordination tasks that require no human judgment.</div>',
+      'eva-prob3':'<span class="prob-icon">🔀</span><div class="prob-text"><strong>Agents working in silos</strong>Without Eva, each agent operates independently. She\'s the connective tissue that turns six tools into one coordinated team.</div>',
+      'eva-roi-title':'Financial Impact',
+      'eva-roi1':'<div class="roi-num">20+ hrs</div><div class="roi-label">Executive time saved per week</div><div class="roi-note">At £75/hr, that\'s £1,500/week returned to strategic work</div>',
+      'eva-roi2':'<div class="roi-num">£50k+</div><div class="roi-label">Equivalent annual coordination value</div><div class="roi-note">Replaces an EA or operations manager role</div>',
+      'eva-roi3':'<div class="roi-num">10×</div><div class="roi-label">Agent efficiency multiplier</div><div class="roi-note">Coordinated agents dramatically outperform siloed ones</div>',
+      'carl-panel-role':'Customer Support Monkey','carl-how-title':'How Carl Works',
+      'carl-step1':'<strong>Customer contacts your business</strong> via phone, chat, email, or SMS. Carl receives the query instantly — zero hold time, zero queue.',
+      'carl-step2':'<strong>Carl searches Eva\'s brain</strong> for the relevant context — product info, client history, past issues, company policies — in milliseconds.',
+      'carl-step3':'<strong>Responds with precision.</strong> Not a template — a real, contextual answer that sounds like it came from someone who actually knows your business.',
+      'carl-step4':'<strong>Escalates intelligently.</strong> When a query genuinely needs a human, Carl flags it with full context so your team doesn\'t start from zero.',
+      'carl-step5':'<strong>Logs every interaction back to the brain.</strong> Every query and resolution makes the knowledge base smarter for next time.',
+      'carl-prob-title':'Problems Carl Solves',
+      'carl-prob1':'<span class="prob-icon">🕐</span><div class="prob-text"><strong>Slow response times</strong>Average email support response is 4+ hours. Carl responds in 3 seconds — 24/7, including weekends and bank holidays.</div>',
+      'carl-prob2':'<span class="prob-icon">🌙</span><div class="prob-text"><strong>After-hours gaps</strong>40% of customer queries arrive outside business hours. Without Carl, those customers go to your competitor.</div>',
+      'carl-prob3':'<span class="prob-icon">📋</span><div class="prob-text"><strong>Inconsistent answers</strong>Different staff give different answers. Carl gives the same accurate, on-brand answer every single time.</div>',
+      'carl-roi-title':'Financial Impact',
+      'carl-roi1':'<div class="roi-num">£30k+</div><div class="roi-label">Saved vs hiring a support agent</div><div class="roi-note">Salary, NI, pension, training — all eliminated</div>',
+      'carl-roi2':'<div class="roi-num">£0.08</div><div class="roi-label">Cost per ticket (was £8+)</div><div class="roi-note">99% reduction in per-ticket support cost</div>',
+      'carl-roi3':'<div class="roi-num">8,760 hrs</div><div class="roi-label">Available per year</div><div class="roi-note">vs 2,080 hrs for one full-time employee</div>',
+      'mike-panel-role':'Social Media Manager','mike-how-title':'How Mike Works',
+      'mike-step1':'<strong>Brain analysis.</strong> Mike reads your existing top-performing content and brand voice from Eva\'s knowledge base to understand what works for your audience.',
+      'mike-step2':'<strong>Trend research.</strong> Mike scans your industry for trending topics, competitor content, and audience conversations to identify timely opportunities.',
+      'mike-step3':'<strong>Platform-native content creation.</strong> Not the same post copy-pasted. LinkedIn gets thought leadership. Instagram gets visuals &amp; hooks. X gets punchy. TikTok gets raw.',
+      'mike-step4':'<strong>Optimal scheduling.</strong> Mike posts at the times your specific audience is most active — maximising organic reach without paid promotion.',
+      'mike-step5':'<strong>Monitors &amp; reports.</strong> Tracks engagement, replies to comments, and feeds performance data back to the brain to refine future content.',
+      'mike-prob-title':'Problems Mike Solves',
+      'mike-prob1':'<span class="prob-icon">📉</span><div class="prob-text"><strong>Inconsistent posting</strong>Most SMBs post less than 3× per week. Inconsistency kills organic reach. Mike posts daily without you lifting a finger.</div>',
+      'mike-prob2':'<span class="prob-icon">🔁</span><div class="prob-text"><strong>Same content, every platform</strong>Copy-pasting kills engagement. Mike creates genuinely different content for each platform\'s format and audience.</div>',
+      'mike-prob3':'<span class="prob-icon">💸</span><div class="prob-text"><strong>Agency fees with no transparency</strong>Social media agencies charge £1,500–£3,000/month for services Mike delivers in real time, 24/7.</div>',
+      'mike-roi-title':'Financial Impact',
+      'mike-roi1':'<div class="roi-num">£32k+</div><div class="roi-label">Saved vs a social media manager</div><div class="roi-note">Salary, benefits, and agency fees combined</div>',
+      'mike-roi2':'<div class="roi-num">15 hrs</div><div class="roi-label">Saved per week on content creation</div><div class="roi-note">Returned to billable or strategic work</div>',
+      'mike-roi3':'<div class="roi-num">+40%</div><div class="roi-label">Average engagement uplift</div><div class="roi-note">Consistent, platform-native content outperforms sporadic posts</div>',
+      'penny-panel-role':'Lead Generation','penny-how-title':'How Penny Works',
+      'penny-step1':'<strong>Defines your ideal customer.</strong> Penny analyses your existing client data in the brain to build a precise ICP — industry, size, pain points, buying triggers.',
+      'penny-step2':'<strong>Builds a targeted prospect list.</strong> Penny searches LinkedIn, directories, and databases to find prospects that match your ICP — not random lists.',
+      'penny-step3':'<strong>Crafts personalised outreach.</strong> Using context from the brain, every message references something specific and relevant — not a generic "hope this finds you well" template.',
+      'penny-step4':'<strong>Manages the follow-up sequence.</strong> 80% of deals require 5+ touchpoints. Penny handles every follow-up automatically, adjusting tone and angle each time.',
+      'penny-step5':'<strong>Qualifies and passes to Rosa.</strong> Hot leads are handed off with full context so Rosa can pick up exactly where Penny left off.',
+      'penny-prob-title':'Problems Penny Solves',
+      'penny-prob1':'<span class="prob-icon">⏰</span><div class="prob-text"><strong>Manual prospecting eats your week</strong>Sales people spend 20% of their week on prospecting that could be automated. Penny does it 24/7 without losing focus.</div>',
+      'penny-prob2':'<span class="prob-icon">📧</span><div class="prob-text"><strong>Generic outreach gets ignored</strong>Average cold email open rate is 21%. Penny\'s personalised, context-driven messages achieve 3–5× higher reply rates.</div>',
+      'penny-prob3':'<span class="prob-icon">📭</span><div class="prob-text"><strong>Missed follow-ups lose deals</strong>80% of sales need 5+ follow-ups. 44% of reps give up after one. Penny never gives up.</div>',
+      'penny-roi-title':'Financial Impact',
+      'penny-roi1':'<div class="roi-num">£35k+</div><div class="roi-label">Saved vs an SDR hire</div><div class="roi-note">Salary, commission, tools, and onboarding costs</div>',
+      'penny-roi2':'<div class="roi-num">3×</div><div class="roi-label">More outreach volume than a human</div><div class="roi-note">Penny never sleeps, never loses motivation</div>',
+      'penny-roi3':'<div class="roi-num">5×</div><div class="roi-label">Higher reply rates on outreach</div><div class="roi-note">Personalised, context-rich messages vs generic templates</div>',
+      'sherlock-panel-role':'SEO &amp; GEO Specialist','sherlock-how-title':'How Sherlock Works',
+      'sherlock-step1':'<strong>Search presence audit.</strong> Sherlock analyses your current rankings, site health, and visibility in both traditional search (Google) and AI search engines (ChatGPT, Perplexity, Gemini).',
+      'sherlock-step2':'<strong>Competitor gap analysis.</strong> Identifies which keywords and topics your competitors rank for that you don\'t — and builds a priority attack list.',
+      'sherlock-step3':'<strong>Content strategy creation.</strong> Using your brain data, Sherlock creates SEO articles and landing pages that address real customer questions with your authentic expertise.',
+      'sherlock-step4':'<strong>GEO optimisation.</strong> Structures your content so it\'s cited by AI answers in ChatGPT, Perplexity, and Google\'s AI Overview — the new frontier of search.',
+      'sherlock-step5':'<strong>Weekly rank tracking &amp; reporting.</strong> Monitors rankings, traffic, and AI citation frequency — adjusting strategy based on what\'s working.',
+      'sherlock-prob-title':'Problems Sherlock Solves',
+      'sherlock-prob1':'<span class="prob-icon">👻</span><div class="prob-text"><strong>Invisible in search</strong>If you don\'t appear on page 1 — traditional or AI — you functionally don\'t exist to 90% of potential customers.</div>',
+      'sherlock-prob2':'<span class="prob-icon">🤖</span><div class="prob-text"><strong>No GEO strategy</strong>AI search is replacing Google for millions of users. Most businesses have zero strategy for being cited in AI answers.</div>',
+      'sherlock-prob3':'<span class="prob-icon">💰</span><div class="prob-text"><strong>Expensive agencies with opaque results</strong>SEO agencies charge £2,000–£5,000/month with 6-month contracts and vague reporting. Sherlock delivers transparent, continuous results.</div>',
+      'sherlock-roi-title':'Financial Impact',
+      'sherlock-roi1':'<div class="roi-num">£36k+</div><div class="roi-label">Saved vs an SEO agency annually</div><div class="roi-note">At £1,500–£3,000/month, agency fees add up fast</div>',
+      'sherlock-roi2':'<div class="roi-num">Compounds</div><div class="roi-label">Organic growth = falling CAC over time</div><div class="roi-note">Every article is a 24/7 sales asset that never expires</div>',
+      'sherlock-roi3':'<div class="roi-num">First-mover</div><div class="roi-label">GEO advantage while competitors sleep</div><div class="roi-note">AI search share is growing 40% year-on-year</div>',
+      'rosa-panel-role':'Sales Agent','rosa-how-title':'How Rosa Works',
+      'rosa-step1':'<strong>Receives qualified leads from Penny.</strong> Rosa picks up where Penny left off — with full context on the prospect\'s background, interests, and engagement history.',
+      'rosa-step2':'<strong>Reviews the brain.</strong> Rosa checks your full product knowledge, pricing, past deals, and client success stories — armed to handle any question or objection.',
+      'rosa-step3':'<strong>Opens the conversation.</strong> Rosa initiates a personalised sales dialogue — not a pitch, a genuine conversation that leads with the prospect\'s specific pain points.',
+      'rosa-step4':'<strong>Handles objections.</strong> Using deep product and competitor knowledge from the brain, Rosa addresses every objection with accurate, confident responses.',
+      'rosa-step5':'<strong>Generates proposals &amp; closes.</strong> Rosa creates tailored proposals, sends contracts, and follows up until the deal is won — or intelligently nurtures prospects not yet ready to buy.',
+      'rosa-prob-title':'Problems Rosa Solves',
+      'rosa-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>Slow lead response kills conversions</strong>Respond to a lead within 5 minutes and you\'re 100× more likely to convert. Rosa responds in seconds, every time.</div>',
+      'rosa-prob2':'<span class="prob-icon">😴</span><div class="prob-text"><strong>Sales only happen during office hours</strong>Deals are lost every night and weekend. Rosa sells 24/7/365 — your best sales rep never sleeps.</div>',
+      'rosa-prob3':'<span class="prob-icon">📑</span><div class="prob-text"><strong>Inconsistent proposals and follow-up</strong>Sales quality varies by person and energy level. Rosa delivers the same excellent experience every single time.</div>',
+      'rosa-roi-title':'Financial Impact',
+      'rosa-roi1':'<div class="roi-num">7×</div><div class="roi-label">Higher conversion from instant response</div><div class="roi-note">Speed-to-lead is the #1 factor in B2B conversion rates</div>',
+      'rosa-roi2':'<div class="roi-num">£40k+</div><div class="roi-label">Saved vs an additional sales hire</div><div class="roi-note">Salary, commission, CRM licences, and onboarding</div>',
+      'rosa-roi3':'<div class="roi-num">−30%</div><div class="roi-label">Shorter sales cycle</div><div class="roi-note">Faster follow-up and consistent nurturing compress timelines</div>',
+      'how-label':'How It Works','how-h2':'Three steps.<br><span>One smart business.</span>',
+      'step1-title':'Feed the Brain','step1-desc':'Your AI voice system captures every call. CRM pulls in your emails and social history. The knowledge base grows with real, live business data from day one.',
+      'step2-title':'Brain Learns Your Business','step2-desc':'The RAG system processes all your data into a living company memory. It understands your products, your tone, your customers, and your history — deeply and continuously.',
+      'step3-title':'Agents Go to Work','step3-desc':'Carl, Mike, Penny, Sherlock, Rosa, and Eva run your operations 24/7. They don\'t need briefing. They already know everything about your business.',
+      'roi-label':'Financial Impact','roi-h2':'The numbers<br><span>don\'t lie.</span>','roi-sub':'Hiring a team to do what your six AI agents do would cost over £200,000 a year. That\'s before tax, benefits, sick days, and turnover.',
+      'roi-hero-label':'Annual equivalent value of your AI team','roi-hero-sub':'Across salaries, agency fees, tools, and lost hours — this is what the full agent stack replaces',
+      'comp-human-title':'Traditional Human Team','comp-human-sub':'Doing what your 6 agents do',
+      'comp-row-support':'Customer Support Agent','comp-row-social':'Social Media Manager','comp-row-sdr':'Sales Development Rep','comp-row-seo':'SEO Agency Retainer','comp-row-sales':'Sales Agent (additional)','comp-row-ea':'Executive Assistant / Ops','comp-row-total-label':'Total Annual Cost',
+      'comp-ai-title':'Artificial Ignorance','comp-ai-sub':'The complete AI infrastructure',
+      'comp-carl':'Carl — 24/7 Customer Support','comp-mike':'Mike — Social Media Manager','comp-penny':'Penny — Lead Generation','comp-sherlock':'Sherlock — SEO &amp; GEO','comp-rosa':'Rosa — Sales Agent','comp-eva':'Eva — Personal Assistant + Brain','comp-row-talk':'Talk to us about pricing','comp-row-book':'Book a Demo →',
+      'savings-eva-role':'Personal Assistant','savings-eva-period':'Annual value delivered','savings-eva-fact1':'20+ executive hours saved per week','savings-eva-fact2':'Coordinates all 5 other agents','savings-eva-fact3':'Daily business intelligence briefings',
+      'savings-carl-role':'Customer Support','savings-carl-period':'Saved vs a support hire','savings-carl-fact1':'3-second response time, 24/7','savings-carl-fact2':'Cost per ticket drops from £8 to £0.08','savings-carl-fact3':'8,760 hours available per year',
+      'savings-mike-role':'Social Media','savings-mike-period':'Saved vs a social manager','savings-mike-fact1':'15+ hours saved per week','savings-mike-fact2':'Average 40% engagement uplift','savings-mike-fact3':'Daily posting across all platforms',
+      'savings-penny-role':'Lead Generation','savings-penny-period':'Saved vs an SDR hire','savings-penny-fact1':'3× more outreach volume','savings-penny-fact2':'5× higher reply rates','savings-penny-fact3':'Never misses a follow-up',
+      'savings-sherlock-role':'SEO &amp; GEO','savings-sherlock-period':'Saved vs an SEO agency','savings-sherlock-fact1':'Compounds organic traffic over time','savings-sherlock-fact2':'GEO for AI search engines','savings-sherlock-fact3':'Every article = permanent sales asset',
+      'savings-rosa-role':'Sales Agent','savings-rosa-period':'Saved vs an additional sales hire','savings-rosa-fact1':'7× higher conversion from instant response','savings-rosa-fact2':'Sales 24/7 — deals close while you sleep','savings-rosa-fact3':'30% shorter sales cycle',
+      'modules-label':'Modular Infrastructure','modules-h2':'Buy what you need.<br>Scale when you\'re ready.','modules-sub':'Start with one module. Add more as your business grows. Every piece plugs into the same AI brain.','modules-cta-p':'Not sure where to start? Let\'s build the right stack for your business.','modules-cta-btn':'Get a Custom Build →',
+      'mod1-name':'AI Voice','mod1-desc':'Intelligent voice AI that captures knowledge from every call. Powered by ElevenLabs, Knotie.AI &amp; RetellAI.','mod1-tag':'Foundation Layer',
+      'mod2-name':'CRM Integration','mod2-desc':'Connects your email, contacts, and social media into the central knowledge base. Everything in sync.','mod2-tag':'Data Layer',
+      'mod3-name':'RAG Brain','mod3-desc':'The core AI memory system. Processes all your data into a searchable, compounding knowledge base.','mod3-tag':'Intelligence Layer',
+      'mod4-name':'Individual Agents','mod4-desc':'Pick your monkeys. Carl, Mike, Penny, Sherlock, Rosa, or Eva — add the agents you need, when you need them.','mod4-tag':'Agent Layer',
+      'mod5-name':'Full Stack','mod5-desc':'The complete AI infrastructure. Voice + CRM + Brain + all 6 Agents. Built, deployed, and managed for you.','mod5-tag':'⭐ Most Popular',
+      'proof-label':'Social Proof','proof-h2':'80+ companies running on<br><span>Artificial Ignorance</span>','proof-stat1':'Active Clients','proof-stat2':'AI Specialists','proof-stat3':'Always Running','proof-stat4':'White-Label Ready',
+      't1-quote':'"We replaced our entire admin team\'s repetitive workload in 3 weeks. The AI brain knows our business better than some of our staff. Genuinely impressive infrastructure."','t1-name':'Sarah K.','t1-title':'CEO, Real Estate Agency',
+      't2-quote':'"The RAG system is the game changer. Our agents answer questions with the full context of our 5-year client history. Nothing else comes close to what Artificial Ignorance has built."','t2-name':'Marcus T.','t2-title':'Founder, Digital Marketing Agency',
+      't3-quote':'"We white-label the full stack for our clients. Artificial Ignorance is the infrastructure we\'d been looking for. Our clients think we built it ourselves — that\'s how seamless it is."','t3-name':'James O.','t3-title':'Director, SaaS Agency',
+      'contact-label':'Book a Demo','contact-h2':'Ready to give your<br>business a <span>real brain?</span>','contact-desc':'Tell us about your business and we\'ll show you exactly which modules you need. No fluff, no hard sell — just a straight conversation about what AI infrastructure can genuinely do for you.',
+      'perk1':'30-minute discovery call — no commitment','perk2':'Custom infrastructure recommendation','perk3':'White-label options for agencies','perk4':'Live demo of the AI brain in action',
+      'ghl-title':'Book Your Demo','ghl-desc':'Paste your GoHighLevel<br>form embed code here.',
+      'footer-copy':'© 2025 Artificial Ignorance. AI infrastructure for businesses that mean it.','footer-link1':'The Monkeys','footer-link2':'How They Work','footer-link4':'Modules','footer-link5':'Contact'
+    },
+    it: {
+      'mob-close':'✕ chiudi','nav-problem':'Il Problema','nav-monkeys':'Le Scimmie','nav-how':'Come Funzionano','nav-modules':'Moduli','nav-proof':'Prove','nav-cta':'Prenota una Demo',
+      'hero-badge':'🧠 Infrastruttura AI · Costruita Diversamente','hero-h1-1':'IL CERVELLO','hero-h1-2':'DEL TUO','hero-h1-3':'BUSINESS.','hero-sub':'Costruiamo un\'infrastruttura AI che conosce davvero la tua azienda — voce, CRM, memoria e sei agenti intelligenti. Tutti in apprendimento. Tutti connessi. Tutti operativi 24/7.','hero-cta1':'Prenota una Demo →','hero-cta2':'Incontra le Scimmie 🐒',
+      'stat-companies':'Aziende Clienti','stat-agents':'Agenti AI','stat-alwayson':'Sempre Attivi','stat-knowledge':'Conoscenza in Crescita','marquee-label':'SI CONNETTE CON',
+      'prob-label':'Il Problema','prob-h2':'L\'AI generica<br>non conosce<br><em>la tua</em> azienda.','prob-body':'La maggior parte degli strumenti AI è uguale per tutti. Dimenticano la tua azienda nel momento in cui chiudi la scheda. Passi più tempo a correggere e spiegare di nuovo che a lavorare davvero.',
+      'pc1-title':'Annegati nella Ripetizione','pc1-desc':'Il tuo team brucia il 60% della giornata su attività che dovrebbero essere automatizzate — email, follow-up, post social, ticket di supporto. Non è un problema di persone. È un problema di infrastruttura.',
+      'pc2-title':'Un\'AI che Dimentica Tutto','pc2-desc':'L\'AI generica non ha memoria della tua azienda. Ogni conversazione riparte da zero. Spiegazioni infinite. Zero valore cumulativo. È uno strumento, non un membro del team.',
+      'pc3-title':'Il Caos degli Strumenti Uccide il ROI','pc3-desc':'Dieci abbonamenti che non comunicano tra loro. Nessun cervello unificato. Nessun output coordinato. Il tuo stack AI costa più di quanto risparmia e nessuno sa cosa funziona.',
+      'sol-label':'La Nostra Soluzione','sol-h2':'Un cervello.<br><span>Memoria infinita.</span><br>Sei specialisti.','sol-sub':'Costruiamo una base di conoscenza AI viva dai tuoi dati aziendali reali — ogni chiamata, ogni email, ogni interazione social — poi alimentiamo sei agenti specialisti che conoscono la tua azienda nel profondo.',
+      'flow-voice-title':'AI Vocale','flow-voice-desc':'Cattura conoscenza da ogni chiamata','flow-crm-title':'CRM + Email','flow-crm-desc':'Contatti, storico e campagne','flow-social-title':'Social Media','flow-social-desc':'Post, engagement e trend','flow-brain-title':'Il Cervello AI','flow-brain-desc':'Base di conoscenza RAG — la memoria viva della tua azienda. Diventa più intelligente ogni giorno.','flow-agents-title':'I Tuoi Agenti','flow-agents-desc':'Carl · Mike · Penny · Sherlock · Rosa · Eva','flow-agents-tag2':'Sempre in apprendimento',
+      'agents-label':'Incontra il Team','agents-h2':'Le Scimmie 🐒','agents-note':'Sei specialisti. Tutti alimentati dal tuo AI Brain. Comprarne uno o tutti.',
+      'carl-badge':'Assistenza Clienti','carl-role':'La Scimmia del Supporto','carl-desc':'Carl gestisce ogni richiesta del cliente con tutta la conoscenza della tua azienda. Niente script. Risposte vere. Niente musica d\'attesa.','carl-task1':'Risoluzione istantanea 24/7','carl-task2':'Escalation intelligente all\'umano','carl-task3':'Impara da ogni interazione',
+      'mike-badge':'Social Media','mike-role':'La Scimmia Social','mike-desc':'Mike crea contenuti nativi per ogni piattaforma — adattati per ogni pubblico, programmati e pubblicati automaticamente.','mike-task1':'Creazione di contenuti specifici per piattaforma','mike-task2':'Programmazione e pubblicazione automatica','mike-task3':'Monitoraggio engagement e risposte',
+      'penny-badge':'Generazione di Lead','penny-role':'La Scimmia dei Lead','penny-desc':'Penny caccia, qualifica e nutre i lead usando il contesto completo della tua azienda — non template generici, vera intelligenza su ciò che interessa ai tuoi prospect.','penny-task1':'Identificazione prospect e outreach','penny-task2':'Sequenze di follow-up automatizzate','penny-task3':'Scoring e qualificazione dei lead',
+      'sherlock-badge':'SEO · GEO','sherlock-role':'La Scimmia della Ricerca','sherlock-desc':'Sherlock indaga ogni angolo della tua presenza nei motori di ricerca — SEO tradizionale e la nuova frontiera dell\'AI search (GEO). Rende il tuo brand impossibile da ignorare.','sherlock-task1':'Contenuti SEO-ottimizzati e audit','sherlock-task2':'Ottimizzazione per Motori Generativi','sherlock-task3':'Monitoraggio ranking e intelligence sui competitor',
+      'rosa-badge':'Vendite','rosa-role':'La Scimmia delle Vendite','rosa-desc':'Rosa chiude. Armata con tutto il contesto aziendale, la conoscenza dei prodotti e la cronologia dei clienti, gestisce il tuo processo di vendita dal primo contatto all\'accordo firmato.','rosa-task1':'Conversazioni di vendita automatizzate','rosa-task2':'Generazione di proposte e preventivi','rosa-task3':'Gestione della pipeline e previsioni',
+      'eva-badge':'⭐ Flagship · Il Cervello AI','eva-role':'Assistente Personale','eva-desc':'Eva È il cervello AI. Impara tutto sulla tua azienda e coordina l\'intero team. Più a lungo funziona l\'infrastruttura, più Eva diventa intelligente — non è solo un\'assistente, è l\'intelligenza collettiva della tua azienda.','eva-task1':'Gestisce inbox e calendario 24/7','eva-task2':'Coordina tutti gli altri agenti','eva-task3':'Conserva tutta la memoria aziendale','eva-task4':'Diventa più intelligente ogni giorno','eva-task5':'Il nucleo dell\'infrastruttura AI','eva-task6':'Fornisce briefing di intelligence quotidiani',
+      'playbook-label':'Il Manuale degli Agenti','playbook-h2':'Come funzionano davvero le tue scimmie <span>in pratica</span>','playbook-sub':'Ogni agente esegue un flusso di lavoro definito alimentato dal tuo AI Brain — risolvendo problemi specifici e generando rendimenti finanziari misurabili.',
+      'eva-panel-role':'Assistente Personale · AI Brain','eva-how-title':'Come Funziona Eva',
+      'eva-step1':'<strong>Si connette a tutto.</strong> Eva si collega al sistema vocale, CRM, email e canali social — ingerendo continuamente tutti i dati aziendali nella base di conoscenza RAG.',
+      'eva-step2':'<strong>Costruisce il tuo AI Brain.</strong> Ogni interazione, ogni chiamata, ogni email arricchisce la comprensione di Eva della tua azienda, prodotti, clienti e tono.',
+      'eva-step3':'<strong>Gestisce il tuo tempo.</strong> Eva gestisce il calendario, redige le email, prende appunti alle riunioni e filtra la posta in arrivo — così ti occupi solo di ciò che conta.',
+      'eva-step4':'<strong>Coordina il team.</strong> Eva informa Carl, Mike, Penny, Sherlock e Rosa — trasmettendo contesto, sincronizzando compiti e assicurando che ogni agente sappia cosa fanno gli altri.',
+      'eva-step5':'<strong>Consegna briefing quotidiani.</strong> Ogni mattina Eva invia un riepilogo di business intelligence — cosa è successo, cosa richiede attenzione, su cosa stanno lavorando gli agenti.',
+      'eva-prob-title':'Problemi che Eva Risolve',
+      'eva-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>Conoscenza aziendale frammentata</strong>Le informazioni vivono in email, CRM, chiamate e WhatsApp — ovunque e da nessuna parte. Eva le unifica tutte.</div>',
+      'eva-prob2':'<span class="prob-icon">⏱️</span><div class="prob-text"><strong>Tempo dirigenziale consumato da admin</strong>20+ ore a settimana perse in pianificazione, gestione della posta in arrivo e attività di coordinamento che non richiedono giudizio umano.</div>',
+      'eva-prob3':'<span class="prob-icon">🔀</span><div class="prob-text"><strong>Agenti che lavorano in silos</strong>Senza Eva, ogni agente opera indipendentemente. Lei è il tessuto connettivo che trasforma sei strumenti in un team coordinato.</div>',
+      'eva-roi-title':'Impatto Finanziario',
+      'eva-roi1':'<div class="roi-num">20+ ore</div><div class="roi-label">Tempo dirigenziale risparmiato a settimana</div><div class="roi-note">A €90/ora, sono €1.800/settimana restituiti al lavoro strategico</div>',
+      'eva-roi2':'<div class="roi-num">€60k+</div><div class="roi-label">Valore annuo equivalente di coordinamento</div><div class="roi-note">Sostituisce un ruolo di EA o operations manager</div>',
+      'eva-roi3':'<div class="roi-num">10×</div><div class="roi-label">Moltiplicatore di efficienza degli agenti</div><div class="roi-note">Gli agenti coordinati superano di gran lunga quelli isolati</div>',
+      'carl-panel-role':'Scimmia dell\'Assistenza Clienti','carl-how-title':'Come Funziona Carl',
+      'carl-step1':'<strong>Il cliente contatta la tua azienda</strong> tramite telefono, chat, email o SMS. Carl riceve la richiesta istantaneamente — zero attesa, zero coda.',
+      'carl-step2':'<strong>Carl cerca nel cervello di Eva</strong> il contesto rilevante — informazioni sul prodotto, storico del cliente, problemi passati, politiche aziendali — in millisecondi.',
+      'carl-step3':'<strong>Risponde con precisione.</strong> Non un template — una risposta vera e contestuale che sembra provenire da qualcuno che conosce davvero la tua azienda.',
+      'carl-step4':'<strong>Scala intelligentemente.</strong> Quando una richiesta richiede genuinamente un umano, Carl la segnala con il contesto completo così il tuo team non riparte da zero.',
+      'carl-step5':'<strong>Registra ogni interazione nel cervello.</strong> Ogni richiesta e risoluzione rende la base di conoscenza più intelligente per la prossima volta.',
+      'carl-prob-title':'Problemi che Carl Risolve',
+      'carl-prob1':'<span class="prob-icon">🕐</span><div class="prob-text"><strong>Tempi di risposta lenti</strong>Il tempo medio di risposta via email è di 4+ ore. Carl risponde in 3 secondi — 24/7, weekend e festivi inclusi.</div>',
+      'carl-prob2':'<span class="prob-icon">🌙</span><div class="prob-text"><strong>Lacune fuori orario</strong>Il 40% delle richieste dei clienti arriva fuori dall\'orario lavorativo. Senza Carl, quei clienti vanno dalla concorrenza.</div>',
+      'carl-prob3':'<span class="prob-icon">📋</span><div class="prob-text"><strong>Risposte incoerenti</strong>Diversi staff danno risposte diverse. Carl dà la stessa risposta accurata e in linea con il brand ogni singola volta.</div>',
+      'carl-roi-title':'Impatto Finanziario',
+      'carl-roi1':'<div class="roi-num">€35k+</div><div class="roi-label">Risparmiato vs assumere un agente di supporto</div><div class="roi-note">Stipendio, contributi, pensione, formazione — tutto eliminato</div>',
+      'carl-roi2':'<div class="roi-num">€0,10</div><div class="roi-label">Costo per ticket (era €10+)</div><div class="roi-note">Riduzione del 99% del costo di supporto per ticket</div>',
+      'carl-roi3':'<div class="roi-num">8.760 ore</div><div class="roi-label">Disponibile per anno</div><div class="roi-note">vs 2.080 ore per un dipendente a tempo pieno</div>',
+      'mike-panel-role':'Social Media Manager','mike-how-title':'Come Funziona Mike',
+      'mike-step1':'<strong>Analisi del cervello.</strong> Mike legge i contenuti più performanti e il tono del brand dalla base di conoscenza di Eva per capire cosa funziona per il tuo pubblico.',
+      'mike-step2':'<strong>Ricerca dei trend.</strong> Mike scansiona il tuo settore alla ricerca di argomenti di tendenza, contenuti dei competitor e conversazioni del pubblico per identificare opportunità tempestive.',
+      'mike-step3':'<strong>Creazione di contenuti nativi per piattaforma.</strong> Non lo stesso post copiato e incollato. LinkedIn riceve leadership di pensiero. Instagram riceve visual e hook. X è pungente. TikTok è grezzo.',
+      'mike-step4':'<strong>Programmazione ottimale.</strong> Mike pubblica negli orari in cui il tuo specifico pubblico è più attivo — massimizzando la portata organica senza promozione a pagamento.',
+      'mike-step5':'<strong>Monitora e riporta.</strong> Traccia il coinvolgimento, risponde ai commenti e alimenta i dati di performance nel cervello per affinare i contenuti futuri.',
+      'mike-prob-title':'Problemi che Mike Risolve',
+      'mike-prob1':'<span class="prob-icon">📉</span><div class="prob-text"><strong>Pubblicazione incoerente</strong>La maggior parte delle PMI pubblica meno di 3 volte a settimana. L\'incoerenza uccide la portata organica. Mike pubblica ogni giorno senza che tu debba fare nulla.</div>',
+      'mike-prob2':'<span class="prob-icon">🔁</span><div class="prob-text"><strong>Stesso contenuto, ogni piattaforma</strong>Il copia-incolla uccide il coinvolgimento. Mike crea contenuti genuinamente diversi per il formato e il pubblico di ogni piattaforma.</div>',
+      'mike-prob3':'<span class="prob-icon">💸</span><div class="prob-text"><strong>Tariffe delle agenzie senza trasparenza</strong>Le agenzie di social media fanno pagare €1.800–€3.600/mese per servizi che Mike fornisce in tempo reale, 24/7.</div>',
+      'mike-roi-title':'Impatto Finanziario',
+      'mike-roi1':'<div class="roi-num">€38k+</div><div class="roi-label">Risparmiato vs un social media manager</div><div class="roi-note">Stipendio, benefit e tariffe delle agenzie combinate</div>',
+      'mike-roi2':'<div class="roi-num">15 ore</div><div class="roi-label">Risparmiate a settimana sulla creazione di contenuti</div><div class="roi-note">Restituite al lavoro fatturabile o strategico</div>',
+      'mike-roi3':'<div class="roi-num">+40%</div><div class="roi-label">Aumento medio del coinvolgimento</div><div class="roi-note">I contenuti nativi e coerenti superano i post sporadici</div>',
+      'penny-panel-role':'Generazione di Lead','penny-how-title':'Come Funziona Penny',
+      'penny-step1':'<strong>Definisce il tuo cliente ideale.</strong> Penny analizza i dati dei clienti esistenti nel cervello per costruire un ICP preciso — settore, dimensione, punti dolenti, trigger di acquisto.',
+      'penny-step2':'<strong>Costruisce una lista di prospect mirata.</strong> Penny cerca su LinkedIn, directory e database per trovare prospect che corrispondono al tuo ICP — non liste casuali.',
+      'penny-step3':'<strong>Crea outreach personalizzato.</strong> Usando il contesto dal cervello, ogni messaggio fa riferimento a qualcosa di specifico e rilevante — non un generico "spero che questo la trovi bene" template.',
+      'penny-step4':'<strong>Gestisce la sequenza di follow-up.</strong> L\'80% degli affari richiede 5+ touchpoint. Penny gestisce ogni follow-up automaticamente, adattando il tono e l\'approccio ogni volta.',
+      'penny-step5':'<strong>Qualifica e passa a Rosa.</strong> I lead caldi vengono trasferiti con il contesto completo così Rosa può riprendere esattamente dove Penny si è fermata.',
+      'penny-prob-title':'Problemi che Penny Risolve',
+      'penny-prob1':'<span class="prob-icon">⏰</span><div class="prob-text"><strong>Il prospecting manuale mangia la settimana</strong>I venditori passano il 20% della settimana sul prospecting che potrebbe essere automatizzato. Penny lo fa 24/7 senza perdere il focus.</div>',
+      'penny-prob2':'<span class="prob-icon">📧</span><div class="prob-text"><strong>L\'outreach generico viene ignorato</strong>Il tasso medio di apertura delle cold email è del 21%. I messaggi personalizzati e guidati dal contesto di Penny raggiungono tassi di risposta 3–5× più alti.</div>',
+      'penny-prob3':'<span class="prob-icon">📭</span><div class="prob-text"><strong>I follow-up mancati fanno perdere affari</strong>L\'80% delle vendite necessita di 5+ follow-up. Il 44% dei rappresentanti si arrende dopo uno. Penny non si arrende mai.</div>',
+      'penny-roi-title':'Impatto Finanziario',
+      'penny-roi1':'<div class="roi-num">€40k+</div><div class="roi-label">Risparmiato vs assumere un SDR</div><div class="roi-note">Stipendio, commissioni, strumenti e costi di onboarding</div>',
+      'penny-roi2':'<div class="roi-num">3×</div><div class="roi-label">Maggior volume di outreach rispetto a un umano</div><div class="roi-note">Penny non dorme mai, non perde mai la motivazione</div>',
+      'penny-roi3':'<div class="roi-num">5×</div><div class="roi-label">Tassi di risposta più alti sull\'outreach</div><div class="roi-note">Messaggi personalizzati e ricchi di contesto vs template generici</div>',
+      'sherlock-panel-role':'Specialista SEO &amp; GEO','sherlock-how-title':'Come Funziona Sherlock',
+      'sherlock-step1':'<strong>Audit della presenza nella ricerca.</strong> Sherlock analizza le tue classifiche attuali, la salute del sito e la visibilità sia nella ricerca tradizionale (Google) che nei motori di ricerca AI (ChatGPT, Perplexity, Gemini).',
+      'sherlock-step2':'<strong>Analisi del gap competitivo.</strong> Identifica quali parole chiave e argomenti i tuoi concorrenti classificano che tu non hai — e crea una lista di attacco prioritaria.',
+      'sherlock-step3':'<strong>Creazione della strategia di contenuto.</strong> Usando i dati del tuo cervello, Sherlock crea articoli SEO e landing page che affrontano le reali domande dei clienti con la tua autentica competenza.',
+      'sherlock-step4':'<strong>Ottimizzazione GEO.</strong> Struttura il tuo contenuto così viene citato dalle risposte AI in ChatGPT, Perplexity e Google\'s AI Overview — la nuova frontiera della ricerca.',
+      'sherlock-step5':'<strong>Monitoraggio settimanale del ranking e reporting.</strong> Monitora classifiche, traffico e frequenza di citazione AI — adattando la strategia in base a ciò che funziona.',
+      'sherlock-prob-title':'Problemi che Sherlock Risolve',
+      'sherlock-prob1':'<span class="prob-icon">👻</span><div class="prob-text"><strong>Invisibile nella ricerca</strong>Se non appari in prima pagina — tradizionale o AI — non esisti funzionalmente per il 90% dei potenziali clienti.</div>',
+      'sherlock-prob2':'<span class="prob-icon">🤖</span><div class="prob-text"><strong>Nessuna strategia GEO</strong>La ricerca AI sta sostituendo Google per milioni di utenti. La maggior parte delle aziende ha zero strategia per essere citata nelle risposte AI.</div>',
+      'sherlock-prob3':'<span class="prob-icon">💰</span><div class="prob-text"><strong>Agenzie costose con risultati opachi</strong>Le agenzie SEO fanno pagare €2.400–€6.000/mese con contratti di 6 mesi e report vaghi. Sherlock fornisce risultati trasparenti e continui.</div>',
+      'sherlock-roi-title':'Impatto Finanziario',
+      'sherlock-roi1':'<div class="roi-num">€43k+</div><div class="roi-label">Risparmiato vs un\'agenzia SEO annualmente</div><div class="roi-note">A €1.800–€3.600/mese, le tariffe delle agenzie si accumulano rapidamente</div>',
+      'sherlock-roi2':'<div class="roi-num">Cresce</div><div class="roi-label">Crescita organica = CAC in calo nel tempo</div><div class="roi-note">Ogni articolo è un asset di vendita 24/7 che non scade mai</div>',
+      'sherlock-roi3':'<div class="roi-num">First mover</div><div class="roi-label">Vantaggio GEO mentre i competitor dormono</div><div class="roi-note">La quota di ricerca AI cresce del 40% anno su anno</div>',
+      'rosa-panel-role':'Agente di Vendita','rosa-how-title':'Come Funziona Rosa',
+      'rosa-step1':'<strong>Riceve lead qualificati da Penny.</strong> Rosa riprende dove Penny si è fermata — con il contesto completo sul background del prospect, interessi e cronologia di coinvolgimento.',
+      'rosa-step2':'<strong>Consulta il cervello.</strong> Rosa verifica la tua conoscenza completa del prodotto, prezzi, trattative passate e storie di successo dei clienti — pronta a gestire qualsiasi domanda o obiezione.',
+      'rosa-step3':'<strong>Apre la conversazione.</strong> Rosa avvia un dialogo di vendita personalizzato — non un pitch, una conversazione genuina che parte dai punti dolenti specifici del prospect.',
+      'rosa-step4':'<strong>Gestisce le obiezioni.</strong> Usando la profonda conoscenza del prodotto e dei competitor dal cervello, Rosa affronta ogni obiezione con risposte accurate e sicure.',
+      'rosa-step5':'<strong>Genera proposte e chiude.</strong> Rosa crea proposte su misura, invia contratti e segue finché l\'affare è vinto — o nutre intelligentemente i prospect non ancora pronti all\'acquisto.',
+      'rosa-prob-title':'Problemi che Rosa Risolve',
+      'rosa-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>La risposta lenta ai lead uccide le conversioni</strong>Rispondi a un lead entro 5 minuti e hai il 100× più probabilità di convertire. Rosa risponde in secondi, ogni volta.</div>',
+      'rosa-prob2':'<span class="prob-icon">😴</span><div class="prob-text"><strong>Le vendite avvengono solo durante l\'orario d\'ufficio</strong>Ogni notte e ogni weekend si perdono affari. Rosa vende 24/7/365 — la tua migliore commerciale non dorme mai.</div>',
+      'rosa-prob3':'<span class="prob-icon">📑</span><div class="prob-text"><strong>Proposte e follow-up incoerenti</strong>La qualità delle vendite varia per persona e livello di energia. Rosa offre la stessa eccellente esperienza ogni singola volta.</div>',
+      'rosa-roi-title':'Impatto Finanziario',
+      'rosa-roi1':'<div class="roi-num">7×</div><div class="roi-label">Conversione più alta dalla risposta istantanea</div><div class="roi-note">La velocità di risposta al lead è il fattore n.1 nei tassi di conversione B2B</div>',
+      'rosa-roi2':'<div class="roi-num">€48k+</div><div class="roi-label">Risparmiato vs assumere un altro commerciale</div><div class="roi-note">Stipendio, commissioni, licenze CRM e onboarding</div>',
+      'rosa-roi3':'<div class="roi-num">−30%</div><div class="roi-label">Ciclo di vendita più breve</div><div class="roi-note">Follow-up più rapidi e nurturing coerente comprimono i tempi</div>',
+      'how-label':'Come Funziona','how-h2':'Tre passaggi.<br><span>Un\'azienda intelligente.</span>',
+      'step1-title':'Alimenta il Cervello','step1-desc':'Il tuo sistema AI vocale cattura ogni chiamata. Il CRM importa le tue email e lo storico social. La base di conoscenza cresce con dati aziendali reali e live dal primo giorno.',
+      'step2-title':'Il Cervello Impara la Tua Azienda','step2-desc':'Il sistema RAG elabora tutti i tuoi dati in una memoria aziendale viva. Capisce i tuoi prodotti, il tuo tono, i tuoi clienti e la tua storia — in modo profondo e continuo.',
+      'step3-title':'Gli Agenti Si Mettono al Lavoro','step3-desc':'Carl, Mike, Penny, Sherlock, Rosa ed Eva gestiscono le tue operazioni 24/7. Non hanno bisogno di istruzioni. Sanno già tutto della tua azienda.',
+      'roi-label':'Impatto Finanziario','roi-h2':'I numeri<br><span>non mentono.</span>','roi-sub':'Assumere un team per fare ciò che fanno i tuoi sei agenti AI costerebbe oltre €200.000 all\'anno. Prima delle tasse, benefit, giorni di malattia e turnover.',
+      'roi-hero-label':'Valore equivalente annuo del tuo team AI','roi-hero-sub':'Tra stipendi, tariffe delle agenzie, strumenti e ore perse — questo è ciò che lo stack completo di agenti sostituisce',
+      'comp-human-title':'Team Umano Tradizionale','comp-human-sub':'Che fa ciò che fanno i tuoi 6 agenti',
+      'comp-row-support':'Agente di Supporto Clienti','comp-row-social':'Social Media Manager','comp-row-sdr':'Sales Development Rep','comp-row-seo':'Contratto Agenzia SEO','comp-row-sales':'Agente di Vendita (aggiuntivo)','comp-row-ea':'Assistente Esecutivo / Ops','comp-row-total-label':'Costo Annuale Totale',
+      'comp-ai-title':'Artificial Ignorance','comp-ai-sub':'L\'infrastruttura AI completa',
+      'comp-carl':'Carl — Assistenza Clienti 24/7','comp-mike':'Mike — Social Media Manager','comp-penny':'Penny — Generazione Lead','comp-sherlock':'Sherlock — SEO &amp; GEO','comp-rosa':'Rosa — Agente di Vendita','comp-eva':'Eva — Assistente Personale + Cervello','comp-row-talk':'Parlaci del prezzo','comp-row-book':'Prenota una Demo →',
+      'savings-eva-role':'Assistente Personale','savings-eva-period':'Valore annuo consegnato','savings-eva-fact1':'20+ ore dirigenziali risparmiate a settimana','savings-eva-fact2':'Coordina tutti gli altri 5 agenti','savings-eva-fact3':'Briefing quotidiani di business intelligence',
+      'savings-carl-role':'Assistenza Clienti','savings-carl-period':'Risparmiato vs assunzione supporto','savings-carl-fact1':'Tempo di risposta 3 secondi, 24/7','savings-carl-fact2':'Costo per ticket scende da €10 a €0,10','savings-carl-fact3':'8.760 ore disponibili per anno',
+      'savings-mike-role':'Social Media','savings-mike-period':'Risparmiato vs un social manager','savings-mike-fact1':'15+ ore risparmiate a settimana','savings-mike-fact2':'Uplift medio del 40% nell\'engagement','savings-mike-fact3':'Pubblicazione giornaliera su tutte le piattaforme',
+      'savings-penny-role':'Generazione Lead','savings-penny-period':'Risparmiato vs assunzione SDR','savings-penny-fact1':'3× più volume di outreach','savings-penny-fact2':'5× tassi di risposta più alti','savings-penny-fact3':'Non perde mai un follow-up',
+      'savings-sherlock-role':'SEO &amp; GEO','savings-sherlock-period':'Risparmiato vs un\'agenzia SEO','savings-sherlock-fact1':'Accresce il traffico organico nel tempo','savings-sherlock-fact2':'GEO per motori di ricerca AI','savings-sherlock-fact3':'Ogni articolo = asset di vendita permanente',
+      'savings-rosa-role':'Agente di Vendita','savings-rosa-period':'Risparmiato vs un altro commerciale','savings-rosa-fact1':'7× conversione più alta dalla risposta istantanea','savings-rosa-fact2':'Vendite 24/7 — gli affari si chiudono mentre dormi','savings-rosa-fact3':'Ciclo di vendita 30% più breve',
+      'modules-label':'Infrastruttura Modulare','modules-h2':'Compra ciò che ti serve.<br>Scala quando sei pronto.','modules-sub':'Inizia con un modulo. Aggiungi altri man mano che la tua azienda cresce. Ogni pezzo si collega allo stesso AI Brain.','modules-cta-p':'Non sai da dove iniziare? Costruiamo lo stack giusto per la tua azienda.','modules-cta-btn':'Ottieni una Build Personalizzata →',
+      'mod1-name':'AI Vocale','mod1-desc':'AI vocale intelligente che cattura conoscenza da ogni chiamata. Alimentata da ElevenLabs, Knotie.AI e RetellAI.','mod1-tag':'Livello Foundation',
+      'mod2-name':'Integrazione CRM','mod2-desc':'Connette email, contatti e social media alla base di conoscenza centrale. Tutto in sincronia.','mod2-tag':'Livello Dati',
+      'mod3-name':'RAG Brain','mod3-desc':'Il sistema di memoria AI core. Elabora tutti i tuoi dati in una base di conoscenza ricercabile e cumulativa.','mod3-tag':'Livello Intelligence',
+      'mod4-name':'Agenti Individuali','mod4-desc':'Scegli le tue scimmie. Carl, Mike, Penny, Sherlock, Rosa o Eva — aggiungi gli agenti che ti servono, quando ti servono.','mod4-tag':'Livello Agente',
+      'mod5-name':'Full Stack','mod5-desc':'L\'infrastruttura AI completa. Voice + CRM + Brain + tutti e 6 gli Agenti. Costruita, distribuita e gestita per te.','mod5-tag':'⭐ Più Popolare',
+      'proof-label':'Riprova Sociale','proof-h2':'80+ aziende che girano su<br><span>Artificial Ignorance</span>','proof-stat1':'Clienti Attivi','proof-stat2':'Specialisti AI','proof-stat3':'Sempre Operativo','proof-stat4':'White-Label Pronto',
+      't1-quote':'"Abbiamo sostituito l\'intero carico di lavoro ripetitivo del team amministrativo in 3 settimane. Il cervello AI conosce la nostra azienda meglio di alcuni nostri dipendenti. Infrastruttura genuinamente impressionante."','t1-name':'Sara K.','t1-title':'CEO, Agenzia Immobiliare',
+      't2-quote':'"Il sistema RAG è il game changer. I nostri agenti rispondono alle domande con il contesto completo della nostra storia clienti di 5 anni. Niente si avvicina a ciò che Artificial Ignorance ha costruito."','t2-name':'Marco T.','t2-title':'Founder, Agenzia di Marketing Digitale',
+      't3-quote':'"White-labelliamo lo stack completo per i nostri clienti. Artificial Ignorance è l\'infrastruttura che stavamo cercando. I nostri clienti pensano che l\'abbiamo costruita noi — è così seamless."','t3-name':'Giacomo O.','t3-title':'Direttore, Agenzia SaaS',
+      'contact-label':'Prenota una Demo','contact-h2':'Pronto a dare alla tua<br>azienda un <span>vero cervello?</span>','contact-desc':'Dicci della tua azienda e ti mostreremo esattamente quali moduli ti servono. Niente fronzoli, niente vendita aggressiva — solo una conversazione diretta su ciò che l\'infrastruttura AI può fare concretamente per te.',
+      'perk1':'Chiamata di scoperta di 30 minuti — nessun impegno','perk2':'Raccomandazione di infrastruttura personalizzata','perk3':'Opzioni white-label per agenzie','perk4':'Demo live del cervello AI in azione',
+      'ghl-title':'Prenota la Tua Demo','ghl-desc':'Incolla qui il codice embed<br>del tuo form GoHighLevel.',
+      'footer-copy':'© 2025 Artificial Ignorance. Infrastruttura AI per le aziende che ci credono davvero.','footer-link1':'Le Scimmie','footer-link2':'Come Funzionano','footer-link4':'Moduli','footer-link5':'Contatti'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+    });
+    // Update desktop lang buttons
+    document.querySelectorAll('.lang-switch .lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    // Update mobile lang buttons
+    document.querySelectorAll('.mobile-lang button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+  }
 </script>
+<script src="https://connect.artificialignorance.io/js/form_embed.js"></script>
 </body>
 </html>
