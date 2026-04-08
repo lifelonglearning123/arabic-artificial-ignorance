@@ -7,7 +7,7 @@
   <meta name="description" content="We build the AI brain behind your business. AI Voice, CRM integration, and intelligent agents that know your company inside out.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -118,6 +118,8 @@
     .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp .8s .24s ease both; }
     .hero-deco { position:absolute; right:6%; top:50%; transform:translateY(-50%); width:clamp(260px,30vw,480px); pointer-events:none; animation:floatDeco 5s ease-in-out infinite; z-index:1; filter:drop-shadow(0 30px 60px rgba(0,200,83,.2)); }
 
+    .hero-text { max-width: 55%; }
+
     .hero-stats {
       position:absolute; bottom:0; left:0; right:0; z-index:2;
       border-top:1px solid var(--border);
@@ -131,12 +133,12 @@
     .stat-label { font-family:var(--font-ui); font-size:.65rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-top:.2rem; }
 
     /* ════════════════ MARQUEE ════════════════ */
-    .marquee-wrap { background:var(--green); overflow:hidden; padding:.9rem 0; white-space:nowrap; }
-    .marquee-label { text-align:center; font-family:var(--font-ui); font-size:.6rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.75); padding-bottom:.6rem; }
+    .marquee-wrap { background:var(--bg-3); border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; padding:.9rem 0; white-space:nowrap; }
+    .marquee-label { text-align:center; font-family:var(--font-ui); font-size:.6rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-muted); padding-bottom:.6rem; }
     .marquee-track { display:inline-flex; align-items:center; animation:marquee 32s linear infinite; }
     .marquee-item { display:inline-flex; align-items:center; padding:0 2.5rem; gap:2.5rem; }
-    .marquee-item img { height:28px; width:auto; display:block; filter:brightness(0) invert(1); opacity:.9; }
-    .marquee-dot  { width:5px; height:5px; background:rgba(0,0,0,.3); border-radius:50%; flex-shrink:0; }
+    .marquee-item img { height:28px; width:auto; display:block; opacity:.85; }
+    .marquee-dot  { width:5px; height:5px; background:var(--border); border-radius:50%; flex-shrink:0; }
 
     /* ════════════════ PROBLEM ════════════════ */
     #problem { background:var(--bg-2); }
@@ -406,6 +408,7 @@
       .contact-grid   { grid-template-columns:1fr; gap:3rem; }
       .proof-stats    { grid-template-columns:repeat(2,1fr); }
       .hero-deco      { display:none; }
+      .hero-text      { max-width:100%; }
       .nav-links      { display:none; }
       .hamburger      { display:flex; }
       .hero-stats     { grid-template-columns:repeat(2,1fr); position:relative; bottom:auto; margin-top:4rem; border:1px solid var(--border); border-radius:var(--radius); }
@@ -432,6 +435,42 @@
       .modules-grid { grid-template-columns:1fr; }
       .hero-stats   { grid-template-columns:1fr 1fr; }
     }
+
+    /* ════════════════ RTL (Arabic) ════════════════ */
+    html[lang="ar"] body { font-family:'Cairo',sans-serif; direction:rtl; }
+    html[lang="ar"] .label::before { content:'◂'; }
+    html[lang="ar"] .hero-h1 { letter-spacing:0; }
+    html[lang="ar"] .hero-sub { margin-right:0; }
+    html[lang="ar"] .hero-ctas { flex-direction:row-reverse; }
+    html[lang="ar"] .nav-links { flex-direction:row-reverse; }
+    html[lang="ar"] nav { flex-direction:row-reverse; }
+    html[lang="ar"] .problem-grid { direction:rtl; }
+    html[lang="ar"] .problem-card { flex-direction:row-reverse; }
+    html[lang="ar"] .card-tasks .card-task::before { margin-left:.6rem; margin-right:0; }
+    html[lang="ar"] .pflow-step { flex-direction:row-reverse; }
+    html[lang="ar"] .pflow-title { flex-direction:row-reverse; }
+    html[lang="ar"] .pflow-title::before { display:none; }
+    html[lang="ar"] .pflow-title::after { content:''; flex:1; height:1px; background:var(--border); }
+    html[lang="ar"] .prob-item { flex-direction:row-reverse; }
+    html[lang="ar"] .savings-fact::before { margin-left:.5rem; margin-right:0; }
+    html[lang="ar"] .contact-perks .perk { flex-direction:row-reverse; }
+    html[lang="ar"] .footer-copy { text-align:center; }
+    html[lang="ar"] .t-author { flex-direction:row-reverse; }
+    html[lang="ar"] footer { flex-direction:row-reverse; }
+    html[lang="ar"] .agents-header { flex-direction:row-reverse; }
+    html[lang="ar"] .agents-note { text-align:left; }
+    html[lang="ar"] .hero-stats { direction:rtl; }
+    html[lang="ar"] .comp-row { flex-direction:row-reverse; }
+    html[lang="ar"] .comp-head { flex-direction:row-reverse; }
+    html[lang="ar"] .savings-agent { flex-direction:row-reverse; }
+    html[lang="ar"] .panel-img-col { direction:rtl; }
+    html[lang="ar"] .panel-content { direction:rtl; }
+    html[lang="ar"] .ptabs-nav { direction:rtl; }
+    html[lang="ar"] .ptab-btn { flex-direction:row-reverse; }
+    html[lang="ar"] .mobile-menu a { font-family:'Cairo',sans-serif; }
+    html[lang="ar"] .step { direction:rtl; }
+    html[lang="ar"] .hero-deco { right:auto; left:6%; }
+    html[lang="ar"] .hero-text { max-width:55%; margin-left:auto; }
 
     /* ════════════════ LANG SWITCH ════════════════ */
     .lang-switch {
@@ -470,6 +509,7 @@
   <div class="mobile-lang">
     <button class="active" onclick="setLang('en')">EN</button>
     <button onclick="setLang('it')">IT</button>
+    <button onclick="setLang('ar')">AR</button>
   </div>
 </div>
 
@@ -488,6 +528,7 @@
     <div class="lang-switch">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('ar')">AR</button>
     </div>
     <a href="#contact" class="btn btn-primary" data-i18n="nav-cta">Book a Demo</a>
     <div class="hamburger" onclick="openMobileMenu()"><span></span><span></span><span></span></div>
@@ -498,6 +539,7 @@
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="container hero-inner">
+    <div class="hero-text">
     <div class="hero-badge" data-i18n="hero-badge">🧠 AI Infrastructure · Built Different</div>
     <h1 class="hero-h1">
       <span class="line-solid" data-i18n="hero-h1-1">THE BRAIN</span>
@@ -508,6 +550,7 @@
     <div class="hero-ctas">
       <a href="#contact" class="btn btn-primary" data-i18n="hero-cta1">Book a Demo →</a>
       <a href="#agents"  class="btn btn-outline" data-i18n="hero-cta2">Meet the Monkeys 🐒</a>
+    </div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="stat-num" data-count="80">0</div><div class="stat-label" data-i18n="stat-companies">Companies Served</div></div>
@@ -1687,6 +1730,142 @@
       'roi-hero-value':'€200.000+',
       'comp-val-support':'€35.000/anno','comp-val-social':'€38.000/anno','comp-val-sdr':'€41.000/anno','comp-val-seo':'€28.000/anno','comp-val-sales':'€49.000/anno','comp-val-ea':'€41.000/anno','comp-val-total':'€232.000',
       'savings-eva-amount':'€60k+','savings-carl-amount':'€35k+','savings-mike-amount':'€38k+','savings-penny-amount':'€40k+','savings-sherlock-amount':'€43k+','savings-rosa-amount':'€48k+'
+    },
+    ar: {
+      'mob-close':'✕ إغلاق','nav-problem':'المشكلة','nav-monkeys':'القرود','nav-how':'كيف يعملون','nav-modules':'الوحدات','nav-proof':'إثبات','nav-cta':'احجز عرضاً',
+      'hero-badge':'🧠 بنية تحتية للذكاء الاصطناعي · مبنية بشكل مختلف','hero-h1-1':'العقل','hero-h1-2':'وراء','hero-h1-3':'أعمالك.','hero-sub':'نبني بنية تحتية للذكاء الاصطناعي تعرف شركتك حقاً — الصوت وإدارة علاقات العملاء والذاكرة وستة وكلاء أذكياء. جميعهم يتعلمون. جميعهم متصلون. جميعهم يعملون 24/7.','hero-cta1':'احجز عرضاً ←','hero-cta2':'تعرف على القرود 🐒',
+      'stat-companies':'شركة عميل','stat-agents':'وكلاء الذكاء الاصطناعي','stat-alwayson':'دائماً في العمل','stat-knowledge':'معرفة متراكمة','marquee-label':'يتصل مع',
+      'prob-label':'المشكلة','prob-h2':'الذكاء الاصطناعي العام<br>لا يعرف<br><em>أعمالك</em>.','prob-body':'معظم أدوات الذكاء الاصطناعي متشابهة للجميع. تنسى أعمالك في اللحظة التي تغلق فيها التبويب. تقضي وقتاً أطول في التصحيح وإعادة الشرح بدلاً من إنجاز العمل فعلاً.',
+      'pc1-title':'الغرق في التكرار','pc1-desc':'يحرق فريقك 60٪ من يومه على مهام يجب أن تكون آلية — رسائل البريد الإلكتروني والمتابعات ومنشورات التواصل الاجتماعي وتذاكر الدعم. هذه ليست مشكلة بشرية. إنها مشكلة بنية تحتية.',
+      'pc2-title':'ذكاء اصطناعي ينسى كل شيء','pc2-desc':'الذكاء الاصطناعي العام ليس لديه ذاكرة لأعمالك. كل محادثة تبدأ من الصفر. إعادة شرح لا نهاية لها. قيمة متراكمة صفرية. إنه أداة وليس عضواً في الفريق.',
+      'pc3-title':'انتشار الأدوات يقتل العائد على الاستثمار','pc3-desc':'عشرة اشتراكات لا تتحدث مع بعضها. لا عقل موحد. لا مخرجات منسقة. حزمة الذكاء الاصطناعي الخاصة بك تكلف أكثر مما توفر ولا أحد يعرف ما الذي يعمل.',
+      'sol-label':'حلنا','sol-h2':'عقل واحد.<br><span>ذاكرة لا نهاية لها.</span><br>ستة متخصصين.','sol-sub':'نبني قاعدة معرفة ذكاء اصطناعي حية من بيانات أعمالك الحقيقية — كل مكالمة وكل بريد إلكتروني وكل تفاعل اجتماعي — ثم نشغّل ستة وكلاء متخصصين يعرفون شركتك من الداخل.',
+      'flow-voice-title':'صوت الذكاء الاصطناعي','flow-voice-desc':'يستخلص المعرفة من كل مكالمة','flow-crm-title':'CRM + البريد','flow-crm-desc':'جهات الاتصال والتاريخ والحملات','flow-social-title':'وسائل التواصل','flow-social-desc':'المنشورات والتفاعل والاتجاهات','flow-brain-title':'العقل الاصطناعي','flow-brain-desc':'قاعدة معرفة RAG — الذاكرة الحية لشركتك. يصبح أذكى كل يوم.','flow-agents-title':'وكلاؤك','flow-agents-desc':'كارل · مايك · بيني · شيرلوك · روزا · إيفا','flow-agents-tag2':'يتعلم دائماً',
+      'agents-label':'تعرف على الفريق','agents-h2':'القرود 🐒','agents-note':'ستة متخصصين. جميعهم مدعومون بعقلك الذكي. اشترِ واحداً أو اشترِهم جميعاً.',
+      'carl-badge':'دعم العملاء','carl-role':'قرد الدعم','carl-desc':'يتعامل كارل مع كل استفسار للعميل بالمعرفة الكاملة لأعمالك خلفه. لا نصوص جاهزة. إجابات حقيقية. لا موسيقى انتظار.','carl-task1':'حل فوري للاستفسارات 24/7','carl-task2':'تصعيد ذكي للبشر','carl-task3':'يتعلم من كل تفاعل',
+      'mike-badge':'وسائل التواصل الاجتماعي','mike-role':'قرد التواصل الاجتماعي','mike-desc':'ينشئ مايك محتوى أصيلاً لكل منصة — مُكيَّف لكل جمهور ومجدول ومنشور تلقائياً.','mike-task1':'إنشاء محتوى خاص بالمنصة','mike-task2':'جدولة ونشر آلي','mike-task3':'تتبع التفاعل والردود',
+      'penny-badge':'توليد العملاء المحتملين','penny-role':'قرد العملاء المحتملين','penny-desc':'تتتبع بيني وتُأهّل وترعى العملاء المحتملين باستخدام سياق أعمالك الكامل — ليس قوالب عامة بل ذكاء حقيقي حول ما يهتم به عملاؤك المحتملون.','penny-task1':'تحديد المستهدفين والتواصل','penny-task2':'تسلسلات متابعة آلية','penny-task3':'تسجيل وتأهيل العملاء المحتملين',
+      'sherlock-badge':'SEO · GEO','sherlock-role':'قرد البحث','sherlock-desc':'يحقق شيرلوك في كل زاوية من حضورك في محركات البحث — SEO التقليدي وحدود الذكاء الاصطناعي الجديدة (GEO). يجعل علامتك التجارية مستحيلة الإغفال.','sherlock-task1':'محتوى محسّن لـ SEO وتدقيقات','sherlock-task2':'تحسين محركات التوليد','sherlock-task3':'تتبع الترتيب ومعلومات المنافسين',
+      'rosa-badge':'المبيعات','rosa-role':'قرد المبيعات','rosa-desc':'تُغلق روزا الصفقات. مسلحة بسياق أعمالك الكامل ومعرفة المنتج وتاريخ العملاء تدير عملية مبيعاتك من أول لمسة حتى الصفقة الموقّعة.','rosa-task1':'محادثات مبيعات آلية','rosa-task2':'إنشاء العروض والأسعار','rosa-task3':'إدارة خط الأنابيب والتنبؤ',
+      'eva-badge':'⭐ الرائد · العقل الاصطناعي','eva-role':'مساعد شخصي','eva-desc':'إيفا هي العقل الاصطناعي. تتعلم كل شيء عن أعمالك وتنسق الفريق بأكمله. كلما طالت مدة تشغيل البنية التحتية أصبحت إيفا أذكى — إنها ليست مجرد مساعدة بل هي الذكاء الجمعي لشركتك.','eva-task1':'تدير صندوق الوارد والتقويم 24/7','eva-task2':'تنسق جميع الوكلاء الآخرين','eva-task3':'تحتفظ بذاكرة أعمالك الكاملة','eva-task4':'تصبح أذكى كل يوم','eva-task5':'جوهر البنية التحتية للذكاء الاصطناعي','eva-task6':'تقدم إحاطات ذكاء الأعمال اليومية',
+      'playbook-label':'دليل الوكيل','playbook-h2':'كيف تعمل قرودك <span>فعلاً</span>','playbook-sub':'يشغّل كل وكيل سير عمل محدداً مدعوماً بعقلك الاصطناعي — يحل مشكلات محددة ويولد عوائد مالية قابلة للقياس.',
+      'eva-panel-role':'مساعد شخصي · العقل الاصطناعي','eva-how-title':'كيف تعمل إيفا',
+      'eva-step1':'<strong>تتصل بكل شيء.</strong> تربط إيفا نظام صوتك وCRM والبريد الإلكتروني وقنوات التواصل الاجتماعي — وتستوعب جميع بيانات الأعمال في قاعدة معرفة RAG باستمرار.',
+      'eva-step2':'<strong>تبني عقلك الاصطناعي.</strong> كل تفاعل وكل مكالمة وكل بريد إلكتروني يثري فهم إيفا لأعمالك ومنتجاتك وعملائك وأسلوبك.',
+      'eva-step3':'<strong>تدير وقتك.</strong> تتعامل إيفا مع تقويمك وتصيغ رسائل بريدك الإلكتروني وتأخذ ملاحظات الاجتماعات وتفلتر صندوق الوارد — حتى تتعامل فقط مع ما يهم.',
+      'eva-step4':'<strong>تنسق الفريق.</strong> تُبلّغ إيفا كارل ومايك وبيني وشيرلوك وروزا — وتنقل السياق وتزامن المهام وتضمن أن كل وكيل يعرف ما يفعله الآخرون.',
+      'eva-step5':'<strong>تقدم إحاطات يومية.</strong> كل صباح ترسل إيفا ملخص ذكاء الأعمال — ما حدث وما يحتاج إلى اهتمام وما يعمل عليه الوكلاء.',
+      'eva-prob-title':'المشكلات التي تحلها إيفا',
+      'eva-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>معرفة الأعمال المجزأة</strong>المعلومات موجودة في البريد الإلكتروني وCRM والمكالمات وواتساب — في لا مكان وفي كل مكان في آن واحد. إيفا توحدها جميعاً.</div>',
+      'eva-prob2':'<span class="prob-icon">⏱️</span><div class="prob-text"><strong>وقت المديرين التنفيذيين يستهلكه الإدارة</strong>أكثر من 20 ساعة أسبوعياً تضيع في الجدولة وإدارة صندوق الوارد ومهام التنسيق التي لا تتطلب حكماً بشرياً.</div>',
+      'eva-prob3':'<span class="prob-icon">🔀</span><div class="prob-text"><strong>الوكلاء يعملون بمعزل عن بعضهم</strong>بدون إيفا يعمل كل وكيل بشكل مستقل. إنها النسيج الرابط الذي يحول ستة أدوات إلى فريق منسق واحد.</div>',
+      'eva-roi-title':'الأثر المالي',
+      'eva-roi1':'<div class="roi-num">+20 ساعة</div><div class="roi-label">وقت المديرين التنفيذيين الموفر أسبوعياً</div><div class="roi-note">بسعر 75 جنيه إسترليني/ساعة، هذا 1,500 جنيه إسترليني/أسبوع يُعاد إلى العمل الاستراتيجي</div>',
+      'eva-roi2':'<div class="roi-num">+50 ألف جنيه</div><div class="roi-label">قيمة تنسيق سنوية معادلة</div><div class="roi-note">يحل محل دور المساعد التنفيذي أو مدير العمليات</div>',
+      'eva-roi3':'<div class="roi-num">10×</div><div class="roi-label">مضاعف كفاءة الوكيل</div><div class="roi-note">الوكلاء المنسقون يتفوقون بشكل كبير على المنعزلين</div>',
+      'carl-panel-role':'قرد دعم العملاء','carl-how-title':'كيف يعمل كارل',
+      'carl-step1':'<strong>يتواصل العميل مع أعمالك</strong> عبر الهاتف أو الدردشة أو البريد الإلكتروني أو الرسائل النصية. يستقبل كارل الاستفسار فوراً — صفر وقت انتظار وصفر طابور.',
+      'carl-step2':'<strong>يبحث كارل في عقل إيفا</strong> عن السياق ذي الصلة — معلومات المنتج وتاريخ العميل والمشكلات السابقة وسياسات الشركة — في ميلي ثانية.',
+      'carl-step3':'<strong>يرد بدقة.</strong> ليس قالباً — إجابة حقيقية وسياقية تبدو كأنها جاءت من شخص يعرف أعمالك فعلاً.',
+      'carl-step4':'<strong>يُصعّد بذكاء.</strong> عندما يحتاج استفسار ما حقاً إلى إنسان يضع كارل علامة عليه بالسياق الكامل حتى لا يبدأ فريقك من الصفر.',
+      'carl-step5':'<strong>يسجل كل تفاعل في العقل.</strong> كل استفسار وحل يجعل قاعدة المعرفة أذكى في المرة القادمة.',
+      'carl-prob-title':'المشكلات التي يحلها كارل',
+      'carl-prob1':'<span class="prob-icon">🕐</span><div class="prob-text"><strong>أوقات استجابة بطيئة</strong>متوسط وقت استجابة دعم البريد الإلكتروني هو 4+ ساعات. يستجيب كارل في 3 ثوانٍ — 24/7 بما في ذلك عطل نهاية الأسبوع والعطلات الرسمية.</div>',
+      'carl-prob2':'<span class="prob-icon">🌙</span><div class="prob-text"><strong>فجوات خارج ساعات العمل</strong>40٪ من استفسارات العملاء تصل خارج ساعات العمل. بدون كارل يذهب هؤلاء العملاء إلى منافسيك.</div>',
+      'carl-prob3':'<span class="prob-icon">📋</span><div class="prob-text"><strong>إجابات غير متسقة</strong>يعطي موظفون مختلفون إجابات مختلفة. يعطي كارل نفس الإجابة الدقيقة والمتوافقة مع العلامة التجارية في كل مرة.</div>',
+      'carl-roi-title':'الأثر المالي',
+      'carl-roi1':'<div class="roi-num">+30 ألف جنيه</div><div class="roi-label">موفر مقارنة بتوظيف وكيل دعم</div><div class="roi-note">الراتب والتأمين الوطني والمعاش والتدريب — كل ذلك تم إلغاؤه</div>',
+      'carl-roi2':'<div class="roi-num">0.08 جنيه</div><div class="roi-label">تكلفة كل تذكرة (كانت +8 جنيهات)</div><div class="roi-note">انخفاض بنسبة 99٪ في تكلفة الدعم لكل تذكرة</div>',
+      'carl-roi3':'<div class="roi-num">8,760 ساعة</div><div class="roi-label">متاح سنوياً</div><div class="roi-note">مقابل 2,080 ساعة لموظف بدوام كامل</div>',
+      'mike-panel-role':'مدير وسائل التواصل الاجتماعي','mike-how-title':'كيف يعمل مايك',
+      'mike-step1':'<strong>تحليل العقل.</strong> يقرأ مايك المحتوى الأفضل أداءً وصوت العلامة التجارية من قاعدة معرفة إيفا لفهم ما يناسب جمهورك.',
+      'mike-step2':'<strong>بحث الاتجاهات.</strong> يفحص مايك صناعتك بحثاً عن المواضيع الرائجة ومحتوى المنافسين ومحادثات الجمهور لتحديد الفرص الآنية.',
+      'mike-step3':'<strong>إنشاء محتوى أصيل للمنصة.</strong> ليس نفس المنشور منسوخاً ولصقاً. LinkedIn يحصل على قيادة فكرية. Instagram يحصل على مرئيات وخطاف. X يكون موجزاً. TikTok يكون خاماً.',
+      'mike-step4':'<strong>الجدولة المثلى.</strong> ينشر مايك في الأوقات التي يكون فيها جمهورك المحدد أكثر نشاطاً — تعظيم الوصول العضوي دون ترويج مدفوع.',
+      'mike-step5':'<strong>يراقب ويُبلّغ.</strong> يتتبع التفاعل ويرد على التعليقات ويُدخل بيانات الأداء إلى العقل لتحسين المحتوى المستقبلي.',
+      'mike-prob-title':'المشكلات التي يحلها مايك',
+      'mike-prob1':'<span class="prob-icon">📉</span><div class="prob-text"><strong>نشر غير متسق</strong>معظم الشركات الصغيرة والمتوسطة تنشر أقل من 3 مرات أسبوعياً. عدم الاتساق يقتل الوصول العضوي. ينشر مايك يومياً دون أن ترفع إصبعاً.</div>',
+      'mike-prob2':'<span class="prob-icon">🔁</span><div class="prob-text"><strong>نفس المحتوى على كل منصة</strong>النسخ واللصق يقتل التفاعل. ينشئ مايك محتوى مختلفاً حقاً لتنسيق وجمهور كل منصة.</div>',
+      'mike-prob3':'<span class="prob-icon">💸</span><div class="prob-text"><strong>رسوم الوكالات دون شفافية</strong>تتقاضى وكالات التواصل الاجتماعي 1,500–3,000 جنيه إسترليني/شهر مقابل خدمات يقدمها مايك في الوقت الفعلي 24/7.</div>',
+      'mike-roi-title':'الأثر المالي',
+      'mike-roi1':'<div class="roi-num">+32 ألف جنيه</div><div class="roi-label">موفر مقارنة بمدير وسائل التواصل الاجتماعي</div><div class="roi-note">الراتب والمزايا ورسوم الوكالات مجتمعة</div>',
+      'mike-roi2':'<div class="roi-num">15 ساعة</div><div class="roi-label">موفرة أسبوعياً في إنشاء المحتوى</div><div class="roi-note">تُعاد إلى العمل القابل للفوترة أو الاستراتيجي</div>',
+      'mike-roi3':'<div class="roi-num">+40٪</div><div class="roi-label">متوسط ارتفاع التفاعل</div><div class="roi-note">المحتوى المتسق والأصيل للمنصة يتفوق على المنشورات المتقطعة</div>',
+      'penny-panel-role':'توليد العملاء المحتملين','penny-how-title':'كيف تعمل بيني',
+      'penny-step1':'<strong>تحدد عميلك المثالي.</strong> تحلل بيني بيانات عملائك الحاليين في العقل لبناء ملف تعريف العميل المثالي الدقيق — الصناعة والحجم ونقاط الألم ومحفزات الشراء.',
+      'penny-step2':'<strong>تبني قائمة مستهدفين دقيقة.</strong> تبحث بيني في LinkedIn والدلائل وقواعد البيانات لإيجاد المستهدفين الذين يتطابقون مع ملف تعريف عميلك المثالي — وليس قوائم عشوائية.',
+      'penny-step3':'<strong>تصنع تواصلاً مخصصاً.</strong> باستخدام السياق من العقل تشير كل رسالة إلى شيء محدد وذي صلة — وليس قالباً عاماً.',
+      'penny-step4':'<strong>تدير تسلسل المتابعة.</strong> 80٪ من الصفقات تتطلب 5+ نقاط اتصال. تتعامل بيني مع كل متابعة تلقائياً مع ضبط النغمة والزاوية في كل مرة.',
+      'penny-step5':'<strong>تؤهّل وتمرر إلى روزا.</strong> يتم تسليم العملاء المحتملين الساخنين مع السياق الكامل حتى تتمكن روزا من الاستمرار بالضبط من حيث توقفت بيني.',
+      'penny-prob-title':'المشكلات التي تحلها بيني',
+      'penny-prob1':'<span class="prob-icon">⏰</span><div class="prob-text"><strong>الاستهداف اليدوي يأكل أسبوعك</strong>يقضي مندوبو المبيعات 20٪ من أسبوعهم في الاستهداف الذي يمكن أتمتته. تفعله بيني 24/7 دون فقدان التركيز.</div>',
+      'penny-prob2':'<span class="prob-icon">📧</span><div class="prob-text"><strong>التواصل العام يُتجاهل</strong>متوسط معدل فتح البريد الإلكتروني البارد هو 21٪. تحقق رسائل بيني المخصصة والمدعومة بالسياق معدلات رد أعلى بـ 3–5×.</div>',
+      'penny-prob3':'<span class="prob-icon">📭</span><div class="prob-text"><strong>المتابعات الفائتة تُضيّع الصفقات</strong>80٪ من المبيعات تحتاج إلى 5+ متابعات. 44٪ من المندوبين يستسلمون بعد واحدة. بيني لا تستسلم أبداً.</div>',
+      'penny-roi-title':'الأثر المالي',
+      'penny-roi1':'<div class="roi-num">+35 ألف جنيه</div><div class="roi-label">موفر مقارنة بتوظيف SDR</div><div class="roi-note">الراتب والعمولة والأدوات وتكاليف التأهيل</div>',
+      'penny-roi2':'<div class="roi-num">3×</div><div class="roi-label">حجم تواصل أكبر من الإنسان</div><div class="roi-note">بيني لا تنام أبداً ولا تفقد الدافعية أبداً</div>',
+      'penny-roi3':'<div class="roi-num">5×</div><div class="roi-label">معدلات رد أعلى على التواصل</div><div class="roi-note">رسائل مخصصة وغنية بالسياق مقابل القوالب العامة</div>',
+      'sherlock-panel-role':'متخصص SEO وGEO','sherlock-how-title':'كيف يعمل شيرلوك',
+      'sherlock-step1':'<strong>تدقيق الحضور في البحث.</strong> يحلل شيرلوك ترتيباتك الحالية وسلامة موقعك وظهوره في كل من البحث التقليدي (Google) ومحركات البحث بالذكاء الاصطناعي (ChatGPT وPerplexity وGemini).',
+      'sherlock-step2':'<strong>تحليل الفجوة التنافسية.</strong> يحدد الكلمات الرئيسية والمواضيع التي يتصدرها منافسوك دونك — ويبني قائمة هجوم ذات أولوية.',
+      'sherlock-step3':'<strong>إنشاء استراتيجية المحتوى.</strong> باستخدام بيانات عقلك ينشئ شيرلوك مقالات SEO وصفحات هبوط تعالج أسئلة العملاء الحقيقية بخبرتك الأصيلة.',
+      'sherlock-step4':'<strong>تحسين GEO.</strong> يهيكل محتواك بحيث يُستشهد به في إجابات الذكاء الاصطناعي في ChatGPT وPerplexity وGoogle AI Overview — الحدود الجديدة للبحث.',
+      'sherlock-step5':'<strong>تتبع الترتيب والتقرير الأسبوعي.</strong> يراقب الترتيبات والزيارات وتكرار استشهادات الذكاء الاصطناعي — ويضبط الاستراتيجية بناءً على ما يعمل.',
+      'sherlock-prob-title':'المشكلات التي يحلها شيرلوك',
+      'sherlock-prob1':'<span class="prob-icon">👻</span><div class="prob-text"><strong>غير مرئي في البحث</strong>إذا لم تظهر في الصفحة الأولى — تقليدياً أو بالذكاء الاصطناعي — فأنت عملياً غير موجود لـ 90٪ من العملاء المحتملين.</div>',
+      'sherlock-prob2':'<span class="prob-icon">🤖</span><div class="prob-text"><strong>لا استراتيجية GEO</strong>البحث بالذكاء الاصطناعي يحل محل Google لملايين المستخدمين. معظم الشركات لديها صفر استراتيجية للاستشهاد بها في إجابات الذكاء الاصطناعي.</div>',
+      'sherlock-prob3':'<span class="prob-icon">💰</span><div class="prob-text"><strong>وكالات باهظة بنتائج مبهمة</strong>تتقاضى وكالات SEO 2,000–5,000 جنيه إسترليني/شهر بعقود 6 أشهر وتقارير مبهمة. يقدم شيرلوك نتائج شفافة ومستمرة.</div>',
+      'sherlock-roi-title':'الأثر المالي',
+      'sherlock-roi1':'<div class="roi-num">+36 ألف جنيه</div><div class="roi-label">موفر مقابل وكالة SEO سنوياً</div><div class="roi-note">بسعر 1,500–3,000 جنيه إسترليني/شهر تتراكم رسوم الوكالات بسرعة</div>',
+      'sherlock-roi2':'<div class="roi-num">يتراكم</div><div class="roi-label">النمو العضوي = انخفاض تكلفة الاستحواذ بمرور الوقت</div><div class="roi-note">كل مقال هو أصل مبيعات 24/7 لا تنتهي صلاحيته أبداً</div>',
+      'sherlock-roi3':'<div class="roi-num">السبق الأول</div><div class="roi-label">ميزة GEO بينما ينام المنافسون</div><div class="roi-note">حصة البحث بالذكاء الاصطناعي تنمو بنسبة 40٪ سنوياً</div>',
+      'rosa-panel-role':'وكيل مبيعات','rosa-how-title':'كيف تعمل روزا',
+      'rosa-step1':'<strong>تستقبل عملاء محتملين مؤهَّلين من بيني.</strong> تستمر روزا من حيث توقفت بيني — مع السياق الكامل حول خلفية العميل المحتمل واهتماماته وتاريخ تفاعله.',
+      'rosa-step2':'<strong>تراجع العقل.</strong> تتحقق روزا من معرفتك الكاملة بالمنتج والتسعير والصفقات السابقة وقصص نجاح العملاء — مستعدة للتعامل مع أي سؤال أو اعتراض.',
+      'rosa-step3':'<strong>تفتح المحادثة.</strong> تبدأ روزا حواراً بيعياً مخصصاً — لا عرضاً ترويجياً بل محادثة حقيقية تقود بنقاط الألم المحددة للعميل المحتمل.',
+      'rosa-step4':'<strong>تتعامل مع الاعتراضات.</strong> باستخدام المعرفة العميقة بالمنتج والمنافسين من العقل تتناول روزا كل اعتراض بردود دقيقة وثقة.',
+      'rosa-step5':'<strong>تنشئ العروض وتُغلق.</strong> تنشئ روزا عروضاً مخصصة وترسل العقود وتتابع حتى تُربح الصفقة — أو ترعى بذكاء العملاء المحتملين غير المستعدين للشراء بعد.',
+      'rosa-prob-title':'المشكلات التي تحلها روزا',
+      'rosa-prob1':'<span class="prob-icon">⚡</span><div class="prob-text"><strong>الاستجابة البطيئة للعملاء المحتملين تقتل التحويلات</strong>استجب لعميل محتمل في غضون 5 دقائق وستكون أكثر احتمالاً بـ 100× للتحويل. تستجيب روزا في ثوانٍ في كل مرة.</div>',
+      'rosa-prob2':'<span class="prob-icon">😴</span><div class="prob-text"><strong>المبيعات تحدث فقط خلال ساعات العمل</strong>تضيع الصفقات كل ليلة وعطلة أسبوع. تبيع روزا 24/7/365 — أفضل مندوب مبيعات لديك لا ينام أبداً.</div>',
+      'rosa-prob3':'<span class="prob-icon">📑</span><div class="prob-text"><strong>عروض ومتابعات غير متسقة</strong>تتباين جودة المبيعات بحسب الشخص ومستوى الطاقة. تقدم روزا نفس التجربة الممتازة في كل مرة.</div>',
+      'rosa-roi-title':'الأثر المالي',
+      'rosa-roi1':'<div class="roi-num">7×</div><div class="roi-label">تحويل أعلى من الاستجابة الفورية</div><div class="roi-note">سرعة الاستجابة للعميل المحتمل هي العامل رقم 1 في معدلات التحويل B2B</div>',
+      'rosa-roi2':'<div class="roi-num">+40 ألف جنيه</div><div class="roi-label">موفر مقارنة بتوظيف مندوب مبيعات إضافي</div><div class="roi-note">الراتب والعمولة وتراخيص CRM والتأهيل</div>',
+      'rosa-roi3':'<div class="roi-num">−30٪</div><div class="roi-label">دورة مبيعات أقصر</div><div class="roi-note">المتابعة الأسرع والرعاية المتسقة تُقصّر الجداول الزمنية</div>',
+      'how-label':'كيف يعمل','how-h2':'ثلاث خطوات.<br><span>أعمال ذكية واحدة.</span>',
+      'step1-title':'أطعم العقل','step1-desc':'يسجل نظام الصوت بالذكاء الاصطناعي كل مكالمة. يسحب CRM رسائل بريدك الإلكتروني وتاريخ وسائل التواصل الاجتماعي. تنمو قاعدة المعرفة ببيانات الأعمال الحقيقية والحية من اليوم الأول.',
+      'step2-title':'العقل يتعلم أعمالك','step2-desc':'يعالج نظام RAG جميع بياناتك في ذاكرة شركة حية. يفهم منتجاتك وأسلوبك وعملاءك وتاريخك — بعمق واستمرار.',
+      'step3-title':'الوكلاء يبدأون العمل','step3-desc':'يدير كارل ومايك وبيني وشيرلوك وروزا وإيفا عملياتك 24/7. لا يحتاجون إلى إحاطة. يعرفون بالفعل كل شيء عن أعمالك.',
+      'roi-label':'الأثر المالي','roi-h2':'الأرقام<br><span>لا تكذب.</span>','roi-sub':'توظيف فريق للقيام بما يفعله وكلاء الذكاء الاصطناعي الستة سيكلف أكثر من 200,000 جنيه إسترليني سنوياً. هذا قبل الضرائب والمزايا وأيام المرض والدوران.',
+      'roi-hero-label':'القيمة السنوية المعادلة لفريق الذكاء الاصطناعي الخاص بك','roi-hero-sub':'عبر الرواتب ورسوم الوكالات والأدوات والساعات الضائعة — هذا ما يحل محله حزمة الوكيل الكاملة',
+      'comp-human-title':'الفريق البشري التقليدي','comp-human-sub':'يفعل ما يفعله وكلاؤك الـ6',
+      'comp-row-support':'وكيل دعم العملاء','comp-row-social':'مدير وسائل التواصل الاجتماعي','comp-row-sdr':'مندوب تطوير المبيعات','comp-row-seo':'عقد احتفاظ وكالة SEO','comp-row-sales':'وكيل مبيعات (إضافي)','comp-row-ea':'مساعد تنفيذي / عمليات','comp-row-total-label':'إجمالي التكلفة السنوية',
+      'comp-ai-title':'Artificial Ignorance','comp-ai-sub':'البنية التحتية الكاملة للذكاء الاصطناعي',
+      'comp-carl':'كارل — دعم العملاء 24/7','comp-mike':'مايك — مدير وسائل التواصل الاجتماعي','comp-penny':'بيني — توليد العملاء المحتملين','comp-sherlock':'شيرلوك — SEO وGEO','comp-rosa':'روزا — وكيل مبيعات','comp-eva':'إيفا — مساعد شخصي + العقل','comp-row-talk':'تحدث إلينا عن الأسعار','comp-row-book':'احجز عرضاً ←',
+      'savings-eva-role':'مساعد شخصي','savings-eva-period':'قيمة سنوية مقدمة','savings-eva-fact1':'توفير +20 ساعة تنفيذية أسبوعياً','savings-eva-fact2':'تنسق جميع الوكلاء الـ5 الآخرين','savings-eva-fact3':'إحاطات ذكاء الأعمال اليومية',
+      'savings-carl-role':'دعم العملاء','savings-carl-period':'موفر مقارنة بتوظيف دعم','savings-carl-fact1':'وقت استجابة 3 ثوانٍ، 24/7','savings-carl-fact2':'تكلفة كل تذكرة تنخفض من 8 إلى 0.08 جنيه','savings-carl-fact3':'8,760 ساعة متاحة سنوياً',
+      'savings-mike-role':'وسائل التواصل الاجتماعي','savings-mike-period':'موفر مقارنة بمدير التواصل الاجتماعي','savings-mike-fact1':'توفير +15 ساعة أسبوعياً','savings-mike-fact2':'متوسط ارتفاع التفاعل 40٪','savings-mike-fact3':'نشر يومي عبر جميع المنصات',
+      'savings-penny-role':'توليد العملاء المحتملين','savings-penny-period':'موفر مقارنة بتوظيف SDR','savings-penny-fact1':'3× حجم تواصل أكبر','savings-penny-fact2':'5× معدلات رد أعلى','savings-penny-fact3':'لا تفوّت أي متابعة أبداً',
+      'savings-sherlock-role':'SEO وGEO','savings-sherlock-period':'موفر مقارنة بوكالة SEO','savings-sherlock-fact1':'يراكم حركة المرور العضوية بمرور الوقت','savings-sherlock-fact2':'GEO لمحركات بحث الذكاء الاصطناعي','savings-sherlock-fact3':'كل مقال = أصل مبيعات دائم',
+      'savings-rosa-role':'وكيل مبيعات','savings-rosa-period':'موفر مقارنة بتوظيف مندوب مبيعات إضافي','savings-rosa-fact1':'7× تحويل أعلى من الاستجابة الفورية','savings-rosa-fact2':'مبيعات 24/7 — تُغلق الصفقات بينما تنام','savings-rosa-fact3':'دورة مبيعات أقصر بـ30٪',
+      'modules-label':'بنية تحتية معيارية','modules-h2':'اشترِ ما تحتاجه.<br>وسّع عندما تكون مستعداً.','modules-sub':'ابدأ بوحدة واحدة. أضف المزيد مع نمو أعمالك. كل قطعة تتصل بنفس العقل الاصطناعي.','modules-cta-p':'لست متأكداً من أين تبدأ؟ لنبنِ الحزمة المناسبة لأعمالك.','modules-cta-btn':'احصل على بناء مخصص ←',
+      'mod1-name':'صوت الذكاء الاصطناعي','mod1-desc':'ذكاء اصطناعي صوتي ذكي يستخلص المعرفة من كل مكالمة. مدعوم بـ ElevenLabs وKnotie.AI وRetellAI.','mod1-tag':'طبقة الأساس',
+      'mod2-name':'تكامل CRM','mod2-desc':'يربط بريدك الإلكتروني وجهات الاتصال ووسائل التواصل الاجتماعي بقاعدة المعرفة المركزية. كل شيء متزامن.','mod2-tag':'طبقة البيانات',
+      'mod3-name':'عقل RAG','mod3-desc':'نظام الذاكرة الأساسي للذكاء الاصطناعي. يعالج جميع بياناتك في قاعدة معرفة قابلة للبحث ومتراكمة.','mod3-tag':'طبقة الذكاء',
+      'mod4-name':'وكلاء فرديون','mod4-desc':'اختر قرودك. كارل أو مايك أو بيني أو شيرلوك أو روزا أو إيفا — أضف الوكلاء الذين تحتاجهم عندما تحتاجهم.','mod4-tag':'طبقة الوكيل',
+      'mod5-name':'الحزمة الكاملة','mod5-desc':'البنية التحتية الكاملة للذكاء الاصطناعي. الصوت + CRM + العقل + جميع الوكلاء الـ6. مبنية ومنشورة ومُدارة لك.','mod5-tag':'⭐ الأكثر شعبية',
+      'proof-label':'إثبات اجتماعي','proof-h2':'أكثر من 80 شركة تعمل على<br><span>Artificial Ignorance</span>','proof-stat1':'عملاء نشطون','proof-stat2':'متخصصو الذكاء الاصطناعي','proof-stat3':'يعمل دائماً','proof-stat4':'جاهز للعلامة البيضاء',
+      't1-quote':'"استبدلنا عبء العمل المتكرر لفريق الإدارة بأكمله في 3 أسابيع. يعرف عقل الذكاء الاصطناعي أعمالنا أفضل من بعض موظفينا. بنية تحتية رائعة حقاً."','t1-name':'سارة ك.','t1-title':'الرئيس التنفيذي، وكالة عقارية',
+      't2-quote':'"نظام RAG هو المحرك الحقيقي. يجيب وكلاؤنا على الأسئلة بالسياق الكامل لتاريخ عملائنا لمدة 5 سنوات. لا شيء يقترب مما بنته Artificial Ignorance."','t2-name':'ماركوس ت.','t2-title':'مؤسس، وكالة تسويق رقمي',
+      't3-quote':'"نضع علامتنا التجارية البيضاء على الحزمة الكاملة لعملائنا. Artificial Ignorance هي البنية التحتية التي كنا نبحث عنها. يعتقد عملاؤنا أننا بنيناها بأنفسنا — بهذه السلاسة."','t3-name':'جيمس أو.','t3-title':'مدير، وكالة SaaS',
+      'contact-label':'احجز عرضاً','contact-h2':'هل أنت مستعد لمنح<br>أعمالك <span>عقلاً حقيقياً؟</span>','contact-desc':'أخبرنا عن أعمالك وسنريك بالضبط الوحدات التي تحتاجها. لا زخارف ولا بيع قسري — مجرد محادثة مباشرة حول ما يمكن للبنية التحتية للذكاء الاصطناعي أن تفعله حقاً لك.',
+      'perk1':'مكالمة اكتشاف لمدة 30 دقيقة — بدون التزام','perk2':'توصية بنية تحتية مخصصة','perk3':'خيارات العلامة البيضاء للوكالات','perk4':'عرض حي لعقل الذكاء الاصطناعي في العمل',
+      'ghl-title':'احجز عرضك','ghl-desc':'الصق رمز تضمين نموذج GoHighLevel الخاص بك هنا.',
+      'footer-copy':'© 2025 Artificial Ignorance. بنية تحتية للذكاء الاصطناعي للأعمال الجادة.','footer-link1':'القرود','footer-link2':'كيف يعملون','footer-link4':'الوحدات','footer-link5':'اتصل بنا',
+      'roi-hero-value':'£200,000+',
+      'comp-val-support':'30,000 جنيه/سنة','comp-val-social':'32,000 جنيه/سنة','comp-val-sdr':'35,000 جنيه/سنة','comp-val-seo':'24,000 جنيه/سنة','comp-val-sales':'42,000 جنيه/سنة','comp-val-ea':'35,000 جنيه/سنة','comp-val-total':'198,000 جنيه',
+      'savings-eva-amount':'+50 ألف جنيه','savings-carl-amount':'+30 ألف جنيه','savings-mike-amount':'+32 ألف جنيه','savings-penny-amount':'+35 ألف جنيه','savings-sherlock-amount':'+36 ألف جنيه','savings-rosa-amount':'+40 ألف جنيه'
     }
   };
 
@@ -1695,6 +1874,7 @@
   function setLang(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
       if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
