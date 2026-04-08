@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artificial Ignorance — AI Infrastructure for Business</title>
+  <title>CloudVA — AI Infrastructure for Business</title>
   <meta name="description" content="We build the AI brain behind your business. AI Voice, CRM integration, and intelligent agents that know your company inside out.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green:          #00C853;
-      --green-dim:      rgba(0,200,83,0.10);
-      --green-glow:     rgba(0,200,83,0.25);
-      --green-border:   rgba(0,200,83,0.30);
+      --green:          #D4007A;
+      --green-dim:      rgba(212,0,122,0.10);
+      --green-glow:     rgba(212,0,122,0.25);
+      --green-border:   rgba(212,0,122,0.30);
       --bg:             #FFFFFF;
       --bg-2:           #F7F7F7;
       --bg-3:           #EFEFEF;
@@ -97,7 +97,7 @@
     #hero-canvas { position:absolute; inset:0; width:100%; height:100%; opacity:.45; }
     #hero::after {
       content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse 70% 60% at 30% 55%, rgba(0,200,83,.07) 0%, transparent 70%);
+      background:radial-gradient(ellipse 70% 60% at 30% 55%, rgba(212,0,122,.07) 0%, transparent 70%);
       pointer-events:none;
     }
     .hero-inner { position:relative; z-index:2; padding-top:9rem; padding-bottom:7rem; width:100%; }
@@ -111,11 +111,11 @@
     }
     .hero-h1 { font-family:var(--font-display); font-weight:900; font-size:clamp(3.8rem,9.5vw,9rem); line-height:.92; letter-spacing:-.01em; margin-bottom:1.75rem; animation:fadeUp .8s .08s ease both; }
     .hero-h1 .line-solid  { display:block; color:var(--text); }
-    .hero-h1 .line-green  { display:block; color:var(--green); text-shadow:0 0 80px rgba(0,200,83,.5); }
+    .hero-h1 .line-green  { display:block; color:var(--green); text-shadow:0 0 80px rgba(212,0,122,.5); }
     .hero-h1 .line-outline{ display:block; -webkit-text-stroke:2px rgba(10,10,15,.18); color:transparent; }
     .hero-sub { font-size:clamp(1rem,1.6vw,1.15rem); color:var(--text-muted); max-width:500px; margin-bottom:2.5rem; line-height:1.75; animation:fadeUp .8s .16s ease both; }
     .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp .8s .24s ease both; }
-    .hero-deco { position:absolute; right:6%; top:50%; transform:translateY(-50%); width:clamp(260px,30vw,480px); pointer-events:none; animation:floatDeco 5s ease-in-out infinite; z-index:1; filter:drop-shadow(0 30px 60px rgba(0,200,83,.2)); }
+    .hero-deco { position:absolute; right:6%; top:50%; transform:translateY(-50%); width:clamp(260px,30vw,480px); pointer-events:none; animation:floatDeco 5s ease-in-out infinite; z-index:1; filter:drop-shadow(0 30px 60px rgba(212,0,122,.2)); }
 
     .hero-stats {
       position:absolute; bottom:0; left:0; right:0; z-index:2;
@@ -153,7 +153,7 @@
 
     /* ════════════════ SOLUTION ════════════════ */
     #solution { background:var(--bg); position:relative; overflow:hidden; }
-    #solution::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:700px; height:700px; background:radial-gradient(circle, rgba(0,200,83,.05) 0%, transparent 65%); pointer-events:none; }
+    #solution::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:700px; height:700px; background:radial-gradient(circle, rgba(212,0,122,.05) 0%, transparent 65%); pointer-events:none; }
     .sol-header { text-align:center; margin-bottom:4.5rem; }
     .sol-h2 { font-family:var(--font-display); font-weight:900; font-size:clamp(2.8rem,5vw,4.5rem); line-height:.95; margin-top:1rem; }
     .sol-h2 span { color:var(--green); }
@@ -161,7 +161,7 @@
     .flow { display:flex; align-items:stretch; justify-content:center; flex-wrap:nowrap; overflow-x:auto; padding-bottom:1rem; }
     .flow-node { flex:1; min-width:140px; max-width:190px; background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:2rem 1.25rem; display:flex; flex-direction:column; align-items:center; text-align:center; gap:.75rem; transition:all .28s; position:relative; z-index:1; }
     .flow-node:hover { border-color:var(--green-border); transform:translateY(-5px); box-shadow:0 16px 48px rgba(0,0,0,.35); }
-    .flow-node.is-brain { flex:1.3; min-width:180px; background:linear-gradient(160deg,rgba(0,200,83,.09) 0%,rgba(0,200,83,.02) 100%); border-color:var(--green-border); }
+    .flow-node.is-brain { flex:1.3; min-width:180px; background:linear-gradient(160deg,rgba(212,0,122,.09) 0%,rgba(212,0,122,.02) 100%); border-color:var(--green-border); }
     .flow-node.is-brain .node-emoji { animation:pulseBrain 2.5s ease-in-out infinite; }
     .flow-arrow { display:flex; align-items:center; padding:0 .5rem; color:var(--green); font-size:1.4rem; flex-shrink:0; align-self:center; }
     .node-emoji { font-size:2.2rem; }
@@ -186,7 +186,7 @@
     .card-color-bar { position:absolute; bottom:0; left:0; right:0; height:4px; background:var(--card-color,var(--green)); }
 
     .card-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; gap:.75rem; }
-    .card-badge { display:inline-block; background:var(--card-badge-bg,rgba(0,200,83,.1)); border:1px solid var(--card-badge-border,rgba(0,200,83,.3)); border-radius:100px; padding:.2rem .7rem; font-family:var(--font-ui); font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--card-color,var(--green)); align-self:flex-start; }
+    .card-badge { display:inline-block; background:var(--card-badge-bg,rgba(212,0,122,.1)); border:1px solid var(--card-badge-border,rgba(212,0,122,.3)); border-radius:100px; padding:.2rem .7rem; font-family:var(--font-ui); font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--card-color,var(--green)); align-self:flex-start; }
     .card-name { font-family:var(--font-display); font-size:2rem; font-weight:900; line-height:1; }
     .card-role { font-family:var(--font-ui); font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
     .card-desc { font-size:.82rem; color:var(--text-muted); line-height:1.7; }
@@ -238,7 +238,7 @@
     .pflow-title::before { content:''; flex:1; height:1px; background:var(--border); }
     .pflow-steps { display:flex; flex-direction:column; gap:.75rem; }
     .pflow-step { display:flex; gap:1rem; align-items:flex-start; }
-    .pflow-num { width:2rem; height:2rem; border-radius:50%; background:var(--panel-color-dim,rgba(0,200,83,.12)); border:1px solid var(--panel-color-border,rgba(0,200,83,.3)); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.9rem; font-weight:900; color:var(--panel-color,var(--green)); flex-shrink:0; }
+    .pflow-num { width:2rem; height:2rem; border-radius:50%; background:var(--panel-color-dim,rgba(212,0,122,.12)); border:1px solid var(--panel-color-border,rgba(212,0,122,.3)); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.9rem; font-weight:900; color:var(--panel-color,var(--green)); flex-shrink:0; }
     .pflow-text { font-size:.82rem; color:var(--text-muted); line-height:1.65; padding-top:.15rem; }
     .pflow-text strong { color:var(--text); font-weight:600; }
 
@@ -275,7 +275,7 @@
 
     /* ════════════════ FINANCIAL IMPACT ════════════════ */
     #roi { background:var(--bg); position:relative; overflow:hidden; }
-    #roi::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:800px; background:radial-gradient(circle,rgba(0,200,83,.04) 0%,transparent 65%); pointer-events:none; }
+    #roi::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:800px; background:radial-gradient(circle,rgba(212,0,122,.04) 0%,transparent 65%); pointer-events:none; }
     .roi-header { text-align:center; margin-bottom:4rem; }
     .roi-h2 { font-family:var(--font-display); font-weight:900; font-size:clamp(2.8rem,5vw,4.5rem); line-height:.95; margin-top:.75rem; }
     .roi-h2 span { color:var(--green); }
@@ -285,17 +285,17 @@
     .roi-hero-num {
       text-align:center; margin-bottom:4rem;
       padding:3rem 2rem;
-      background:linear-gradient(160deg,rgba(0,200,83,.08) 0%,rgba(0,200,83,.02) 100%);
+      background:linear-gradient(160deg,rgba(212,0,122,.08) 0%,rgba(212,0,122,.02) 100%);
       border:1px solid var(--green-border); border-radius:var(--radius);
     }
-    .roi-hero-value { font-family:var(--font-display); font-size:clamp(5rem,12vw,10rem); font-weight:900; color:var(--green); line-height:.9; text-shadow:0 0 80px rgba(0,200,83,.4); }
+    .roi-hero-value { font-family:var(--font-display); font-size:clamp(5rem,12vw,10rem); font-weight:900; color:var(--green); line-height:.9; text-shadow:0 0 80px rgba(212,0,122,.4); }
     .roi-hero-label { font-family:var(--font-ui); font-size:1rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--text-muted); margin-top:1rem; }
     .roi-hero-sub { font-size:.8rem; color:var(--text-muted); margin-top:.5rem; }
 
     /* Comparison table */
     .comparison { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:3rem; }
     .comp-col { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .comp-col.comp-ai { border-color:var(--green-border); background:linear-gradient(160deg,rgba(0,200,83,.06) 0%,var(--bg-2) 60%); }
+    .comp-col.comp-ai { border-color:var(--green-border); background:linear-gradient(160deg,rgba(212,0,122,.06) 0%,var(--bg-2) 60%); }
     .comp-head { padding:1.5rem 2rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
     .comp-head-title { font-family:var(--font-display); font-size:1.3rem; font-weight:900; }
     .comp-head-sub   { font-size:.72rem; color:var(--text-muted); margin-top:.2rem; }
@@ -379,7 +379,7 @@
 
     /* ════════════════ FOOTER ════════════════ */
     footer { background:var(--bg); border-top:1px solid var(--border); padding:2.5rem var(--gutter); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
-    .footer-logo img { height:26px; width:auto; }
+    .footer-logo img { height:39px; width:auto; }
     .footer-copy  { font-size:.72rem; color:var(--text-muted); text-align:center; }
     .footer-links { display:flex; gap:1.75rem; list-style:none; }
     .footer-links a { font-family:var(--font-ui); font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; transition:color .2s; }
@@ -389,7 +389,7 @@
     @keyframes fadeUp   { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
     @keyframes floatDeco{ 0%,100%{transform:translateY(-50%) rotate(-2deg)} 50%{transform:translateY(calc(-50% - 18px)) rotate(2deg)} }
     @keyframes marquee  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    @keyframes pulseBrain { 0%,100%{filter:drop-shadow(0 0 8px rgba(0,200,83,.5));transform:scale(1)} 50%{filter:drop-shadow(0 0 22px rgba(0,200,83,.9));transform:scale(1.06)} }
+    @keyframes pulseBrain { 0%,100%{filter:drop-shadow(0 0 8px rgba(212,0,122,.5));transform:scale(1)} 50%{filter:drop-shadow(0 0 22px rgba(212,0,122,.9));transform:scale(1.06)} }
 
     /* ════════════════ RESPONSIVE ════════════════ */
     @media(max-width:1100px) {
@@ -419,7 +419,6 @@
     }
     @media(max-width:700px) {
       .agents-grid  { grid-template-columns:1fr; }
-      .agent-card.card-eva { grid-column:span 1; }
       .modules-grid { grid-template-columns:repeat(2,1fr); }
       .flow         { flex-direction:column; align-items:stretch; }
       .flow .flow-node { max-width:100%; }
@@ -461,10 +460,17 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
+<<<<<<< HEAD
   <button class="mobile-close" onclick="closeMobileMenu()" data-i18n="mob-close">✕ close</button>
   <a href="#problem"  onclick="closeMobileMenu()" data-i18n="nav-problem">Problem</a>
   <a href="#agents"   onclick="closeMobileMenu()" data-i18n="nav-monkeys">The Monkeys</a>
   <a href="#playbook" onclick="closeMobileMenu()" data-i18n="nav-how">How They Work</a>
+=======
+  <button class="mobile-close" onclick="closeMobileMenu()">✕ close</button>
+  <a href="#problem"  onclick="closeMobileMenu()">Problem</a>
+  <a href="#agents"   onclick="closeMobileMenu()">The Digital Assistants</a>
+  <a href="#playbook" onclick="closeMobileMenu()">How They Work</a>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
   <a href="#roi"      onclick="closeMobileMenu()">ROI</a>
   <a href="#modules"  onclick="closeMobileMenu()" data-i18n="nav-modules">Modules</a>
   <a href="#contact"  onclick="closeMobileMenu()" style="color:var(--green)" data-i18n="nav-cta">Book a Demo</a>
@@ -476,11 +482,17 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo"><img src="brand/Vector.png" alt="Artificial Ignorance"></a>
+  <a href="#hero" class="nav-logo"><img src="brand/Vector.png" alt="CloudVA"></a>
   <ul class="nav-links">
+<<<<<<< HEAD
     <li><a href="#problem" data-i18n="nav-problem">Problem</a></li>
     <li><a href="#agents" data-i18n="nav-monkeys">The Monkeys</a></li>
     <li><a href="#playbook" data-i18n="nav-how">How They Work</a></li>
+=======
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#agents">The Digital Assistants</a></li>
+    <li><a href="#playbook">How They Work</a></li>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
     <li><a href="#roi">ROI</a></li>
     <li><a href="#modules" data-i18n="nav-modules">Modules</a></li>
     <li><a href="#proof" data-i18n="nav-proof">Proof</a></li>
@@ -507,8 +519,13 @@
     </h1>
     <p class="hero-sub" data-i18n="hero-sub">We build AI infrastructure that truly knows your company — voice, CRM, memory, and six intelligent agents. All learning. All connected. All working 24/7.</p>
     <div class="hero-ctas">
+<<<<<<< HEAD
       <a href="#contact" class="btn btn-primary" data-i18n="hero-cta1">Book a Demo →</a>
       <a href="#agents"  class="btn btn-outline" data-i18n="hero-cta2">Meet the Monkeys 🐒</a>
+=======
+      <a href="#contact" class="btn btn-primary">Book a Demo →</a>
+      <a href="#agents"  class="btn btn-outline">Meet the Digital Assistants 🤖</a>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="stat-num" data-count="80">0</div><div class="stat-label" data-i18n="stat-companies">Companies Served</div></div>
@@ -604,10 +621,17 @@
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node">
+<<<<<<< HEAD
         <span class="node-emoji">🐒</span>
         <span class="node-title" data-i18n="flow-agents-title">Your Agents</span>
         <span class="node-desc" data-i18n="flow-agents-desc">Carl · Mike · Penny · Sherlock · Rosa · Eva</span>
         <div class="node-tags"><span class="node-tag">24/7</span><span class="node-tag" data-i18n="flow-agents-tag2">Always learning</span></div>
+=======
+        <span class="node-emoji">🤖</span>
+        <span class="node-title">Your Agents</span>
+        <span class="node-desc">Carl · Mike · Penny · Sherlock · Rosa · Eva</span>
+        <div class="node-tags"><span class="node-tag">24/7</span><span class="node-tag">Always learning</span></div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
     </div>
   </div>
@@ -618,8 +642,13 @@
   <div class="container">
     <div class="agents-header">
       <div class="reveal">
+<<<<<<< HEAD
         <span class="label" data-i18n="agents-label">Meet the Team</span>
         <h2 class="agents-h2" data-i18n="agents-h2">The Monkeys 🐒</h2>
+=======
+        <span class="label">Meet the Team</span>
+        <h2 class="agents-h2">The Digital Assistants 🤖</h2>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
       <p class="agents-note reveal" data-i18n="agents-note">Six specialists. All powered by your AI brain. Buy one or buy them all.</p>
     </div>
@@ -629,14 +658,19 @@
       <!-- CARL -->
       <div class="agent-card reveal" style="--card-color:var(--carl-color);--card-bg:rgba(41,121,255,.08);--card-badge-bg:rgba(41,121,255,.1);--card-badge-border:rgba(41,121,255,.3);">
         <div class="card-img-wrap" style="height:300px;">
-          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="Carl — Customer Support Monkey">
+          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="Carl — Customer Support Assistant">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
           <span class="card-badge" data-i18n="carl-badge">Customer Support</span>
           <div class="card-name">Carl</div>
+<<<<<<< HEAD
           <div class="card-role" data-i18n="carl-role">The Support Monkey</div>
           <p class="card-desc" data-i18n="carl-desc">Carl handles every customer query with the full knowledge of your business behind him. No scripts. Real answers. No hold music.</p>
+=======
+          <div class="card-role">The Support Assistant</div>
+          <p class="card-desc">Carl handles every customer query with the full knowledge of your business behind him. No scripts. Real answers. No hold music.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           <div class="card-tasks">
             <div class="card-task" data-i18n="carl-task1">24/7 instant query resolution</div>
             <div class="card-task" data-i18n="carl-task2">Intelligent human escalation</div>
@@ -646,16 +680,21 @@
       </div>
 
       <!-- MIKE -->
-      <div class="agent-card reveal" style="--card-color:var(--mike-color);--card-bg:rgba(0,200,83,.08);--card-badge-bg:rgba(0,200,83,.1);--card-badge-border:rgba(0,200,83,.3);">
+      <div class="agent-card reveal" style="--card-color:var(--mike-color);--card-bg:rgba(212,0,122,.08);--card-badge-bg:rgba(212,0,122,.1);--card-badge-border:rgba(212,0,122,.3);">
         <div class="card-img-wrap" style="height:300px;">
-          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_21_09.png" alt="Mike — Social Media Monkey">
+          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_21_09.png" alt="Mike — Social Media Assistant">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
           <span class="card-badge" data-i18n="mike-badge">Social Media</span>
           <div class="card-name">Mike</div>
+<<<<<<< HEAD
           <div class="card-role" data-i18n="mike-role">The Social Monkey</div>
           <p class="card-desc" data-i18n="mike-desc">Mike creates platform-native content across every channel — adapted for each audience, scheduled and posted automatically.</p>
+=======
+          <div class="card-role">The Social Assistant</div>
+          <p class="card-desc">Mike creates platform-native content across every channel — adapted for each audience, scheduled and posted automatically.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           <div class="card-tasks">
             <div class="card-task" data-i18n="mike-task1">Platform-specific content creation</div>
             <div class="card-task" data-i18n="mike-task2">Automated scheduling &amp; posting</div>
@@ -668,14 +707,19 @@
       <!-- PENNY -->
       <div class="agent-card reveal" style="--card-color:var(--penny-color);--card-bg:rgba(255,214,0,.10);--card-badge-bg:rgba(255,214,0,.1);--card-badge-border:rgba(255,214,0,.3);">
         <div class="card-img-wrap" style="height:300px;">
-          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_13_36.png" alt="Penny — Lead Generation Monkey">
+          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_13_36.png" alt="Penny — Lead Generation Assistant">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
           <span class="card-badge" style="color:var(--penny-color);" data-i18n="penny-badge">Lead Generation</span>
           <div class="card-name">Penny</div>
+<<<<<<< HEAD
           <div class="card-role" data-i18n="penny-role">The Lead Monkey</div>
           <p class="card-desc" data-i18n="penny-desc">Penny hunts, qualifies, and nurtures leads using your full business context — not generic templates, actual intelligence about what your prospects care about.</p>
+=======
+          <div class="card-role">The Lead Assistant</div>
+          <p class="card-desc">Penny hunts, qualifies, and nurtures leads using your full business context — not generic templates, actual intelligence about what your prospects care about.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           <div class="card-tasks">
             <div class="card-task" data-i18n="penny-task1">Prospect identification &amp; outreach</div>
             <div class="card-task" data-i18n="penny-task2">Automated follow-up sequences</div>
@@ -687,14 +731,19 @@
       <!-- SHERLOCK -->
       <div class="agent-card reveal" style="--card-color:var(--sherlock-color);--card-bg:rgba(171,71,188,.08);--card-badge-bg:rgba(171,71,188,.1);--card-badge-border:rgba(171,71,188,.3);">
         <div class="card-img-wrap" style="height:300px;">
-          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_23_15.png" alt="Sherlock — SEO Monkey">
+          <img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_23_15.png" alt="Sherlock — SEO Assistant">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
           <span class="card-badge" style="color:var(--sherlock-color);" data-i18n="sherlock-badge">SEO · GEO</span>
           <div class="card-name">Sherlock</div>
+<<<<<<< HEAD
           <div class="card-role" data-i18n="sherlock-role">The Search Monkey</div>
           <p class="card-desc" data-i18n="sherlock-desc">Sherlock investigates every angle of your search presence — traditional SEO and the new frontier of AI search (GEO). He makes your brand impossible to miss.</p>
+=======
+          <div class="card-role">The Search Assistant</div>
+          <p class="card-desc">Sherlock investigates every angle of your search presence — traditional SEO and the new frontier of AI search (GEO). He makes your brand impossible to miss.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           <div class="card-tasks">
             <div class="card-task" data-i18n="sherlock-task1">SEO-optimised content &amp; audits</div>
             <div class="card-task" data-i18n="sherlock-task2">Generative Engine Optimisation</div>
@@ -706,14 +755,19 @@
       <!-- ROSA -->
       <div class="agent-card reveal" style="--card-color:var(--rosa-color);--card-bg:rgba(245,0,87,.08);--card-badge-bg:rgba(245,0,87,.1);--card-badge-border:rgba(245,0,87,.3);">
         <div class="card-img-wrap" style="height:300px;">
-          <img src="brand/ChatGPT%20Image%202%20apr%202026%2C%2009_05_59.png" alt="Rosa — Sales Monkey">
+          <img src="brand/ChatGPT%20Image%202%20apr%202026%2C%2009_05_59.png" alt="Rosa — Sales Assistant">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
           <span class="card-badge" style="color:var(--rosa-color);" data-i18n="rosa-badge">Sales</span>
           <div class="card-name">Rosa</div>
+<<<<<<< HEAD
           <div class="card-role" data-i18n="rosa-role">The Sales Monkey</div>
           <p class="card-desc" data-i18n="rosa-desc">Rosa closes. Armed with your full business context, product knowledge, and customer history, she runs your sales process from first touch to signed deal.</p>
+=======
+          <div class="card-role">The Sales Assistant</div>
+          <p class="card-desc">Rosa closes. Armed with your full business context, product knowledge, and customer history, she runs your sales process from first touch to signed deal.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           <div class="card-tasks">
             <div class="card-task" data-i18n="rosa-task1">Automated sales conversations</div>
             <div class="card-task" data-i18n="rosa-task2">Proposal &amp; quote generation</div>
@@ -723,12 +777,17 @@
       </div>
 
       <!-- EVA -->
+<<<<<<< HEAD
       <div class="agent-card reveal" style="--card-color:var(--eva-color);--card-bg:rgba(0,191,165,.08);--card-badge-bg:rgba(0,191,165,.1);--card-badge-border:rgba(0,191,165,.3);">
+=======
+      <div class="agent-card card-eva reveal" style="--card-color:var(--eva-color);--card-bg:rgba(0,191,165,.08);--card-badge-bg:rgba(0,191,165,.1);--card-badge-border:rgba(0,191,165,.3);">
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
         <div class="card-img-wrap" style="height:300px;">
           <img src="brand/EVA.png" alt="Eva — Personal Assistant &amp; AI Brain">
           <div class="card-color-bar"></div>
         </div>
         <div class="card-body">
+<<<<<<< HEAD
           <span class="card-badge" style="background:rgba(0,191,165,.15);border-color:rgba(0,191,165,.4);color:var(--eva-color);" data-i18n="eva-badge">⭐ Flagship · The AI Brain</span>
           <div class="card-name">Eva</div>
           <div class="card-role" data-i18n="eva-role">Personal Assistant</div>
@@ -737,6 +796,16 @@
             <div class="card-task" data-i18n="eva-task1">Manages inbox &amp; calendar 24/7</div>
             <div class="card-task" data-i18n="eva-task2">Coordinates all other agents</div>
             <div class="card-task" data-i18n="eva-task3">Holds your full business memory</div>
+=======
+          <span class="card-badge" style="background:rgba(0,191,165,.15);border-color:rgba(0,191,165,.4);color:var(--eva-color);">⭐ Flagship · The AI Brain</span>
+          <div class="card-name">Eva</div>
+          <div class="card-role">Personal Assistant</div>
+          <p class="card-desc">Eva IS the AI brain. She learns everything about your business and coordinates the entire team. Gets smarter every single day.</p>
+          <div class="card-tasks">
+            <div class="card-task" style="--card-color:var(--eva-color);">Manages inbox &amp; calendar 24/7</div>
+            <div class="card-task" style="--card-color:var(--eva-color);">Coordinates all other agents</div>
+            <div class="card-task" style="--card-color:var(--eva-color);">Holds your full business memory</div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
           </div>
         </div>
       </div>
@@ -749,9 +818,15 @@
 <section id="playbook" class="section">
   <div class="container">
     <div class="playbook-header reveal">
+<<<<<<< HEAD
       <span class="label" data-i18n="playbook-label">Agent Playbook</span>
       <h2 class="playbook-h2" data-i18n="playbook-h2">How your monkeys <span>actually work</span></h2>
       <p class="playbook-sub" data-i18n="playbook-sub">Each agent runs a defined workflow powered by your AI brain — solving specific problems and generating measurable financial returns.</p>
+=======
+      <span class="label">Agent Playbook</span>
+      <h2 class="playbook-h2">How your digital assistants <span>actually work</span></h2>
+      <p class="playbook-sub">Each agent runs a defined workflow powered by your AI brain — solving specific problems and generating measurable financial returns.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
     </div>
 
     <!-- Tab nav -->
@@ -804,7 +879,11 @@
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_17_30.png" alt="Carl"></div>
         <div class="panel-agent-name">Carl</div>
+<<<<<<< HEAD
         <div class="panel-agent-role" data-i18n="carl-panel-role">Customer Support Monkey</div>
+=======
+        <div class="panel-agent-role">Customer Support Assistant</div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
       <div class="panel-content reveal">
         <div>
@@ -835,7 +914,7 @@
     </div>
 
     <!-- ── MIKE ── -->
-    <div class="ptab-panel" id="panel-mike" style="--panel-color:var(--mike-color);--panel-color-dim:rgba(0,200,83,.12);--panel-color-border:rgba(0,200,83,.3);--panel-bg:rgba(0,200,83,.06);--panel-border:rgba(0,200,83,.3);">
+    <div class="ptab-panel" id="panel-mike" style="--panel-color:var(--mike-color);--panel-color-dim:rgba(212,0,122,.12);--panel-color-border:rgba(212,0,122,.3);--panel-bg:rgba(212,0,122,.06);--panel-border:rgba(212,0,122,.3);">
       <div class="panel-img-col reveal">
         <div class="panel-img-wrap"><img src="brand/ChatGPT%20Image%2024%20mar%202026%2C%2005_21_09.png" alt="Mike"></div>
         <div class="panel-agent-name">Mike</div>
@@ -999,9 +1078,15 @@
       </div>
       <div class="step reveal">
         <div class="step-circle">03</div>
+<<<<<<< HEAD
         <div class="step-icon">🐒</div>
         <div class="step-title" data-i18n="step3-title">Agents Go to Work</div>
         <p class="step-desc" data-i18n="step3-desc">Carl, Mike, Penny, Sherlock, Rosa, and Eva run your operations 24/7. They don't need briefing. They already know everything about your business.</p>
+=======
+        <div class="step-icon">🤖</div>
+        <div class="step-title">Agents Go to Work</div>
+        <p class="step-desc">Carl, Mike, Penny, Sherlock, Rosa, and Eva run your operations 24/7. They don't need briefing. They already know everything about your business.</p>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
     </div>
   </div>
@@ -1042,8 +1127,9 @@
       </div>
       <div class="comp-col comp-ai">
         <div class="comp-head">
-          <span class="comp-head-icon">🐒</span>
+          <span class="comp-head-icon">🤖</span>
           <div>
+<<<<<<< HEAD
             <div class="comp-head-title" data-i18n="comp-ai-title">Artificial Ignorance</div>
             <div class="comp-head-sub" data-i18n="comp-ai-sub">The complete AI infrastructure</div>
           </div>
@@ -1055,6 +1141,19 @@
         <div class="comp-row"><span class="comp-row-label" data-i18n="comp-rosa">Rosa — Sales Agent</span><span class="comp-row-val good">✓ Included</span></div>
         <div class="comp-row"><span class="comp-row-label" data-i18n="comp-eva">Eva — Personal Assistant + Brain</span><span class="comp-row-val good">✓ Included</span></div>
         <div class="comp-row" style="background:rgba(0,200,83,.08);"><span class="comp-row-label" style="font-weight:700;color:var(--text);" data-i18n="comp-row-talk">Talk to us about pricing</span><span class="comp-row-val good" style="font-size:1.5rem;" data-i18n="comp-row-book">Book a Demo →</span></div>
+=======
+            <div class="comp-head-title">CloudVA</div>
+            <div class="comp-head-sub">The complete AI infrastructure</div>
+          </div>
+        </div>
+        <div class="comp-row"><span class="comp-row-label">Carl — 24/7 Customer Support</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label">Mike — Social Media Manager</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label">Penny — Lead Generation</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label">Sherlock — SEO &amp; GEO</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label">Rosa — Sales Agent</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row"><span class="comp-row-label">Eva — Personal Assistant + Brain</span><span class="comp-row-val good">✓ Included</span></div>
+        <div class="comp-row" style="background:rgba(212,0,122,.08);"><span class="comp-row-label" style="font-weight:700;color:var(--text);">Talk to us about pricing</span><span class="comp-row-val good" style="font-size:1.5rem;">Book a Demo →</span></div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
     </div>
 
@@ -1180,10 +1279,17 @@
       </div>
       <div class="mod-card" onclick="toggleMod(this)">
         <div class="mod-check">✓</div>
+<<<<<<< HEAD
         <span class="mod-icon">🐒</span>
         <div class="mod-name" data-i18n="mod4-name">Individual Agents</div>
         <div class="mod-desc" data-i18n="mod4-desc">Pick your monkeys. Carl, Mike, Penny, Sherlock, Rosa, or Eva — add the agents you need, when you need them.</div>
         <span class="mod-tag" data-i18n="mod4-tag">Agent Layer</span>
+=======
+        <span class="mod-icon">🤖</span>
+        <div class="mod-name">Individual Agents</div>
+        <div class="mod-desc">Pick your digital assistants. Carl, Mike, Penny, Sherlock, Rosa, or Eva — add the agents you need, when you need them.</div>
+        <span class="mod-tag">Agent Layer</span>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
       <div class="mod-card active" onclick="toggleMod(this)">
         <div class="mod-check" style="opacity:1;transform:scale(1);">✓</div>
@@ -1204,8 +1310,13 @@
 <section id="proof" class="section">
   <div class="container">
     <div class="proof-head reveal">
+<<<<<<< HEAD
       <span class="label" data-i18n="proof-label">Social Proof</span>
       <h2 class="proof-h2" data-i18n="proof-h2">80+ companies running on<br><span>Artificial Ignorance</span></h2>
+=======
+      <span class="label">Social Proof</span>
+      <h2 class="proof-h2">80+ companies running on<br><span>CloudVA</span></h2>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
     </div>
     <div class="proof-stats reveal">
       <div class="proof-stat"><div class="proof-stat-num" data-count="80">0</div><div class="proof-stat-label" data-i18n="proof-stat1">Active Clients</div></div>
@@ -1216,6 +1327,7 @@
     <div class="testimonials reveal">
       <div class="testimonial">
         <div class="t-stars">★★★★★</div>
+<<<<<<< HEAD
         <p class="t-quote" data-i18n="t1-quote">"We replaced our entire admin team's repetitive workload in 3 weeks. The AI brain knows our business better than some of our staff. Genuinely impressive infrastructure."</p>
         <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name" data-i18n="t1-name">Sarah K.</div><div class="t-title" data-i18n="t1-title">CEO, Real Estate Agency</div></div></div>
       </div>
@@ -1228,6 +1340,20 @@
         <div class="t-stars">★★★★★</div>
         <p class="t-quote" data-i18n="t3-quote">"We white-label the full stack for our clients. Artificial Ignorance is the infrastructure we'd been looking for. Our clients think we built it ourselves — that's how seamless it is."</p>
         <div class="t-author"><div class="t-avatar">🐒</div><div><div class="t-name" data-i18n="t3-name">James O.</div><div class="t-title" data-i18n="t3-title">Director, SaaS Agency</div></div></div>
+=======
+        <p class="t-quote">"We replaced our entire admin team's repetitive workload in 3 weeks. The AI brain knows our business better than some of our staff. Genuinely impressive infrastructure."</p>
+        <div class="t-author"><div class="t-avatar">🤖</div><div><div class="t-name">Sarah K.</div><div class="t-title">CEO, Real Estate Agency</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"The RAG system is the game changer. Our agents answer questions with the full context of our 5-year client history. Nothing else comes close to what CloudVA has built."</p>
+        <div class="t-author"><div class="t-avatar">🤖</div><div><div class="t-name">Marcus T.</div><div class="t-title">Founder, Digital Marketing Agency</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"We white-label the full stack for our clients. CloudVA is the infrastructure we'd been looking for. Our clients think we built it ourselves — that's how seamless it is."</p>
+        <div class="t-author"><div class="t-avatar">🤖</div><div><div class="t-name">James O.</div><div class="t-title">Director, SaaS Agency</div></div></div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
       </div>
     </div>
   </div>
@@ -1249,6 +1375,7 @@
         </div>
       </div>
       <div class="reveal">
+<<<<<<< HEAD
         <div class="ghl-wrap" style="padding:0;min-height:924px;">
           <iframe
             src="https://connect.artificialignorance.io/widget/form/8R3staFI5zUbueDFIiAj"
@@ -1267,6 +1394,15 @@
             data-form-id="8R3staFI5zUbueDFIiAj"
             title="Drop us a message">
           </iframe>
+=======
+        <div class="ghl-wrap">
+          <!-- GHL FORM EMBED CODE HERE -->
+          <div class="ghl-placeholder">
+            <span class="ph-icon">🤖</span>
+            <div class="ph-title">Book Your Demo</div>
+            <p class="ph-desc">Paste your GoHighLevel<br>form embed code here.</p>
+          </div>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
         </div>
       </div>
     </div>
@@ -1275,11 +1411,19 @@
 
 <!-- FOOTER -->
 <footer>
+<<<<<<< HEAD
   <a href="#hero" class="footer-logo"><img src="brand/Vector.png" alt="Artificial Ignorance"></a>
   <p class="footer-copy" data-i18n="footer-copy">© 2025 Artificial Ignorance. AI infrastructure for businesses that mean it.</p>
   <ul class="footer-links">
     <li><a href="#agents" data-i18n="footer-link1">The Monkeys</a></li>
     <li><a href="#playbook" data-i18n="footer-link2">How They Work</a></li>
+=======
+  <a href="#hero" class="footer-logo"><img src="brand/Vector.png" alt="CloudVA"></a>
+  <p class="footer-copy">© 2025 CloudVA. AI infrastructure for businesses that mean it.</p>
+  <ul class="footer-links">
+    <li><a href="#agents">The Digital Assistants</a></li>
+    <li><a href="#playbook">How They Work</a></li>
+>>>>>>> aed8ef6c035c7f61fe54554a4e82b739206241c3
     <li><a href="#roi">ROI</a></li>
     <li><a href="#modules" data-i18n="footer-link4">Modules</a></li>
     <li><a href="#contact" data-i18n="footer-link5">Contact</a></li>
@@ -1378,7 +1522,7 @@
         const dist = Math.hypot(dx, dy);
         if (dist < 160) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(0,200,83,${(1 - dist/160) * .22})`;
+          ctx.strokeStyle = `rgba(212,0,122,${(1 - dist/160) * .22})`;
           ctx.lineWidth = .6;
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -1391,7 +1535,7 @@
       const g = (Math.sin(n.ph) + 1) / 2;
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,200,83,${.25 + g * .55})`;
+      ctx.fillStyle = `rgba(212,0,122,${.25 + g * .55})`;
       ctx.fill();
       n.x += n.vx; n.y += n.vy;
       if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
